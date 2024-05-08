@@ -15,7 +15,6 @@ function Home() {
       <div className='flex-1'>
        <ChatArea/>
       </div>
-        
     </div>
   )
 }

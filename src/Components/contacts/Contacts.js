@@ -4,13 +4,11 @@ import CardUser from './CardUser';
 
 function Contacts() {
     return (
-
-        <div className='m-9'>
-           <CardUser/> 
-           <CardUser/> 
-           <CardUser/> 
-        </div>
- 
+      <div className='m-9'>
+        <CardUser/> 
+        <CardUser/> 
+        <CardUser/> 
+      </div>
       );
 }
 
