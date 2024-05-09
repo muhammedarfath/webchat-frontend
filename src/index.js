@@ -4,16 +4,19 @@ import './index.css';
 import App from './App';
 import {NextUIProvider} from "@nextui-org/system";
 import {Provider} from 'react-redux'
-import store from './Redux/store';
+import store,{persistor} from './Redux/store';
+import {PersistGate} from 'redux-persist/integration/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <NextUIProvider>
-        <App />
-      </NextUIProvider>
-    </React.StrictMode>
+    <PersistGate persistor={persistor}>
+      <React.StrictMode>
+        <NextUIProvider>
+          <App />
+        </NextUIProvider>
+      </React.StrictMode>
+    </PersistGate>
   </Provider>
 
 );
