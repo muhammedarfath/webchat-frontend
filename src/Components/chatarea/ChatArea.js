@@ -4,6 +4,8 @@ import { IoCallSharp } from "react-icons/io5";
 import { IoIosContact } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User} from "@nextui-org/react";
+import {Input} from "@nextui-org/react";
+import { IoMdSend } from "react-icons/io";
 
 function ChatArea() {
   return (
@@ -116,13 +118,13 @@ function ChatArea() {
                     </div>
                 </div>
             </div>
-            <div className="absolute bottom-0">
-            <input
-            className="flex-grow bg-gray-300 py-2 m-3 px-3 w-[49rem] rounded-l-xl"
-            type="text"
-            placeholder="Type your message here..."
-        />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-r-xl">Send</button>
+            <div className="absolute bottom-0  w-full max-w-[40vw]">
+            <div className="flex items-center ">
+            <Input type="text" size='lg' placeholder='enter your message'  className='w-full'/>
+            <button className='m-4 border-solid border-1 rounded-lg border-white bg-[#F4F4F4] p-3'>
+                <IoMdSend className='text-2xl'/>
+            </button>
+            </div>
             </div>
         </div>
 
