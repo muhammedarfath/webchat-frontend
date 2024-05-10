@@ -1,10 +1,10 @@
 import React from 'react'
 import { RiMessage2Fill } from "react-icons/ri";
-import { IoVideocamSharp } from "react-icons/io5";
+import { RiAccountCircleFill } from "react-icons/ri";
 import { IoCallSharp } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 
-function Header() {
+function Header({toggleBlur}) {
   return (
     <div className="flex h-screen">
         <div className="text-[#420BA1] p-4 shadow-xl bg-white">
@@ -17,7 +17,7 @@ function Header() {
                     <RiMessage2Fill className="text-[#420BA1] text-2xl " />
                 </div>
                 <div className="mt-4 border-solid border-1 rounded-lg border-white bg-[#F4F4F4] p-3">
-                    <IoVideocamSharp className="text-[#420BA1] text-2xl " />
+                <RiAccountCircleFill onClick={() => toggleBlur(true)} className="text-[#420BA1] text-2xl" />
                 </div>
                 <div className="mt-4 border-solid border-1 rounded-lg bg-[#F4F4F4] border-white p-3">
                     <IoCallSharp className="text-[#420BA1] text-2xl " />

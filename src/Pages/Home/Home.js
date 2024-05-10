@@ -7,28 +7,37 @@ import CardUser from '../../Components/contacts/CardUser'
 import EmptyChat from '../../Components/contacts/EmptyChat'
 function Home() {
   const {email} = useSelector(state=>state.auth)
-  const [userId,setUserId]=useState(false)
-  
-  const handleUserIdUpdate = (id) => {
-    setUserId(true)
+  const [userId,setUserId]=useState({})
+  const [isBlurred, setIsBlurred] = useState(false); 
+
+  const handleUserIdUpdate = (id,username,email) => {
+    setUserId({
+         "id":id,
+         "username":username,
+         "email":email
+    })
   }
 
+  const toggleBlur = (value) => {
+    setIsBlurred(value);
+  };
+  console.log(isBlurred);
   
   return (
     
 
-      <div className="flex" >
+      <div className={`flex ${isBlurred ? 'blurred' : ''}`}>
         
         {email ?
         <>
          <div className='flex-none'>
-          <Header/>
+          <Header toggleBlur={toggleBlur}/>
         </div>
         <div className='flex-1'>
           <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
         </div>
         <div className='flex-1'>
-        {userId ? (<ChatArea/>) : (<EmptyChat/>)}
+        { Object.keys(userId).length !== 0 ? (<ChatArea user={userId}/>) : (<EmptyChat/>)}
         </div>
         </>
         :(<Login/>)

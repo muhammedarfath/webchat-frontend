@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IoVideocamSharp } from "react-icons/io5";
 import { IoCallSharp } from "react-icons/io5";
 import { IoIosContact } from "react-icons/io";
@@ -6,8 +6,13 @@ import { FaSearch } from "react-icons/fa";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User} from "@nextui-org/react";
 import {Input} from "@nextui-org/react";
 import { IoMdSend } from "react-icons/io";
+import axios from 'axios';
 
-function ChatArea() {
+function ChatArea({user}) {
+
+  
+   
+
   return (
     <div className="hidden lg:block shadow-lg rounded-lg bg-white h-full">
         <header className="shadow-xl text-dark py-4 px-6 flex items-center justify-between">
