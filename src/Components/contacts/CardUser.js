@@ -1,11 +1,24 @@
 import React from 'react'
 import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
-function CardUser() {
+function CardUser({handleUserIdUpdate}) {
     const [isFollowed, setIsFollowed] = React.useState(false);
+    const name = useSelector(state=>state.auth.username)
+    const dispatch = useDispatch()
+    const handlechat = async () => {
+      try{
+        const response = await axios.get(`http://127.0.0.1:8000/chat/${name}/`)
+        console.log(response);
+        handleUserIdUpdate()
+      }catch(error){
+        alert(error)
+      }
+    }
 
   return (
-    <Card className="mb-3">
+    <Card className="m-9">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar isBordered radius="full" size="md" src="https://nextui.org/avatars/avatar-1.png" />
@@ -20,6 +33,7 @@ function CardUser() {
           size="sm"
           variant={isFollowed ? "bordered" : "solid"}
           onPress={() => setIsFollowed(!isFollowed)}
+          onClick={handlechat}
         >
           {isFollowed ? "Unfollow" : "Follow"}
         </Button>

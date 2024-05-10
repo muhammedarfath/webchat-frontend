@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../Components/header/Header'
-import Contacts from '../../Components/contacts/Contacts'
 import ChatArea from '../../Components/chatarea/ChatArea'
 import {useSelector} from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import Login from '../Authentication/Login'
+import CardUser from '../../Components/contacts/CardUser'
+import EmptyChat from '../../Components/contacts/EmptyChat'
 function Home() {
-  const navigate = useNavigate()
   const {email} = useSelector(state=>state.auth)
+  const [userId,setUserId]=useState(false)
+  
+  const handleUserIdUpdate = (id) => {
+    setUserId(true)
+  }
 
   
   return (
@@ -17,15 +21,15 @@ function Home() {
         
         {email ?
         <>
-         (<div className='flex-none'>
-        <Header/>
+         <div className='flex-none'>
+          <Header/>
         </div>
         <div className='flex-1'>
-          <Contacts/>
+          <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
         </div>
         <div className='flex-1'>
-        <ChatArea/>
-        </div>)
+        {userId ? (<ChatArea/>) : (<EmptyChat/>)}
+        </div>
         </>
         :(<Login/>)
         

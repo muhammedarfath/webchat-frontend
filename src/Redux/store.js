@@ -13,7 +13,7 @@ const persistedReducer  = persistReducer(persistConfig,authReducer)
 
 const store =  configureStore({
     reducer:{
-        auth:persistedReducer
+        auth:persistedReducer,
     }
 })
 
