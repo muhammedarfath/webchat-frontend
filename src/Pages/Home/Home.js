@@ -9,7 +9,7 @@ import ProfileModal from '../../Components/modal/ProfileModal'
 function Home() {
   const {email} = useSelector(state=>state.auth)
   const [userId,setUserId]=useState({})
-  const [isCoinModelOpen, setIsCoinModelOpen] = useState(false);
+  const [isProfileModelOpen, setIsProfileModelOpen] = useState(false);
 
   const handleUserIdUpdate = (id,username,email) => {
     setUserId({
@@ -21,8 +21,8 @@ function Home() {
 
 
 
-  const handleGiftModelOpen = () => {
-    setIsCoinModelOpen(true);
+  const handleProfileModelOpen = () => {
+    setIsProfileModelOpen(true);
 };
   return (
     
@@ -33,7 +33,7 @@ function Home() {
         {email ?
         <>
          <div className='flex-none'>
-          <Header handleGiftModelOpen={handleGiftModelOpen}/>
+          <Header handleProfileModelOpen={handleProfileModelOpen}/>
         </div>
         <div className='flex-1'>
           <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
@@ -47,7 +47,7 @@ function Home() {
         }
 
       </div>
-      <ProfileModal isCoinModelOpen={isCoinModelOpen} setIsCoinModelOpen={setIsCoinModelOpen} />
+      <ProfileModal isProfileModelOpen={isProfileModelOpen} setIsProfileModelOpen={setIsProfileModelOpen} />
     </>  
 
 

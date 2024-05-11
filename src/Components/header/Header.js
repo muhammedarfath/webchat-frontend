@@ -4,12 +4,12 @@ import { FaUserEdit } from "react-icons/fa";
 import { IoCallSharp } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 
-function Header({handleGiftModelOpen}) {
+function Header({handleProfileModelOpen}) {
 
     const handleModal = () => {
-
-        handleGiftModelOpen()
+        handleProfileModelOpen()
     }
+    
   return (
     <div className="flex h-screen">
         <div className="text-[#420BA1] p-4 shadow-xl bg-white">

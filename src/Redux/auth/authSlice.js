@@ -26,9 +26,14 @@ export const authSlice = createSlice({
         signUpUser: (state, action) => {
             state.user_id = action.payload.user;
         },
+        updateUserProfile: (state, action) => {
+            state.full_name = action.payload.full_name;
+            state.bio = action.payload.bio;
+            state.image = action.payload.image;
+        },
     }
     
 })
 
-export const {loginUser,signUpUser} = authSlice.actions
+export const {loginUser,signUpUser,updateUserProfile} = authSlice.actions
 export default authSlice.reducer

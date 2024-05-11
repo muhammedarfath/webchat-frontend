@@ -6,12 +6,15 @@ import { useSelector } from 'react-redux';
 function CardUser({handleUserIdUpdate}) {
     const [isFollowed, setIsFollowed] = React.useState(false);
     const [users,setUsers] = useState([])
+    const current_userId = useSelector(state=>state.auth.user_id)
 
 
     useEffect(()=>{
       const fetchAllUsers = async () =>{
         try{
-          const response = await axios.get('http://127.0.0.1:8000/chat/users/')
+          const response = await axios.post('http://127.0.0.1:8000/chat/users/',{
+            current_userId
+          })
           console.log(response.data);
           setUsers(response.data)
         }catch(error){
