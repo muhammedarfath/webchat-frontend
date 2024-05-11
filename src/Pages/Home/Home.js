@@ -5,10 +5,11 @@ import {useSelector} from 'react-redux'
 import Login from '../Authentication/Login'
 import CardUser from '../../Components/contacts/CardUser'
 import EmptyChat from '../../Components/contacts/EmptyChat'
+import ProfileModal from '../../Components/modal/ProfileModal'
 function Home() {
   const {email} = useSelector(state=>state.auth)
   const [userId,setUserId]=useState({})
-  const [isBlurred, setIsBlurred] = useState(false); 
+  const [isCoinModelOpen, setIsCoinModelOpen] = useState(false);
 
   const handleUserIdUpdate = (id,username,email) => {
     setUserId({
@@ -18,20 +19,21 @@ function Home() {
     })
   }
 
-  const toggleBlur = (value) => {
-    setIsBlurred(value);
-  };
-  console.log(isBlurred);
-  
+
+
+  const handleGiftModelOpen = () => {
+    setIsCoinModelOpen(true);
+};
   return (
     
+    <>
 
-      <div className={`flex ${isBlurred ? 'blurred' : ''}`}>
+      <div className='flex'>
         
         {email ?
         <>
          <div className='flex-none'>
-          <Header toggleBlur={toggleBlur}/>
+          <Header handleGiftModelOpen={handleGiftModelOpen}/>
         </div>
         <div className='flex-1'>
           <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
@@ -43,7 +45,10 @@ function Home() {
         :(<Login/>)
         
         }
+
       </div>
+      <ProfileModal isCoinModelOpen={isCoinModelOpen} setIsCoinModelOpen={setIsCoinModelOpen} />
+    </>  
 
 
   )

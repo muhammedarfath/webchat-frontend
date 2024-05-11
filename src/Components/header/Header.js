@@ -1,10 +1,15 @@
 import React from 'react'
 import { RiMessage2Fill } from "react-icons/ri";
-import { RiAccountCircleFill } from "react-icons/ri";
+import { FaUserEdit } from "react-icons/fa";
 import { IoCallSharp } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 
-function Header({toggleBlur}) {
+function Header({handleGiftModelOpen}) {
+
+    const handleModal = () => {
+
+        handleGiftModelOpen()
+    }
   return (
     <div className="flex h-screen">
         <div className="text-[#420BA1] p-4 shadow-xl bg-white">
@@ -17,7 +22,7 @@ function Header({toggleBlur}) {
                     <RiMessage2Fill className="text-[#420BA1] text-2xl " />
                 </div>
                 <div className="mt-4 border-solid border-1 rounded-lg border-white bg-[#F4F4F4] p-3">
-                <RiAccountCircleFill onClick={() => toggleBlur(true)} className="text-[#420BA1] text-2xl" />
+                <FaUserEdit onClick={handleModal} className="text-[#420BA1] text-2xl" />
                 </div>
                 <div className="mt-4 border-solid border-1 rounded-lg bg-[#F4F4F4] border-white p-3">
                     <IoCallSharp className="text-[#420BA1] text-2xl " />
