@@ -30,13 +30,17 @@ function CardUser({handleUserIdUpdate}) {
 
 
     const handlechat = async (id,username) => {
-      console.log(id);
       try{
         const response = await axios.post(`http://127.0.0.1:8000/chat/${username}/`,{
-          id
+          user_id: id,
         })
-        const data = response.data
-        handleUserIdUpdate(data.user_id,data.email,data.username)
+        if (response){
+          console.log(response.data);
+          const data = response.data
+          handleUserIdUpdate(data.id,data.user.email,data.user.username,data.image,data.full_name,data.bio)
+        }else{
+          console.log('somthing went wrong');
+        }
       }catch(error){
         alert(error)
       }
@@ -48,7 +52,7 @@ function CardUser({handleUserIdUpdate}) {
         <Card className="m-9">
         <CardHeader className="justify-between">
           <div className="flex gap-5">
-            <Avatar isBordered radius="full" size="md" src="https://nextui.org/avatars/avatar-1.png" />
+            <Avatar isBordered radius="full" size="md" src={`http://127.0.0.1:8000${user.image}`} />
             <div className="flex flex-col gap-1 items-start justify-center">
               <h4 className="text-small font-semibold leading-none text-default-600">{user.user.username}</h4>
               <h5 className="text-small tracking-tight text-default-400">@zoeylang</h5>

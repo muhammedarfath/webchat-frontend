@@ -1,17 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { IoVideocamSharp } from "react-icons/io5";
 import { IoCallSharp } from "react-icons/io5";
 import { IoIosContact } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User} from "@nextui-org/react";
-import {Input} from "@nextui-org/react";
-import { IoMdSend } from "react-icons/io";
-import axios from 'axios';
+import {useSelector} from 'react-redux'
+import Message from './Message';
+import MessageInput from './MessageInput';
 
-function ChatArea({user}) {
+function ChatArea({userArr}) {
+    const [messages, setMessages] = useState([]);
 
-  
-   
+
+
+
+
+    useEffect(()=>{
+
+        const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.username}/`);
+
+        const fetchMessages = () => {
+            socket.send(JSON.stringify({ 'command': 'fetch_messages' }));
+        }
+
+        socket.onopen = () => {
+            console.log('open');
+            fetchMessages();
+        };
+        
+        socket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            if (data['command'] === 'messages') {
+                setMessages(data['messages']);
+            } else if (data['command'] === 'new_message') {
+                setMessages(prevMessages => [...prevMessages, data['message']]);
+            }
+        };
+
+
+
+    
+        socket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+
+    
+    },[])
+
+
+
+
+
 
   return (
     <div className="hidden lg:block shadow-lg rounded-lg bg-white h-full">
@@ -24,11 +64,11 @@ function ChatArea({user}) {
                         as="button"
                         avatarProps={{
                         isBordered: true,
-                        src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+                        src:`http://127.0.0.1:8000${userArr.image}`,
                         }}
                         className="transition-transform"
-                        description="@tonyreichert"
-                        name="Tony Reichert"
+                        description={`@${userArr.bio}`}
+                        name={userArr.username}
                     />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="User Actions" variant="flat">
@@ -60,76 +100,13 @@ function ChatArea({user}) {
             </div>
         </header>
         <div className="w-full px-5 flex flex-col justify-between">
-            <div className="flex flex-col mt-5">
-                <div className="flex justify-end mb-4">
-                    <div
-                    className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
-                    >
-                    Welcome to group everyone !
-                    </div>
-                    <img
-                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                    className="object-cover h-8 w-8 rounded-full"
-                    alt=""
-                    />
-                </div>
-                <div className="flex justify-start mb-4">
-                    <img
-                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                    className="object-cover h-8 w-8 rounded-full"
-                    alt=""
-                    />
-                    <div
-                    className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
-                    >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-                    at praesentium, aut ullam delectus odio error sit rem. Architecto
-                    nulla doloribus laborum illo rem enim dolor odio saepe,
-                    consequatur quas?
-                    </div>
-                </div>
-                <div className="flex justify-end mb-4">
-                    <div>
-                    <div
-                        className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
-                    >
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Magnam, repudiandae.
-                    </div>
 
-                    <div
-                        className="mt-4 mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
-                    >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Debitis, reiciendis!
-                    </div>
-                    </div>
-                    <img
-                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                    className="object-cover h-8 w-8 rounded-full"
-                    alt=""
-                    />
-                </div>
-                <div className="flex justify-start mb-4">
-                    <img
-                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                    className="object-cover h-8 w-8 rounded-full"
-                    alt=""
-                    />
-                    <div
-                    className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
-                    >
-                    happy holiday guys!
-                    </div>
-                </div>
-            </div>
+            {messages.map((message, index) => (
+                <Message key={index} text={message} sent={message.author === userArr.username} />
+            ))}             
+
             <div className="absolute bottom-0  w-full max-w-[40vw]">
-            <div className="flex items-center ">
-            <Input type="text" size='lg' placeholder='enter your message'  className='w-full'/>
-            <button className='m-4 border-solid border-1 rounded-lg border-white bg-[#F4F4F4] p-3'>
-                <IoMdSend className='text-2xl'/>
-            </button>
-            </div>
+              <MessageInput userArr={userArr}/>
             </div>
         </div>
 

@@ -11,11 +11,14 @@ function Home() {
   const [userId,setUserId]=useState({})
   const [isProfileModelOpen, setIsProfileModelOpen] = useState(false);
 
-  const handleUserIdUpdate = (id,username,email) => {
+  const handleUserIdUpdate = (id,email,username,image,full_name,bio) => {
     setUserId({
          "id":id,
          "username":username,
-         "email":email
+         "email":email,
+         "image":image,
+         "full_name":full_name,
+         "bio":bio
     })
   }
 
@@ -39,7 +42,7 @@ function Home() {
           <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
         </div>
         <div className='flex-1'>
-        { Object.keys(userId).length !== 0 ? (<ChatArea user={userId}/>) : (<EmptyChat/>)}
+        { Object.keys(userId).length !== 0 ? (<ChatArea userArr={userId}/>) : (<EmptyChat/>)}
         </div>
         </>
         :(<Login/>)
