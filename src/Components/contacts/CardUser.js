@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react'
 import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosSearch } from "react-icons/io";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { RiMessage3Line } from "react-icons/ri";
+
+
+
+
 
 function CardUser({handleUserIdUpdate}) {
     const [isFollowed, setIsFollowed] = React.useState(false);
@@ -47,9 +55,26 @@ function CardUser({handleUserIdUpdate}) {
     }
 
   return (
-    <>
+    <div className='border border-dark w-full h-full'>
+      <div className='flex items-center border-b-2 p-6 border-b-gray-300 justify-between'>
+        <div className='flex items-center gap-2'>
+          <h1 className='font-bold'>All Chats</h1>
+          <IoIosArrowDown className='text-2xl font-bold'/>
+        </div>
+        <div className='flex items-center ml-3 gap-3'>
+          <IoIosSearch className='text-2xl font-bold'/>
+          <BsThreeDotsVertical />
+        </div>
+      </div>
+
+
+
+      <div className='flex items-center ml-4 mt-5 gap-3'>
+        <RiMessage3Line className='text-2xl font-bold'/>
+        <h1>Recent Chat</h1>
+      </div>
       {users.map((user)=>
-        <Card className="m-9">
+        <Card className='m-5'>
         <CardHeader className="justify-between">
           <div className="flex gap-5">
             <Avatar isBordered radius="full" size="md" src={`http://127.0.0.1:8000${user.image}`} />
@@ -69,7 +94,7 @@ function CardUser({handleUserIdUpdate}) {
             {isFollowed ? "Unfollow" : "Follow"}
           </Button>
         </CardHeader>
-        <CardBody className="px-3 py-0 text-small text-default-400">
+        {/* <CardBody className="px-3 py-0 text-small text-default-400">
           <p>
             Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
           </p>
@@ -89,10 +114,10 @@ function CardUser({handleUserIdUpdate}) {
             <p className="font-semibold text-default-400 text-small">97.1K</p>
             <p className="text-default-400 text-small">Followers</p>
           </div>
-        </CardFooter>
+        </CardFooter> */}
         </Card>
       )}
-    </>
+    </div>
 
     
   )

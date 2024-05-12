@@ -35,13 +35,15 @@ function Home() {
         
         {email ?
         <>
-         <div className='flex-none'>
-          <Header handleProfileModelOpen={handleProfileModelOpen}/>
+        <div className='w-1/3 flex'>
+          <div className='flex-none'>
+            <Header handleProfileModelOpen={handleProfileModelOpen}/>
+          </div>
+          <div className='w-full'>
+            <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
+          </div>
         </div>
-        <div className='flex-1'>
-          <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
-        </div>
-        <div className='flex-1'>
+        <div className='flex-1 w-2/3'>
         { Object.keys(userId).length !== 0 ? (<ChatArea userArr={userId}/>) : (<EmptyChat/>)}
         </div>
         </>
