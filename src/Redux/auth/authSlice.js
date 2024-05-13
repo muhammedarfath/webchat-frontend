@@ -31,9 +31,14 @@ export const authSlice = createSlice({
             state.bio = action.payload.bio;
             state.image = action.payload.image;
         },
+        logoutUser: (state,action) => {
+            state.authTokens = action.payload.authTokens;
+            state.user_id = action.payload.user_id;
+            state.is_superuser = action.payload.is_superuser;
+        },
     }
     
 })
 
-export const {loginUser,signUpUser,updateUserProfile} = authSlice.actions
+export const {loginUser,signUpUser,updateUserProfile,logoutUser} = authSlice.actions
 export default authSlice.reducer

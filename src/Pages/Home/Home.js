@@ -31,11 +31,11 @@ function Home() {
     
     <>
 
-      <div className='flex'>
+      <div className='flex h-screen'>
         
         {email ?
         <>
-        <div className='w-1/3 flex'>
+        <div className='w-full lg:w-1/3 flex'>
           <div className='flex-none'>
             <Header handleProfileModelOpen={handleProfileModelOpen}/>
           </div>
@@ -43,7 +43,7 @@ function Home() {
             <CardUser handleUserIdUpdate={handleUserIdUpdate}/>
           </div>
         </div>
-        <div className='flex-1 w-2/3'>
+        <div className='flex-1 w-2/3 border border-l-gray'>
         { Object.keys(userId).length !== 0 ? (<ChatArea userArr={userId}/>) : (<EmptyChat/>)}
         </div>
         </>

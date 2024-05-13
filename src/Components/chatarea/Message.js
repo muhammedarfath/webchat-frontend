@@ -3,6 +3,7 @@ import React from 'react'
 function Message({text,sent}) {
 
   return (
+    <>
     <div className="flex flex-col mt-5">
         {sent ? (<div className="flex justify-end mb-4">
             <div
@@ -29,6 +30,7 @@ function Message({text,sent}) {
             </div>
         </div>)}
     </div>
+    </>
   )
 }
 
