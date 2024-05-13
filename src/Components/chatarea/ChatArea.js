@@ -49,7 +49,7 @@ function ChatArea({ userArr }) {
 
     return (
         <div className="hidden lg:block rounded-lg bg-white h-full">
-            <header className="fixed z-30 border-b-1 border-b-gray top-0 text-dark p-[13px] flex items-center justify-between bg-white w-2/3">
+            <header className="fixed z-30 border-b-1 border-b-gray top-0 text-dark p-[13px] flex items-center justify-between bg-white w-3/4">
                 <div className="flex gap-4 items-center">
                     <div>
                         <Dropdown placement="bottom-start">
