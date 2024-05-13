@@ -13,7 +13,6 @@ function MessageInput({userArr}) {
         socket.send(JSON.stringify({
             'message': message,
             'command':'new_message',
-            // 'from':userArr.username
         }));
     }
 

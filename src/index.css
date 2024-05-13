@@ -7,6 +7,7 @@
 @layer base {
     body {
       background-color: #F4F4F4; 
+      overflow: hidden;
   }
   .blurred {
     filter: blur(5px); 
@@ -39,4 +40,14 @@
   .animation-vibrate {
     animation: vibrate 0.3s ease infinite;
   }
+}
+.messages-container {
+  overflow-y: auto;
+  height: calc(100% - 120px); /* Adjust according to your design */
+}
+
+.message-input-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

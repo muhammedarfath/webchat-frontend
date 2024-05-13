@@ -59,7 +59,7 @@ function CardUser({handleUserIdUpdate}) {
     }
 
   return (
-    <div className='border-none w-full h-full bg-[#FFFFFF]'>
+    <div className='border-none w-full h-full bg-[#FFFFFF] overflow-y-auto'>
       <div className='flex items-center border-b-1 border-b-gray p-6 justify-between'>
         <div className='flex items-center gap-2'>
           <h1 className='font-bold'>All Chats</h1>
