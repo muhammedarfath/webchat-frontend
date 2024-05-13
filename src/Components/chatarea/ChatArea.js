@@ -39,6 +39,7 @@ function ChatArea({ userArr }) {
         
  
     }, [userArr]);
+    
     useEffect(() => {
         if (messagesContainerRef.current) {
             messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
@@ -48,7 +49,7 @@ function ChatArea({ userArr }) {
 
     return (
         <div className="hidden lg:block rounded-lg bg-white h-full">
-            <header className="fixed z-40 border-b-1 border-b-gray top-0 text-dark p-[11px] flex items-center justify-between w-full bg-white">
+            <header className="fixed z-30 border-b-1 border-b-gray top-0 text-dark p-[13px] flex items-center justify-between bg-white w-2/3">
                 <div className="flex gap-4 items-center">
                     <div>
                         <Dropdown placement="bottom-start">
@@ -59,9 +60,10 @@ function ChatArea({ userArr }) {
                                         isBordered: true,
                                         src: `http://127.0.0.1:8000${userArr.image}`,
                                     }}
-                                    className="transition-transform"
-                                    description={`@${userArr.bio}`}
-                                    name={userArr.username}
+                                    className="transition-transform font-semibold gap-4"
+                                    description='Last Seen at 07:15 PM'
+                                    name={userArr.username.toUpperCase()}
+                                    
                                 />
                             </DropdownTrigger>
                             <DropdownMenu aria-label="User Actions" variant="flat">
@@ -80,17 +82,18 @@ function ChatArea({ userArr }) {
                         </Dropdown>
                     </div>
                 </div>
-                <div className='flex gap-2'>
-                    <div className="mt-4 border-solid border-1 rounded-lg border-white bg-[#F4F4F4] p-2">
-                        <IoVideocamSharp className="text-[#420BA1] text-1xl " />
+                <div className='flex gap-2 justify-center items-center mr-7'>
+                    <div className="border-solid border-1 rounded-lg border-white bg-[#F4F4F4] p-2">
+                        <IoVideocamSharp className="text-[#420BA1] text-1xl" />
                     </div>
-                    <div className="mt-4 border-solid border-1 rounded-lg bg-[#F4F4F4] border-white p-2">
-                        <IoCallSharp className="text-[#420BA1] text-1xl " />
+                    <div className="border-solid border-1 rounded-lg bg-[#F4F4F4] border-white p-2">
+                        <IoCallSharp className="text-[#420BA1] text-1xl" />
                     </div>
-                    <div className="mt-4 border-solid border-1 rounded-lg bg-[#F4F4F4] border-white p-2">
-                        <FaSearch className="text-[#420BA1] text-1xl " />
+                    <div className="border-solid border-1 rounded-lg bg-[#F4F4F4] border-white p-2">
+                        <FaSearch className="text-[#420BA1] text-1xl" />
                     </div>
                 </div>
+
             </header>
             <div className="messages-container w-full z-0 mt-[60px] pb-[60px]" ref={messagesContainerRef}>
                 {messages.map((message, index) => (

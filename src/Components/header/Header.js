@@ -54,7 +54,7 @@ function Header({handleProfileModelOpen}) {
             <div class="absolute bottom-4 w-[3rem] h-[3rem] overflow-hidden" onClick={handleprofiletoggle}>
                 <img src={`http://127.0.0.1:8000${image}`} class=" w-full h-full rounded-full" alt="image" />
             </div>
-            {profiletoggle && <div className="absolute bottom-[4rem] w-36 bg-white shadow-md rounded-md z-10">
+            {profiletoggle && <div className="absolute bottom-[4rem]  w-36 bg-white shadow-md rounded-md z-10">
                 <ul>
                 <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
                 <li className="py-1 px-3 hover:bg-gray-200 cursor-pointer" onClick={handleLogout} >Logout</li>
