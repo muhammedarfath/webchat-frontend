@@ -10,6 +10,7 @@ import MessageInput from './MessageInput';
 
 function ChatArea({userArr}) {
     const [messages, setMessages] = useState([]);
+    const senderId = useSelector(state=>state.auth.user_id)
 
 
 
@@ -17,7 +18,7 @@ function ChatArea({userArr}) {
 
     useEffect(()=>{
 
-        const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.username}/`);
+        const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`);
 
         const fetchMessages = () => {
             socket.send(JSON.stringify({ 'command': 'fetch_messages' }));
@@ -46,7 +47,7 @@ function ChatArea({userArr}) {
 
 
     
-    },[])
+    },[userArr])
 
 
 

@@ -16,10 +16,11 @@ function CardUser({handleUserIdUpdate}) {
 
     const [users,setUsers] = useState([])
     const current_userId = useSelector(state=>state.auth.user_id)
-
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(()=>{
       const fetchAllUsers = async () =>{
+        setIsLoading(true);
         try{
           const response = await axios.post('http://127.0.0.1:8000/chat/users/',{
             current_userId
@@ -29,6 +30,7 @@ function CardUser({handleUserIdUpdate}) {
         }catch(error){
           alert(error)
         }
+        setIsLoading(false);
       }
       fetchAllUsers();
 
@@ -37,14 +39,14 @@ function CardUser({handleUserIdUpdate}) {
 
 
 
-
     const handlechat = async (id,username) => {
+      setIsLoading(true);
       try{
         const response = await axios.post(`http://127.0.0.1:8000/chat/${username}/`,{
           user_id: id,
+
         })
         if (response){
-          console.log(response.data);
           const data = response.data
           handleUserIdUpdate(data.id,data.user.email,data.user.username,data.image,data.full_name,data.bio)
         }else{
@@ -53,6 +55,7 @@ function CardUser({handleUserIdUpdate}) {
       }catch(error){
         alert(error)
       }
+      setIsLoading(false);
     }
 
   return (

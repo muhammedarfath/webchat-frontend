@@ -6,13 +6,14 @@ import { MdOutlineMicOff } from "react-icons/md";
 
 function MessageInput({userArr}) {
     const [message,setMessage]=useState('')
-    const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.username}/`);
+    const senderId = useSelector(state=>state.auth.user_id)
+    const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`);
 
     const handleInputMessage = () =>{
         socket.send(JSON.stringify({
             'message': message,
             'command':'new_message',
-            'from':userArr.username
+            // 'from':userArr.username
         }));
     }
 
