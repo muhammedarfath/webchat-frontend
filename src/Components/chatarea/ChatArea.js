@@ -99,7 +99,7 @@ function ChatArea({userArr}) {
                 </div>
             </div>
         </header>
-        <div className="w-full px-5 flex flex-col justify-between">
+        <div className="w-full flex flex-col justify-between">
 
             {messages.map((message, index) => (
                 <Message key={index} text={message} sent={message.author === userArr.username} />
