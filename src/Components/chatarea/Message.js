@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { BiCheckDouble } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 
-function Message({ text, sent }) {
+function Message({ text, sent  }) {
   const { image } = useSelector(state => state.auth);
 
   return (
