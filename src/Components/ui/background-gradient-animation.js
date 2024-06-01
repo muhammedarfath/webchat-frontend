@@ -104,7 +104,7 @@ export const BackgroundGradientAnimation = ({
           isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
         )}
       >
-        <div
+        {/* <div
           className={cn(
             `absolute [background:radial-gradient(circle_at_center,_var(--first-color)_0,_var(--first-color)_50%)_no-repeat]`,
             `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
@@ -160,7 +160,7 @@ export const BackgroundGradientAnimation = ({
               `opacity-70`
             )}
           ></div>
-        )}
+        )} */}
       </div>
     </div>
   );

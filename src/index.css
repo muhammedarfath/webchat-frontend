@@ -63,3 +63,23 @@
 .messages-container::-webkit-scrollbar-thumb {
   z-index: 8;
 }
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0f0a44;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #220991;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #181063;
+}

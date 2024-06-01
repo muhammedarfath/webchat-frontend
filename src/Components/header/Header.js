@@ -29,25 +29,25 @@ function Header({handleProfileModelOpen}) {
     
   return (
     <div className="hidden border lg:flex h-screen">
-        <div className="text-[#420BA1] p-4 shadow-xl bg-white">
+        <div className="text-[#796DF7] p-4 shadow-xl bg-white">
             <div className="py-4">
-                <a href="#" className="text-[#420BA1] text-lg font-semibold uppercase">Logo</a>
+                <a href="#" className="text-[#796DF7] text-lg font-semibold uppercase">Logo</a>
             </div>
                 
             <nav className="flex-1 flex flex-col items-center py-[5rem]">
                 <div className="border-solid cursor-pointer border-1 rounded-lg border-white bg-[#F4F4F4] p-3">
-                    <RiMessage2Fill className="text-[#420BA1] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                    <RiMessage2Fill className="text-[#796DF7] text-2xl transition-transform transform hover:scale-x-[-1] " />
                 </div>
                 <div className="mt-4 border-solid border-1 cursor-pointer  rounded-lg border-white bg-[#F4F4F4] p-3">
-                    <FaUserEdit onClick={handleModal} className="text-[#420BA1] text-2xl transition-transform transform hover:rotate-45" />
+                    <FaUserEdit onClick={handleModal} className="text-[#796DF7] text-2xl transition-transform transform hover:rotate-45" />
                 </div>
 
                 <div className="mt-4 border-solid border-1 cursor-pointer  rounded-lg bg-[#F4F4F4] border-white p-3">
-                    <BiSolidVideos className="text-[#420BA1] text-2xl hover:vibrate" />
+                    <BiSolidVideos className="text-[#796DF7] text-2xl hover:vibrate" />
                 </div>
 
                 <div className="mt-4 border-solid border-1 cursor-pointer  rounded-lg bg-[#F4F4F4] border-white p-3">
-                    <IoSettings className="text-[#420BA1] text-2xl transition-transform transform hover:rotate-45" />
+                    <IoSettings className="text-[#796DF7] text-2xl transition-transform transform hover:rotate-45" />
                 </div>
             </nav>
            
