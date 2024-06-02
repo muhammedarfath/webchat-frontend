@@ -1,27 +1,43 @@
-import React from 'react'
-import { BackgroundGradientAnimation } from "../../Components/ui/background-gradient-animation";
+
+import { motion } from "framer-motion";
+import React from "react";
+import { AuroraBackground } from "../../Components/ui/background-gradient-animation";
 import { BentoGridThirdDemo } from '../../Components/grid/Grid';
-import Footer from '../../Components/footer/Footer';
+import Footer from '../../Components/footer/Footer'
 
 
 function AppHome() {
   return (
-    <BackgroundGradientAnimation>
-      <div className='w-screen h-screen overflow-auto flex flex-col'>
-        <div className="inset-0 h-screen py-[25rem] flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl">
-          <p className="bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-            Gradients X Animations
-          </p>
-        </div>
-        <div className="h-screen mb-7">
-         <BentoGridThirdDemo />
-        </div>
-        <div>
-          <Footer/>
-        </div>
-      </div>
 
-    </BackgroundGradientAnimation>
+    <AuroraBackground>
+      <motion.div
+        initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="relative flex flex-col gap-4 items-center justify-center px-4 mt-[45rem]"
+      >
+        
+        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
+          Background lights are cool you know.
+        </div>
+        <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
+          And this, is chemical burn.
+        </div>
+        <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
+          Debug now
+        </button>
+         <div className="h-full">
+         <BentoGridThirdDemo />
+          </div>
+      </motion.div>
+      <div className="w-full mt-4">
+        <Footer/>
+      </div>
+    </AuroraBackground>
   )
 }
 
