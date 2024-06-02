@@ -11,9 +11,16 @@ import { BentoGrid, BentoGridItem } from "../../Components/ui/bento-grid";
 // } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import Image from "next/image";
 
 export function BentoGridThirdDemo() {
+  const {email} = useSelector(state=>state.auth)
+
+
+
+
+
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
       {items.map((item, i) => (
@@ -305,7 +312,7 @@ const SkeletonFive = () => {
 };
 const items = [
   {
-    title: "AI Content Generation",
+    title: "Chat With Online Friends",
     description: (
       
       <span className="text-sm">

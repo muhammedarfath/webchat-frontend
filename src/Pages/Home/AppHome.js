@@ -4,9 +4,18 @@ import React from "react";
 import { AuroraBackground } from "../../Components/ui/background-gradient-animation";
 import { BentoGridThirdDemo } from '../../Components/grid/Grid';
 import Footer from '../../Components/footer/Footer'
+import { useSelector } from "react-redux";
 
 
 function AppHome() {
+
+  const {email} = useSelector(state=>state.auth)
+
+
+
+
+
+
   return (
 
     <AuroraBackground>
