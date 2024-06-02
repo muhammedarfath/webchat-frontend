@@ -1,11 +1,14 @@
 import React,{useState} from 'react'
-import { RiMessage2Fill } from "react-icons/ri";
-import { FaUserEdit } from "react-icons/fa";
-import { IoSettings } from "react-icons/io5";
-import { BiSolidVideos } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../Redux/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { GoHome } from "react-icons/go";
+import { IoSearchOutline } from "react-icons/io5";
+import { BiMoviePlay } from "react-icons/bi";
+import { FiMessageCircle } from "react-icons/fi";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineAddBox } from "react-icons/md";
+import { AiOutlineMenu } from "react-icons/ai";
 
 function Header({handleProfileModelOpen}) {
     const navigate = useNavigate();
@@ -28,38 +31,54 @@ function Header({handleProfileModelOpen}) {
     
     
   return (
-    <div className="hidden border lg:flex h-screen">
-        <div className="text-[#796DF7] p-4 shadow-xl bg-white">
-            <div className="py-4">
-                <a href="#" className="text-[#796DF7] text-lg font-semibold uppercase">Logo</a>
+    <div className="hidden border-2 lg:flex h-screen">
+        <div className="text-[#000000] p-4 bg-#F4F4F4">
+            <div className="py-4 flex items-center justify-center">
+                <a href="#" className="text-[#000000] text-3xl font-semibold uppercase">OT</a>
             </div>
                 
-            <nav className="flex-1 flex flex-col items-center py-[5rem]">
-                <div className="border-solid cursor-pointer border-1 rounded-lg border-white bg-[#F4F4F4] p-3">
-                    <RiMessage2Fill className="text-[#796DF7] text-2xl transition-transform transform hover:scale-x-[-1] " />
-                </div>
-                <div className="mt-4 border-solid border-1 cursor-pointer  rounded-lg border-white bg-[#F4F4F4] p-3">
-                    <FaUserEdit onClick={handleModal} className="text-[#796DF7] text-2xl transition-transform transform hover:rotate-45" />
-                </div>
-
-                <div className="mt-4 border-solid border-1 cursor-pointer  rounded-lg bg-[#F4F4F4] border-white p-3">
-                    <BiSolidVideos className="text-[#796DF7] text-2xl hover:vibrate" />
-                </div>
-
-                <div className="mt-4 border-solid border-1 cursor-pointer  rounded-lg bg-[#F4F4F4] border-white p-3">
-                    <IoSettings className="text-[#796DF7] text-2xl transition-transform transform hover:rotate-45" />
-                </div>
+            <nav className="flex-1 flex flex-col items-center py-[5rem] gap-5">
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                        <GoHome className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                        <span>Home</span>
+                    </div>
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                        <IoSearchOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                        <span>Search</span>
+                    </div> 
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                        <BiMoviePlay className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                        <span>Reels</span>
+                    </div> 
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                        <FiMessageCircle className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                        <span>Message</span>
+                    </div> 
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                        <IoMdNotificationsOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                        <span>Notification</span>
+                    </div>  
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                        <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                        <span>Create</span>
+                    </div>  
+                    {/* <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center' onClick={handleprofiletoggle}>
+                        <img src={`http://127.0.0.1:8000${image}`} class=" w-full h-full rounded-full" alt="image" />
+                        <span>Profile</span>
+                    </div>    
+                    {profiletoggle && <div className="absolute bottom-[4rem]  w-36 bg-white shadow-md rounded-md z-10">
+                        <ul>
+                        <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
+                        <li className="py-1 px-3 hover:bg-gray-200 cursor-pointer" onClick={handleLogout} >Logout</li>
+                        </ul>
+                    </div>} */}
             </nav>
            
-            <div class="absolute bottom-4 w-[3rem] h-[3rem] overflow-hidden" onClick={handleprofiletoggle}>
-                <img src={`http://127.0.0.1:8000${image}`} class=" w-full h-full rounded-full" alt="image" />
+            <div class="absolute bottom-4 flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center" >
+                <AiOutlineMenu className='text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] '/>
+                <span>More</span>
             </div>
-            {profiletoggle && <div className="absolute bottom-[4rem]  w-36 bg-white shadow-md rounded-md z-10">
-                <ul>
-                <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
-                <li className="py-1 px-3 hover:bg-gray-200 cursor-pointer" onClick={handleLogout} >Logout</li>
-                </ul>
-            </div>}
+
 
         </div>
     </div>
