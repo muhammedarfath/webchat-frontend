@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../Redux/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoHome } from "react-icons/go";
 import { IoSearchOutline } from "react-icons/io5";
 import { BiMoviePlay } from "react-icons/bi";
@@ -38,27 +38,29 @@ function Header({handleProfileModelOpen}) {
             </div>
                 
             <nav className="flex-1 flex flex-col items-center py-[5rem] gap-5">
-                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
-                        <GoHome className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
-                        <span>Home</span>
-                    </div>
-                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                   
+                        <Link to='/' className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center cursor-pointer'>
+                            <GoHome className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                            <span>Home</span>
+                        </Link>
+                    
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center cursor-pointer'>
                         <IoSearchOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Search</span>
                     </div> 
-                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center cursor-pointer'>
                         <BiMoviePlay className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Reels</span>
                     </div> 
-                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center cursor-pointer'>
                         <FiMessageCircle className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Message</span>
                     </div> 
-                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center cursor-pointer'>
                         <IoMdNotificationsOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Notification</span>
                     </div>  
-                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center'>
+                    <div className='flex gap-4 w-full hover:bg-gray-100 p-3 rounded-lg items-center cursor-pointer'>
                         <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Create</span>
                     </div>  

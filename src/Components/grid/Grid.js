@@ -67,7 +67,7 @@ const SkeletonOne = () => {
   };
 
   return (
-  <Link to="chathome/">
+  <Link to="/chathome">
     <motion.div
       initial="initial"
       whileHover="animate"
@@ -96,7 +96,7 @@ const SkeletonOne = () => {
         <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
       </motion.div>
     </motion.div>
-    </Link>
+  </Link>
   );
 };
 const SkeletonTwo = () => {

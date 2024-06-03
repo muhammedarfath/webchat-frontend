@@ -6,7 +6,7 @@ import { BiCheckDouble } from "react-icons/bi";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import  People  from '../../Pages/explore/People';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function CardUser({ handleUserIdUpdate }) {
   const [users, setUsers] = useState([]);
@@ -21,10 +21,9 @@ function CardUser({ handleUserIdUpdate }) {
         const response = await axios.post('http://127.0.0.1:8000/chat/users/', {
           current_userId
         });
-        console.log(response.data);
-        setUsers(response.data);
-        if (setUsers.length > 0){
-          navigate('/people')
+        if (response.status === 200){
+          const data = response.data
+          setUsers(response.data);
         }
       } catch (error) {
         alert(error);
@@ -34,13 +33,18 @@ function CardUser({ handleUserIdUpdate }) {
     fetchAllUsers();
   }, [current_userId]);
 
+
+
   const handlechat = async (id, username) => {
     setIsLoading(true);
     try {
+
       const response = await axios.post(`http://127.0.0.1:8000/chat/${username}/`, {
         user_id: id,
       });
-      if (response) {
+      console.log(response.data);
+
+      if (response.status === 200) {
         const data = response.data;
         handleUserIdUpdate(data.id, data.user.email, data.user.username, data.image, data.full_name, data.bio);
       } else {
@@ -52,9 +56,11 @@ function CardUser({ handleUserIdUpdate }) {
     setIsLoading(false);
   };
 
+
+
   return (
     <>
-        <div className='border-none w-full h-full bg-[#FFFFFF] overflow-y-auto'>
+        {users.length > 0 ? (<div className='border-none w-full h-full bg-[#FFFFFF] overflow-y-auto'>
           <div className='flex items-center border-b-1 border-b-gray p-6 justify-between'>
             <div className='flex items-center gap-2'>
               <h1 className='font-bold'>All Chats</h1>
@@ -100,7 +106,7 @@ function CardUser({ handleUserIdUpdate }) {
               </div>
             </div>
           ))}
-        </div>
+        </div>): <Navigate to="/people"/>}
 
     </>
   );

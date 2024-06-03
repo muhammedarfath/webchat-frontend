@@ -27,7 +27,7 @@ function AppHome() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4 mt-[45rem]"
+        className="relative flex flex-col gap-4 items-center justify-center px-4 lg:mt-[45rem] mt-[95rem] md:mt-[50rem] "
       >
         
         <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">

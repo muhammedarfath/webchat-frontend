@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function People() {
-    const [isFollowed, setIsFollowed] = React.useState(false);
+    const [isFollowed, setIsFollowed] = useState(false);
     const [users,setUsers] = useState([])
     const current_userId = useSelector(state=>state.auth.user_id)
     const [isLoading, setIsLoading] = useState(false);
@@ -31,10 +31,16 @@ function People() {
 
       const handlefollow =async (userId) => {
         try{
-         await axios.post('http://127.0.0.1:8000/chat/follow/',{
+          const response = await axios.post('http://127.0.0.1:8000/chat/send_follow_request/',{
             followerId: current_userId,
             userId: userId
          })
+         if (response.data){
+          console.log(response.data);
+          setIsFollowed(!isFollowed)
+         }else{
+          alert('somthing went wrong')
+         }
         }catch(error){
             console.log(error)
         }
@@ -67,7 +73,7 @@ function People() {
                                 <small>Suggested for you</small>
                             </div>
                             <div class='flex gap-3 items-end ml-auto'>
-                                <button className='bg-[#0095F6] p-2 px-5 rounded-xl text-white font-medium' onClick={()=>handlefollow(user.id)} >Follow</button>
+                                {isFollowed ?(<button className='bg-[#080b0c] p-2 px-5 rounded-xl text-white font-medium' onClick={()=>handlefollow(user.id)} >Requested</button>) : (<button className='bg-[#0095F6] p-2 px-5 rounded-xl text-white font-medium' onClick={()=>handlefollow(user.id)} >Follow</button>)}
 
                             </div>
                         </div>

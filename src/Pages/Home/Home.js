@@ -7,7 +7,6 @@ import CardUser from '../../Components/contacts/CardUser'
 import EmptyChat from '../../Components/contacts/EmptyChat'
 import ProfileModal from '../../Components/modal/ProfileModal'
 function Home() {
-  const {email} = useSelector(state=>state.auth)
   const [userId,setUserId]=useState({})
   const [isProfileModelOpen, setIsProfileModelOpen] = useState(false);
 
@@ -24,6 +23,9 @@ function Home() {
 
 
 
+
+
+
   const handleProfileModelOpen = () => {
     setIsProfileModelOpen(true);
 };
@@ -33,7 +35,7 @@ function Home() {
 
       <div className='flex h-screen'>
         
-        {email ?
+
         <>
         <div className='w-full lg:w-1/4 flex'>
           <div className='flex-none'>
@@ -47,9 +49,7 @@ function Home() {
         { Object.keys(userId).length !== 0 ? (<ChatArea userArr={userId}/>) : (<EmptyChat/>)}
         </div>
         </>
-        :(<Login/>)
-        
-        }
+
 
       </div>
       <ProfileModal isProfileModelOpen={isProfileModelOpen} setIsProfileModelOpen={setIsProfileModelOpen} />
