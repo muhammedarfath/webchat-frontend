@@ -16,7 +16,6 @@ function People() {
             const response = await axios.post('http://127.0.0.1:8000/chat/suggested_friends/',{
               current_userId
             })
-            console.log(response.data);
             setUsers(response.data)
           }catch(error){
             alert(error)

@@ -27,7 +27,7 @@ function App() {
         <Route
           path='/chathome'
           element={email ? <Home /> : <Navigate to="/login" />}
-        />
+        />  
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
