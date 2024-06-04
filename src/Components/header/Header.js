@@ -13,7 +13,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 function Header({handleProfileModelOpen}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {image} = useSelector(state=>state.auth)
+    const {image,username} = useSelector(state=>state.auth)
     const [profiletoggle,setProfiletoggle] = useState(false)
 
     const handleprofiletoggle = () =>{
@@ -62,16 +62,12 @@ function Header({handleProfileModelOpen}) {
                         <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Create</span>
                     </div>  
-                    {/* <div className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center' onClick={handleprofiletoggle}>
+                    <Link to={`/profile/${username}`}>
+                    <div className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center'>
                         <img src={`http://127.0.0.1:8000${image}`} class=" w-full h-full rounded-full" alt="image" />
                         <span>Profile</span>
-                    </div>    
-                    {profiletoggle && <div className="absolute bottom-[4rem]  w-36 bg-white shadow-md rounded-md z-10">
-                        <ul>
-                        <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
-                        <li className="py-1 px-3 hover:bg-gray-200 cursor-pointer" onClick={handleLogout} >Logout</li>
-                        </ul>
-                    </div>} */}
+                    </div> 
+                    </Link>   
             </nav>
            
             <div class="absolute bottom-4 flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center" >

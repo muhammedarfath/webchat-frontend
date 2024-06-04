@@ -12,16 +12,16 @@ import { useNavigate } from "react-router-dom";
 
 function AppHome() {
 
-  const {authTokens} = useSelector(state=>state.auth)
-  const [profiletoggle,setProfiletoggle] = useState(false)
+  const { authTokens } = useSelector(state => state.auth)
+  const [profiletoggle, setProfiletoggle] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleprofiletoggle = () =>{
+  const handleprofiletoggle = () => {
     setProfiletoggle(!profiletoggle)
-}
+  }
   const handleLogout = () => {
-    dispatch(logoutUser({ authTokens: null, user_id: null,is_superuser:false}));
+    dispatch(logoutUser({ authTokens: null, user_id: null, is_superuser: false }));
     navigate('/login');
   };
 
@@ -35,26 +35,26 @@ function AppHome() {
 
   return (
     <AuroraBackground>
-            <div 
-                className="absolute top-6 right-6 border border-slate-500 p-2 rounded-full cursor-pointer" 
-                onClick={handleprofiletoggle}
+      <div
+        className="absolute top-6 right-6 border border-slate-500 p-2 rounded-full cursor-pointer"
+        onClick={handleprofiletoggle}
+      >
+        <ProfileIcon />
+      </div>
+      {profiletoggle && (
+        <div className="absolute top-20 right-6 w-36 bg-white shadow-md rounded-md z-10 profile-dropdown">
+          <div className="arrow-up"></div>
+          <ul>
+            <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
+            <li
+              className="py-1 px-3 hover:bg-gray-200 cursor-pointer"
+              onClick={handleLogout}
             >
-                <ProfileIcon />
-            </div>
-            {profiletoggle && (
-                <div className="absolute top-20 right-6 w-36 bg-white shadow-md rounded-md z-10 profile-dropdown">
-                    <div className="arrow-up"></div>
-                    <ul>
-                        <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
-                        <li 
-                            className="py-1 px-3 hover:bg-gray-200 cursor-pointer" 
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </li>
-                    </ul>
-                </div>
-            )}
+              Logout
+            </li>
+          </ul>
+        </div>
+      )}
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -75,12 +75,12 @@ function AppHome() {
         <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
           Debug now
         </button>
-         <div className="h-full">
-         <BentoGridThirdDemo />
-          </div>
+        <div className="h-full">
+          <BentoGridThirdDemo />
+        </div>
       </motion.div>
       <div className="w-full mt-4">
-        <Footer/>
+        <Footer />
       </div>
     </AuroraBackground>
   )
