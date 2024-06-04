@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 function AppHome() {
 
-  const {email,authTokens} = useSelector(state=>state.auth)
+  const {authTokens} = useSelector(state=>state.auth)
   const [profiletoggle,setProfiletoggle] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();

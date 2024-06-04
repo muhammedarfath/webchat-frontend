@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../../Components/header/Header';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function People() {
     const [users,setUsers] = useState([])
@@ -75,7 +76,9 @@ function People() {
 
                             </div>
                             <div class='flex flex-col items-start ml-3'>
-                                <h1 class='text-1xl mt-3 font-medium'>{user.user.username}</h1>
+                              <Link to={`/profile/${user.user.username}`}>
+                                <h1 class='text-1xl mt-3 font-medium '>{user.user.username}</h1>
+                              </Link>
                                 <small>arfathusr</small>
                                 <small>Suggested for you</small>
                             </div>

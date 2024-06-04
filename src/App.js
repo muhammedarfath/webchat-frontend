@@ -23,7 +23,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<AppHome />} />
-        <Route path='/profile' element={<Profile/>} />
+        <Route path="/profile/:username" element={<Profile/>} />
         <Route path='/people' element={<People/>} />
         <Route path='/reels' element={<Reels/>} />
         <Route

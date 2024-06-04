@@ -1,35 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+
+
+
+
 
 function Profile() {
+    const {username} = useParams();
+    const [user,setUser] = useState()
+
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/app_profile/userprofile/', {
+                    username
+                });
+                const data = response.data;
+                setUser(data)
+            } catch (error) {
+                console.error('Error fetching user:', error);
+            }
+        };
+
+        fetchUser();
+    }, [username]);
+
+
+
+
+
   return (
-    <div className='w-full h-[100vh] overflow-auto flex flex-col items-center'>
+    <>
+    { user && <div className='w-full h-[100vh] overflow-auto flex flex-col items-center'>
         <div className='flex lg:w-[80rem] lg:gap-11 gap-4 justify-center'>
             <div className='pt-16'>
-                <img className='lg:w-40 w-20 lg:h-40 rounded-full' src="images/profil-image.webp" alt="Description" />
+            {user.image ? (<img className='lg:w-40 w-20 lg:h-40 rounded-full' src={`http://127.0.0.1:8000${user.image}`} alt="Description" />
+            ):(
+            <img className='lg:w-40 w-20 lg:h-40 rounded-full' src="images/profil-image.webp" alt="Description" />
+            )}
             </div>
 
             <div>
-                <div className='flex pt-16 gap-3 justify-center items-center'>
-                    <h1>ar__f4th</h1>
-                    <div className='border-1 border-black p-1.5 rounded-md'>
-                        <span>Edit Profile</span>  
+                <div className='flex pt-16 gap-5 justify-center items-center'>
+                    <h1 className='font-light text-2xl'>{user.user.username}</h1>
+                    <div className='shadow-sm p-1.5 px-4 rounded-md bg-gray-100'>
+                        <span className='font-semibold text-sm' >Edit Profile</span>  
                     </div>
-                    <div className='border-1 border-black p-1.5 rounded-md'>
-                        <span>Settings</span>  
+                    <div className='shadow-sm p-1.5 px-4 rounded-md bg-gray-100'>
+                        <span className='font-semibold text-sm'>Settings</span>  
                     </div>
                 </div>
             
                 <div className='flex gap-5 mt-5'>
-                    <h1>posts</h1>
-                    <h1>followers</h1>
-                    <h1>following</h1>
+                    <h1 className='flex gap-1'> <span className='font-medium text-base'>0</span>posts</h1>
+                    <h1 className='flex gap-1'><span className='font-medium text-base'>{user.followers.length}</span>followers</h1>
+                    <h1 className='flex gap-1'><span className='font-medium text-base'>{user.following.length}</span>following</h1>
                 </div>
 
                 <div className='flex flex-col mt-5'>
-                    <span>FULL NAME</span>
-                    <span>PLACE</span>
-                    <span>DISCRIPTION</span>
+                    <span className='font-medium text-base'>{user.full_name}</span>
+                    <span>kerala🤣</span>
+                    <span>{user.bio}</span>
                 </div>
 
 
@@ -140,8 +175,10 @@ function Profile() {
                               
             </div>
         </div>
-    </div>    
+    </div> }  
+    </> 
   )
+  
 }
 
 export default Profile

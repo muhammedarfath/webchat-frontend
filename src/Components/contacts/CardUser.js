@@ -31,9 +31,6 @@ function CardUser({ handleUserIdUpdate }) {
           setUsers(data)
         }
 
-
-
-
         setIsLoading(false)
       } catch (error) {
         console.error('Error fetching users:', error);
