@@ -7,6 +7,7 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } f
 import { useSelector } from 'react-redux';
 import Message from './Message';
 import MessageInput from './MessageInput';
+import MessageInpu from './MessageInpu';
 
 function ChatArea({ userArr }) {
     const [messages, setMessages] = useState([]);
@@ -36,10 +37,10 @@ function ChatArea({ userArr }) {
         socket.onclose = function (e) {
             console.error('Chat socket closed unexpectedly');
         };
-        
- 
+
+
     }, [userArr]);
-    
+
     useEffect(() => {
         if (messagesContainerRef.current) {
             messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
@@ -48,8 +49,8 @@ function ChatArea({ userArr }) {
 
 
     return (
-        <div className="hidden lg:block rounded-lg bg-[#F4F4F4] h-full">
-            <header className="fixed z-30 border-b-1 border-b-gray top-0 text-dark p-[13px] flex items-center justify-between bg-white w-3/4">
+        <div className="hidden  lg:block rounded-lg bg-white h-screen">
+            <header className="w-full z-30 border-b-1 border-b-gray top-0 text-dark p-[13px] flex items-center justify-between bg-white">
                 <div className="flex gap-4 items-center">
                     <div>
                         <Dropdown placement="bottom-start">
@@ -63,7 +64,7 @@ function ChatArea({ userArr }) {
                                     className="transition-transform font-semibold gap-4"
                                     description='Last Seen at 07:15 PM'
                                     name={userArr.username.toUpperCase()}
-                                    
+
                                 />
                             </DropdownTrigger>
                             <DropdownMenu aria-label="User Actions" variant="flat">
@@ -95,14 +96,15 @@ function ChatArea({ userArr }) {
                 </div>
 
             </header>
-            <div className="messages-container w-full z-0 mt-[60px] pb-[60px]" ref={messagesContainerRef}>
+            <div className="messages-container w-full z-0 mt-[60px] pb-[70px]" ref={messagesContainerRef}>
                 {messages.map((message, index) => (
                     <Message key={index} text={message} sent={message.author === userArr.username} />
                 ))}
             </div>
 
-            <div className="absolute bottom-0">
-                <MessageInput userArr={userArr} />
+            <div className="relative bottom-20 w-full">
+                <MessageInpu userArr={userArr}/>
+                {/* <MessageInput userArr={userArr} /> */}
             </div>
         </div>
     );

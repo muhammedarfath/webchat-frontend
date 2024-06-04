@@ -29,7 +29,7 @@ function Header({handleProfileModelOpen}) {
     
     
   return (
-    <div className="hidden border-2 lg:flex h-screen">
+    <div className="hidden md:block border-2 lg:flex h-screen">
         <div className="text-[#000000] p-4 bg-white">
             <div className="py-4 flex items-center justify-center">
                 <a href="#" className="text-[#000000] text-3xl font-semibold uppercase">OT</a>
@@ -69,11 +69,11 @@ function Header({handleProfileModelOpen}) {
                     </div> 
                     </Link>   
             </nav>
-           
+{/*            
             <div class="absolute bottom-4 flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center" >
                 <AiOutlineMenu className='text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] '/>
                 <span>More</span>
-            </div>
+            </div> */}
 
 
         </div>

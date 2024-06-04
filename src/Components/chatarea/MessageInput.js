@@ -4,31 +4,31 @@ import { useSelector } from 'react-redux';
 import { GrEmoji } from "react-icons/gr";
 import { MdOutlineMicOff } from "react-icons/md";
 
-function MessageInput({userArr}) {
-    const [message,setMessage]=useState('')
-    const senderId = useSelector(state=>state.auth.user_id)
+function MessageInput({ userArr }) {
+    const [message, setMessage] = useState('')
+    const senderId = useSelector(state => state.auth.user_id)
     const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`);
 
-    const handleInputMessage = () =>{
+    const handleInputMessage = () => {
         socket.send(JSON.stringify({
             'message': message,
-            'command':'new_message',
-        }));
+            'command': 'new_message',
+        }));    
     }
 
     return (
-        <div className="flex items-center w-[66vw] bg-[#f5f5f5]">
+        <div className="flex items-center bg-[#f5f5f5]">
             <div className='flex gap-3 ml-5'>
                 <div className='rounded-full  border-solid border-1 cursor-pointer border-white bg-[#fff] p-2'>
-                <GrEmoji className="text-2xl"/>
+                    <GrEmoji className="text-2xl" />
                 </div>
                 <div className='rounded-full  border-solid border-1 cursor-pointer border-white bg-[#fff] p-2'>
-                <MdOutlineMicOff className="text-2xl"/>
+                    <MdOutlineMicOff className="text-2xl" />
 
                 </div>
 
             </div>
-            <div className="flex-grow mr-5">
+            <div className="flex-grow mr-5 w-full">
                 <input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}

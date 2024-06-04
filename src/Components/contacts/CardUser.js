@@ -26,7 +26,8 @@ function CardUser({ handleUserIdUpdate }) {
         if (response.status === 200 || response.status === 204) {
           const data = response.data;
           if (!data?.length) {
-            navigate("/people")
+            // navigate("/people")
+            
           }
           setUsers(data)
         }
@@ -64,12 +65,12 @@ function CardUser({ handleUserIdUpdate }) {
     setIsLoading(false);
   };
 
-console.log(users,"this is users");
 
 
 
   return (
-    <div className='border-none w-full h-full bg-[#FFFFFF] overflow-y-auto'>
+    <>
+    {users && <div className='border-none w-full h-screen bg-[#FFFFFF] overflow-y-auto'>
       <div className='flex items-center border-b-1 border-b-gray p-6 justify-between'>
         <div className='flex items-center gap-2'>
           <h1 className='font-bold'>All Chats</h1>
@@ -115,7 +116,8 @@ console.log(users,"this is users");
           </div>
         </div>
       ))}
-    </div>
+    </div>}
+    </>
   );
 }
 
