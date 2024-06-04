@@ -37,32 +37,32 @@ function Header({handleProfileModelOpen}) {
                 
             <nav className="flex-1 flex flex-col items-center py-[5rem] gap-5">
                    
-                        <Link to='/' className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center cursor-pointer'>
+                        <Link to='/' className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center cursor-pointer'>
                             <GoHome className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                             <span>Home</span>
                         </Link>
                     
-                    <div className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center cursor-pointer'>
+                    <div className='flex gap-4 w-full hover:bg-gray-100 py-4 rounded-lg items-center cursor-pointer'>
                         <IoSearchOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Search</span>
                     </div> 
-                    <Link to='/reels' className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center cursor-pointer'>
+                    <Link to='/reels' className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center cursor-pointer'>
                         <BiMoviePlay className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Reels</span>
                     </Link> 
-                    <Link to='/chathome' className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center cursor-pointer'>
+                    <Link to='/chathome' className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center cursor-pointer'>
                         <FiMessageCircle className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Message</span>
                     </Link> 
-                    <div className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center cursor-pointer'>
+                    <div className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center cursor-pointer'>
                         <IoMdNotificationsOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Notification</span>
                     </div>  
-                    <div className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center cursor-pointer'>
+                    <div className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center cursor-pointer'>
                         <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                         <span>Create</span>
                     </div>  
-                    {/* <div className='flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center' onClick={handleprofiletoggle}>
+                    {/* <div className='flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center' onClick={handleprofiletoggle}>
                         <img src={`http://127.0.0.1:8000${image}`} class=" w-full h-full rounded-full" alt="image" />
                         <span>Profile</span>
                     </div>    
@@ -74,7 +74,7 @@ function Header({handleProfileModelOpen}) {
                     </div>} */}
             </nav>
            
-            <div class="absolute bottom-4 flex gap-4 w-full hover:bg-gray-100 pt-4 rounded-lg items-center" >
+            <div class="absolute bottom-4 flex gap-3 w-full hover:bg-gray-100 py-4 rounded-lg items-center" >
                 <AiOutlineMenu className='text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] '/>
                 <span>More</span>
             </div>

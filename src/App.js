@@ -7,6 +7,7 @@ import Home from './Pages/Home/Home';
 import { useSelector } from 'react-redux';
 import {Reels} from './Pages/Reels/Reels'
 import People from './Pages/explore/People';
+import Profile from './Pages/Profile/Profile';
 
 
 
@@ -22,6 +23,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<AppHome />} />
+        <Route path='/profile' element={<Profile/>} />
         <Route path='/people' element={<People/>} />
         <Route path='/reels' element={<Reels/>} />
         <Route
