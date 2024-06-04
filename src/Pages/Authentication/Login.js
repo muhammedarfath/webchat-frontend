@@ -24,7 +24,7 @@ function Login() {
       const data = response.data
       console.log(data,"this is data")
       dispatch(loginUser({authTokens: data.access, user_id: data.user_id, username: data.username, email: data.user_email,is_superuser:data.is_superuser }))
-      navigate('/chathome')
+      navigate('/')
      }else{
       alert('somthing went wrong')
      }

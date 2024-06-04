@@ -8,7 +8,7 @@ import Follow_Card from "../../Components/follow_suggestions/Follow_Card.js";
 
 export function Reels() {
   return (
-    <div className="h-screen overflow-auto relative">
+    <div className="h-screen overflow-auto relative bg-white">
       <div className="fixed left-0">
         <Header/>
       </div>
