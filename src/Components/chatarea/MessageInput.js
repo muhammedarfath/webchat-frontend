@@ -1,50 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import { IoMdSend } from "react-icons/io";
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { PlaceholdersAndVanishInput } from "../../Components/ui/placeholders-and-vanish-input";
 import { GrEmoji } from "react-icons/gr";
 import { MdOutlineMicOff } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 function MessageInput({ userArr }) {
-    const [message, setMessage] = useState('')
-    const senderId = useSelector(state => state.auth.user_id)
-    const socket = new WebSocket(`ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`);
+  const [message, setMessage] = useState("");
+  const senderId = useSelector((state) => state.auth.user_id);
+  const socket = new WebSocket(
+    `ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`
+  );
 
-    const handleInputMessage = () => {
-        socket.send(JSON.stringify({
-            'message': message,
-            'command': 'new_message',
-        }));    
-    }
-
-    return (
-        <div className="flex items-center bg-[#f5f5f5]">
-            <div className='flex gap-3 ml-5'>
-                <div className='rounded-full  border-solid border-1 cursor-pointer border-white bg-[#fff] p-2'>
-                    <GrEmoji className="text-2xl" />
-                </div>
-                <div className='rounded-full  border-solid border-1 cursor-pointer border-white bg-[#fff] p-2'>
-                    <MdOutlineMicOff className="text-2xl" />
-
-                </div>
-
-            </div>
-            <div className="flex-grow mr-5 w-full">
-                <input
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type Your Message Here....."
-                    className="p-3 rounded-lg w-full bg-white m-5 shadow-md"
-                />
-            </div>
-            <button
-                onClick={handleInputMessage}
-                className="m-4 border-solid border-1 text-white rounded-lg border-gray bg-[#420BA1] p-3 transition-colors duration-100 shadow-lg hover:bg-transparent hover:text-[#420BA1]"
-            >
-                <IoMdSend className="text-2xl" />
-            </button>
-
-        </div>
+  const handleInputMessage = () => {
+    socket.send(
+      JSON.stringify({
+        message: message,
+        command: "new_message",
+      })
     );
+  };
+
+  const placeholders = [
+    "What's the first rule of Fight Club?",
+    "Who is Tyler Durden?",
+    "Where is Andrew Laeddis Hiding?",
+    "Write a Javascript method to reverse a string",
+    "How to assemble your own PC?",
+  ];
+
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleInputMessage();
+  };
+  return (
+    <div className="absolute flex items-center bg-[#f5f5f5] p-4 w-full">
+      <div className="flex gap-3 ml-5">
+        <div className="rounded-full  border-solid border-1 cursor-pointer border-white bg-[#fff] p-2">
+          <GrEmoji className="text-2xl" />
+        </div>
+        <div className="rounded-full  border-solid border-1 cursor-pointer border-white bg-[#fff] p-2">
+          <MdOutlineMicOff className="text-2xl" />
+        </div>
+      </div>
+
+      <div className=" flex flex-col justify-center w-full items-center px-4">
+        <PlaceholdersAndVanishInput
+          placeholders={placeholders}
+          onChange={handleChange}
+          onSubmit={onSubmit}
+        />
+      </div>
+    </div>
+  );
 }
 
-export default MessageInput
+export default MessageInput;

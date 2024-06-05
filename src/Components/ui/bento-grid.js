@@ -1,9 +1,6 @@
-import { cn } from "../../utils/cn"
+import { cn } from "../../utils/cn";
 
-export const BentoGrid = ({
-  className,
-  children,
-}) => {
+export const BentoGrid = ({ className, children }) => {
   return (
     <div
       className={cn(

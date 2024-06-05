@@ -1,37 +1,34 @@
-
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { AuroraBackground } from "../../Components/ui/background-gradient-animation";
-import { BentoGridThirdDemo } from '../../Components/grid/Grid';
-import Footer from '../../Components/footer/Footer'
-import { useDispatch, useSelector } from 'react-redux';
+import { BentoGridThirdDemo } from "../../Components/grid/Grid";
+import Footer from "../../Components/footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileIcon from "../../Components/profile_icon/ProfileIcon";
 import { logoutUser } from "../../Redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
-
 function AppHome() {
-
-  const { authTokens } = useSelector(state => state.auth)
-  const [profiletoggle, setProfiletoggle] = useState(false)
+  const { authTokens } = useSelector((state) => state.auth);
+  const [profiletoggle, setProfiletoggle] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleprofiletoggle = () => {
-    setProfiletoggle(!profiletoggle)
-  }
+    setProfiletoggle(!profiletoggle);
+  };
   const handleLogout = () => {
-    dispatch(logoutUser({ authTokens: null, user_id: null, is_superuser: false }));
-    navigate('/login');
+    dispatch(
+      logoutUser({ authTokens: null, user_id: null, is_superuser: false })
+    );
+    navigate("/login");
   };
 
   useEffect(() => {
     if (!authTokens) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [authTokens, navigate]);
-
-
 
   return (
     <AuroraBackground>
@@ -65,7 +62,6 @@ function AppHome() {
         }}
         className="relative flex flex-col gap-4 items-center justify-center px-4 lg:mt-[45rem] mt-[95rem] md:mt-[50rem] "
       >
-
         <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
           Background lights are cool you know.
         </div>
@@ -83,7 +79,7 @@ function AppHome() {
         <Footer />
       </div>
     </AuroraBackground>
-  )
+  );
 }
 
-export default AppHome
+export default AppHome;
