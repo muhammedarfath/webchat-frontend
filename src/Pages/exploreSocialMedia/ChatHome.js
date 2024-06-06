@@ -19,8 +19,8 @@ function ChatHome() {
 
   return (
     <>
-      <div className="flex flex-col  md:w-4/5 md:flex-row w-full lg:w-5/6 h-full">
-        <div className="w-full lg:w-1/3 overflow-y-scroll h-full">
+      <div className="flex flex-col md:flex-row w-full lg:w-5/6 h-full">
+        <div className="w-full md:w- lg:w-1/3 overflow-y-scroll h-full">
           <Friends fetchUserIdDetails={fetchUserIdDetails} />
         </div>
         <div className="hidden md:hidden lg:block lg:w-2/3 h-full">

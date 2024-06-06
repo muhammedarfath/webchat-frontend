@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 function MessageInput({ userArr }) {
   const [message, setMessage] = useState("");
   const senderId = useSelector((state) => state.auth.user_id);
+  
   const socket = new WebSocket(
     `ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`
   );

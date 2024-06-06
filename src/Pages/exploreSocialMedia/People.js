@@ -7,6 +7,7 @@ import Layout from "../../Components/Layout/Layout";
 function People() {
   const [users, setUsers] = useState([]);
   const current_userId = useSelector((state) => state.auth.user_id);
+  const username = useSelector((state) => state.auth.username);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function People() {
       setIsLoading(false);
     };
     fetchAllUsers();
-  }, []);
+  }, [current_userId]);
 
   const handleFollow = async (userId) => {
     try {
@@ -42,8 +43,9 @@ function People() {
         }
       );
       if (response.data) {
+        console.log('success');
         setUsers(
-          users.map((user) =>
+          users.map((user) => 
             user.id === userId
               ? {
                   ...user,
@@ -53,13 +55,34 @@ function People() {
           )
         );
       } else {
-        alert("somthing went wrong");
+        alert("something went wrong");
       }
     } catch (error) {
       console.log(error);
     }
+  
+    handleNotification(userId);
   };
 
+  const handleNotification = (userId) => {
+    const socket = new WebSocket(`ws://localhost:8000/ws/notification/${userId}/`);
+  
+    socket.onopen = () => {
+      console.log('WebSocket connection established');
+      socket.send(
+        JSON.stringify({
+          message: `${username} has requested to follow you.`,
+          command: "new_notify",
+        })
+      );
+    };
+  
+    socket.onerror = (error) => {
+      console.error('WebSocket Error: ', error);
+    };
+
+  };
+  
   return (
     <div className="h-screen overflow-auto w-full">
       <div className="flex justify-center items-center mt-16">
@@ -71,32 +94,32 @@ function People() {
           </div>
 
           {users.map((user) => (
-            <div class="cursor-pointer bg-opacity-100 flex items-center justify-between ml-9 mt-1 mr-9 rounded-lg relative">
-              <div class="w-10 h-10 overflow-hidden">
+            <div className="cursor-pointer bg-opacity-100 flex items-center justify-between ml-9 mt-1 mr-9 rounded-lg relative" key={user.id}>
+              <div className="w-10 h-10 overflow-hidden">
                 {user.image ? (
                   <img
                     src={`http://127.0.0.1:8000${user.image}`}
-                    class="w-full h-full rounded-full"
+                    className="w-full h-full rounded-full"
                     alt="image"
                   />
                 ) : (
                   <img
                     src="images/profil-image.webp"
-                    class="w-full h-full rounded-full"
+                    className="w-full h-full rounded-full"
                     alt="image"
                   />
                 )}
               </div>
-              <div class="flex flex-col items-start ml-3">
+              <div className="flex flex-col items-start ml-3">
                 <Link to={`/profile/${user.user.username}`}>
-                  <h1 class="text-1xl mt-3 font-medium ">
+                  <h1 className="text-1xl mt-3 font-medium ">
                     {user.user.username}
                   </h1>
                 </Link>
                 <small>arfathusr</small>
                 <small>Suggested for you</small>
               </div>
-              <div class="flex gap-3 items-end ml-auto">
+              <div className="flex gap-3 items-end ml-auto">
                 {user.isFollowed ? (
                   <button
                     className="bg-[#080b0c] p-2 px-5 rounded-xl text-white font-medium"

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function EmptyChat() {
+
+
   return (
     <div className="hidden lg:block rounded-lg bg-white h-full">
       <div className="rounded-lg bg-white h-screen flex flex-col justify-center items-center">
