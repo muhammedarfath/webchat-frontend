@@ -13,6 +13,7 @@ import { RiMovie2Fill } from "react-icons/ri";
 import { TbMessageCircle2Filled } from "react-icons/tb";
 import { RiMessage3Line } from "react-icons/ri";
 import { RiMessage3Fill } from "react-icons/ri";
+import Logo from "../Logo/Logo";
 
 function Layout() {
   const current_user = useSelector((state) => state.auth.user_id);
@@ -64,8 +65,10 @@ function Layout() {
                 href="#"
                 className="text-[#000000] italic text-2xl text font-semibold uppercase"
               >
-                <span className="md:hidden lg:block">𝓞𝓝𝓔 𝓣𝓐𝓟</span>
-                <span className="md:block lg:hidden">𝓞𝓣</span>
+                <span className="md:hidden lg:block">ONE TAP</span>
+                <span className="md:block lg:hidden">
+                  <Logo/>
+                </span>
               </a>
             </div>
 
