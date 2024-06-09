@@ -17,6 +17,7 @@ import { RiMessage3Fill } from "react-icons/ri";
 function Layout() {
   const current_user = useSelector((state) => state.auth.user_id);
   const [notifications, setNotifications] = useState([]); 
+  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
     const socket = new WebSocket(`ws://localhost:8000/ws/notification/${current_user}/`);
@@ -33,6 +34,7 @@ function Layout() {
       const data = JSON.parse(event.data);
       console.log('Notification received:', data);
       setNotifications((prevNotifications) => [...prevNotifications, ...data.messages]); 
+      setUnreadCount(data.messages.length);
     };
 
     socket.onerror = (error) => {
@@ -70,7 +72,7 @@ function Layout() {
             <nav className="flex-1 flex flex-col items-center py-[2rem] gap-5">
             <NavLink 
                 to="/"
-                className="flex gap-3 w-full hover:bg-gray-100 py-2 rounded-lg items-center cursor-pointer"
+                className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
                 activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
               >
 
@@ -82,13 +84,13 @@ function Layout() {
 
 
 
-              <div className="flex gap-4 w-full hover:bg-gray-100 py-2 rounded-lg items-center cursor-pointer">
+              <div className="flex gap-4 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer">
                 <IoMdSearch className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                 <span className="md:hidden lg:block">Search</span>
               </div>
               <NavLink 
                 to="/reels"
-                className="flex gap-3 w-full hover:bg-gray-100 py-2 rounded-lg items-center cursor-pointer"
+                className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
                 activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
               >
                 {({ isActive })=>(
@@ -111,7 +113,7 @@ function Layout() {
 
               <NavLink 
                 to="/chathome"
-                className="flex gap-3 w-full hover:bg-gray-100 py-2 rounded-lg items-center cursor-pointer"
+                className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
                 activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
               >
                 {({ isActive })=>(
@@ -138,11 +140,16 @@ function Layout() {
 
 
 
-              <div className="flex gap-3 w-full hover:bg-gray-100 py-2 rounded-lg items-center cursor-pointer">
-                <MdOutlineNotifications className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+              <div className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer relative">
+                <MdOutlineNotifications className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]" />
                 <span className="md:hidden lg:block">Notification</span>
+                {unreadCount > 0 && (
+                  <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                    {unreadCount}
+                  </span>
+                )}
               </div>
-              <div className="flex gap-3 w-full hover:bg-gray-100 py-2 rounded-lg items-center cursor-pointer">
+              <div className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer">
                 <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                 <span className="md:hidden lg:block">Create</span>
               </div>

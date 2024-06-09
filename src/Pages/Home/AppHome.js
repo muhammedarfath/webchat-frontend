@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileIcon from "../../Components/profile_icon/ProfileIcon";
 import { logoutUser } from "../../Redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function AppHome() {
   const { authTokens } = useSelector((state) => state.auth);
@@ -29,6 +30,7 @@ function AppHome() {
       navigate("/login");
     }
   }, [authTokens, navigate]);
+
 
   return (
     <AuroraBackground>

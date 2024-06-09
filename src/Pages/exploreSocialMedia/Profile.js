@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-import { useParams } from "react-router-dom";
+import { Card, CardHeader, CardBody, Image, useNavbar } from "@nextui-org/react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import FollowButton from "../../Components/follow_btn/FollowButton";
 
 function Profile() {
+  const navigate = useNavigate();
   const { username } = useParams();
   const [user, setUser] = useState();
   const current_user = useSelector((state) => state.auth.username);
 
+
+
+console.log(user,"once again");
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -29,9 +34,6 @@ function Profile() {
     fetchUser();
   }, [username]);
 
-  const isFollowing = (followers, currentUser) => {
-    return followers.some((follower) => follower.username === currentUser);
-  };
 
   return (
     <>
@@ -68,16 +70,14 @@ function Profile() {
               ) : (
                 <div className="flex pt-16 gap-5 justify-center items-center">
                   <h1 className="font-light text-2xl">{user.user.username}</h1>
-                  {isFollowing(user.followers, current_user) ? (
-                    <div className="shadow-sm p-1.5 px-4 rounded-md bg-gray-100">
-                      <span className="font-semibold text-sm">Following</span>
-                    </div>
-                  ) : (
-                    <div className="shadow-sm p-1.5 px-4 text-white rounded-md bg-[#0095F6]">
-                      <span className="font-semibold text-sm">Follow</span>
-                    </div>
-                  )}
-                  <div className="shadow-sm p-1.5 px-4 rounded-md bg-gray-100">
+                  
+
+
+                  <FollowButton user={user} currentUser={current_user} />
+
+
+
+                  <div className="shadow-sm p-1.5 px-4 cursor-pointer rounded-md bg-gray-100" onClick={()=>navigate('/chathome',{state:{username:user.user.username}})}>
                     <span className="font-semibold text-sm">Message</span>
                   </div>
                 </div>

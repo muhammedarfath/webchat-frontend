@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "../../utils/cn";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BentoGrid, BentoGridItem } from "../../Components/ui/bento-grid";
 // import {
 //   IconBoxAlignRightFilled,
@@ -12,14 +12,47 @@ import { BentoGrid, BentoGridItem } from "../../Components/ui/bento-grid";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
+
 // import Image from "next/image";
 
+
+
+
+
+
+
+
 export function BentoGridThirdDemo() {
-  const { email } = useSelector((state) => state.auth);
+  const [users, setUsers] = useState([]);
+  const { email, user_id } = useSelector((state) => state.auth);
+  const [isLoading,setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchUsersWithLastMessages = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/home/last-three-messages/${user_id}/`);
+        if (response.status === 200) {
+          setUsers(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching users with last messages:", error);
+      }
+      setIsLoading(false);
+    };
+
+    fetchUsersWithLastMessages();
+  }, [user_id]);
+
+
+
+
+
 
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
-      {items.map((item, i) => (
+      {items(users, isLoading).map((item, i) => (
         <BentoGridItem
           key={i}
           title={item.title}
@@ -30,13 +63,16 @@ export function BentoGridThirdDemo() {
         />
       ))}
     </BentoGrid>
+
   );
 }
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full max-h-[20vh] rounded-xl  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black"></div>
 );
 
-const SkeletonOne = () => {
+const SkeletonOne = ({users,isLoading}) => {
+ console.log(users,"this is arfath");
+
   const variants = {
     initial: {
       x: 0,
@@ -63,35 +99,37 @@ const SkeletonOne = () => {
   };
 
   return (
-    <Link to="/chathome">
-      <motion.div
-        initial="initial"
-        whileHover="animate"
-        className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2 cursor-pointer"
-      >
+    <div>
+      <Link to="/chathome">
         <motion.div
-          variants={variants}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
+          initial="initial"
+          whileHover="animate"
+          className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2 cursor-pointer"
         >
-          <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-          <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+          
+          {users.map((user,index)=>(
+            index !==1 ?(<motion.div
+              variants={variants}
+              className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
+            >
+              <img src={`http://127.0.0.1:8000${user.image}`} className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+              <h1 className="w-full bg-gray-100 h-4 rounded-full text-black dark:bg-neutral-900"></h1>
+            </motion.div>) : (
+              <motion.div
+              variants={variantsSecond}
+              className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
+            >
+              <h1 className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900"></h1>
+              <img src={`http://127.0.0.1:8000${user.image}`} className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
+            </motion.div>
+            )
+          ))}
+
+
         </motion.div>
-        <motion.div
-          variants={variantsSecond}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
-        >
-          <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-          <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-        </motion.div>
-        <motion.div
-          variants={variants}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-black"
-        >
-          <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-          <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-        </motion.div>
-      </motion.div>
-    </Link>
+      </Link>
+    </div>
+
   );
 };
 const SkeletonTwo = () => {
@@ -247,6 +285,8 @@ const SkeletonFour = () => {
     </Link>
   );
 };
+
+
 const SkeletonFive = () => {
   const variants = {
     initial: {
@@ -305,7 +345,9 @@ const SkeletonFive = () => {
     </motion.div>
   );
 };
-const items = [
+
+
+const items =(users,isLoading)=> [
   {
     title: "Chat With Online Friends",
     description: (
@@ -313,7 +355,7 @@ const items = [
         Experience the power of AI in generating unique content.
       </span>
     ),
-    header: <SkeletonOne />,
+    header:  <SkeletonOne users={users} isLoading={isLoading} />,
     className: "md:col-span-1",
     // icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },

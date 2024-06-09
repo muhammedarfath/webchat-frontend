@@ -13,9 +13,6 @@ function EmptyChat() {
             To see your existing conversation or share a link below to start new
           </p>
         </div>
-        <button className="mt-4 px-4 py-2 bg-[#420BA1] text-white rounded-md">
-          Add New Message
-        </button>
       </div>
     </div>
   );
