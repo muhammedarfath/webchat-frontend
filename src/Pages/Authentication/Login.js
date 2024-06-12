@@ -60,11 +60,13 @@ function Login() {
 
               <a href="#" class="mb-4 text-blue-500">Login with Facebook</a>
               
-              <p class="text-gray-600 mb-4">Don't have an account? <a href="#" class="text-blue-500">Sign up</a></p>
+              <Link to='/signup'>
+              <p class="text-gray-600 mb-4">Don't have an account? <a class="text-blue-500">Sign up</a></p>
+              </Link>
           </div>
           
           <div class="border p-4 bg-white rounded-lg text-center my-4">
-              <span>Forgot your password? <a href="#" class="text-blue-500">Reset password</a></span>
+              <span>Forgot your password? <a href="" class="text-blue-500">Reset password</a></span>
           </div>
         
       </div>

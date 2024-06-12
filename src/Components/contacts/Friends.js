@@ -6,6 +6,7 @@ import { BiCheckDouble } from "react-icons/bi";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { OnlineUser } from "../onlineuser/OnlineUser";
 
 function Friends({ fetchUserIdDetails, username }) {
   const current_userId = useSelector((state) => state.auth.user_id);
@@ -94,10 +95,9 @@ function Friends({ fetchUserIdDetails, username }) {
         </div>
       </div>
 
-      <div className="ml-9 mt-5 gap-3">
+      <div className="flex flex-col w-full p-5">
         <h1 className="font-medium text-[#424242]">Online Now</h1>
-        <div className="flex w-9 h-9 m-2 gap-4 items-center">
-          <img
+          {/* <img
             src="images/profil-image.webp"
             className="rounded-full"
             alt="image"
@@ -116,8 +116,9 @@ function Friends({ fetchUserIdDetails, username }) {
             src="images/profil-image.webp"
             className="rounded-full"
             alt="image"
-          />
-        </div>
+          /> */}
+          <OnlineUser/>
+
       </div>
 
       <div className="flex items-center ml-9 mt-5 gap-3">

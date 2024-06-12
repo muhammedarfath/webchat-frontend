@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Card, CardHeader, CardBody, Input,Button} from "@nextui-org/react";
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { signUpUser } from '../../Redux/auth/authSlice';
 
@@ -97,7 +97,7 @@ function Signup() {
                 </div>
                 
                 <div className="border p-4 mt-6 bg-white rounded-lg w-full max-w-sm text-center">
-                    <span>Do you have an account? <a href="#" className="text-blue-500">Login</a></span>
+                    <span>Do you have an account? <Link to='/login'><a className="text-blue-500">Login</a></Link></span>
                 </div>
                 
                 <div className="text-center mt-6">
@@ -121,7 +121,7 @@ function Signup() {
                         <span className="inline-block mx-1">MA Verified</span>
                     </p>
                 </div>
-            </div>
+        </div>
     
       )
 }
