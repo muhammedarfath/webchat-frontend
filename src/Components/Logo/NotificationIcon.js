@@ -41,7 +41,7 @@ function NotificationIcon() {
 
   return (
     <motion.div
-      className='max-w-40 border-1 border-black bg-white opacity-20 rounded-xl grid grid-cols-2 p-3 gap-2'
+      className='max-w-40 border-1 border-black  rounded-xl grid grid-cols-2 p-3 gap-2'
       variants={container}
       initial='hidden'
       animate='visible'

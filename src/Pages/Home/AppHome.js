@@ -13,11 +13,8 @@ import FollowButton from "../../Components/follow_btn/FollowButton";
 function AppHome() {
   const { authTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const current_userId = useSelector((state) => state.auth.user_id);
-  const [users, setUsers] = useState([]);
-  const current_user = useSelector((state) => state.auth.username);
-
+ 
+ 
 
   useEffect(() => {
     if (!authTokens) {
@@ -26,28 +23,6 @@ function AppHome() {
   }, [authTokens, navigate]);
 
 
-
-
-  useEffect(() => {
-    fetchAllUsers();
-  }, [current_userId]);
-
-  const fetchAllUsers = async (query = "") => {
-    setIsLoading(true);
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/chat/suggested_friends/",
-        {
-          current_userId,
-          search_query: query,
-        }
-      );
-      setUsers(response.data); 
-    } catch (error) {
-      alert(error);
-    }
-    setIsLoading(false);
-  };
 
 
 
@@ -60,46 +35,6 @@ function AppHome() {
       >
         <div className="fixed top-6 right-6">
           <NotificationIcon/>
-        </div>
-        <div className="hidden w-[500px] lg:block md:block absolute lg:m-10 md:top-10 md:m-4 lg:border">
-          <div className="py-4">
-            <div className="flex justify-between pb-0 pt-2 px-4 items-center">
-              <p className="text-tiny uppercase font-bold">Suggested for you</p>
-              <small className="text-default-500">See All</small>
-            </div>
-            {users.map((user) => (
-                <div
-                  className="cursor-pointer bg-opacity-100 flex items-center justify-between ml-9 mt-1 mr-9 rounded-lg relative"
-                  key={user.id}
-                >
-                  <div className="w-10 h-10 overflow-hidden">
-                    {user.image ? (
-                      <img
-                        src={`http://127.0.0.1:8000${user.image}`}
-                        className="w-full h-full rounded-full"
-                        alt="image"
-                      />
-                    ) : (
-                      <img
-                        src="images/profil-image.webp"
-                        className="w-full h-full rounded-full"
-                        alt="image"
-                      />
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start ml-3">
-                    <Link to={`/profile/${user.user.username}`}>
-                      <h1 className="text-1xl mt-3 font-medium">
-                        {user.user.username}
-                      </h1>
-                    </Link>
-                    <small>arfathusr</small>
-                    <small>Suggested for you</small>
-                  </div>
-                  <FollowButton user={user} currentUser={current_user} />
-                </div>
-              ))}
-          </div>
         </div>
       </div>
 

@@ -37,32 +37,58 @@ function Login() {
 
   
   return (
-    <div className='flex'>
-        <div className="w-2/5 h-screen flex items-center justify-center" >
+    <div class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+      <div class="max-w-sm">
+          <div class="border bg-white text-black flex flex-col justify-center items-center p-6 rounded-lg">
+            <h1 className="text-2xl font-bold mb-4">One TAP</h1>
+            <form onSubmit={handlesubmit} className='w-full'>
+                <div class="w-full mb-4">
+                    <input type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)} class="border border-black p-2 rounded-md w-full"/>
+                </div>
 
-            <Card className="py-4 ">
-            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start gap-4">
-                <p className="uppercase font-bold  text-2xl">Login</p>
-                <small className="text-default-500">Login with your Data that you entered during your Registration</small>
-            </CardHeader>
-            
-              <form onSubmit={handlesubmit}>
-                <CardBody className="overflow-visible py-2 w-[29rem] gap-5">
-                  <Input type="text" label="username" onChange={(e)=>setUsername(e.target.value)}/>
-                  <Input type="password" label="password" onChange={(e)=>setPassword(e.target.value)} />
-                  <Button type='submit' radius="full" className="bg-gradient-to-tr from-purple-500 to-blue-500 text-white shadow-lg">
-                  Button
-                  </Button>
-                </CardBody>
-            </form>
-            <p className="text-small uppercase font-solid text-center">Don’t have an account? Signup</p>
-            
-            </Card>
-            
-        </div>
-        <div className='w-3/5 h-screen'>
-            <img src="images/loginpage.png" alt="" className='h-full w-full bg-[#4B0973]'/>
-        </div>
+                <div class="w-full mb-4">
+                    <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} class="border border-black p-2 rounded-md w-full"/>
+                </div>
+              
+              <button type='submit' class="bg-blue-500 text-white p-2 rounded-md w-full mb-4">Login</button>
+              </form>
+              <div class="flex items-center w-full mb-4">
+                  <hr class="flex-grow border-t border-black" />
+                  <span class="mx-4">or</span>
+                  <hr class="flex-grow border-t border-black" />
+              </div>
+
+              <a href="#" class="mb-4 text-blue-500">Login with Facebook</a>
+              
+              <p class="text-gray-600 mb-4">Don't have an account? <a href="#" class="text-blue-500">Sign up</a></p>
+          </div>
+          
+          <div class="border p-4 bg-white rounded-lg text-center my-4">
+              <span>Forgot your password? <a href="#" class="text-blue-500">Reset password</a></span>
+          </div>
+        
+      </div>
+      <div class="text-center">
+              <p class="text-gray-600 mb-4 gap-4 flex">
+                  <span class="inline-block mx-1">MA</span> &middot;
+                  <span class="inline-block mx-1">About</span> &middot;
+                  <span class="inline-block mx-1">Blog</span> &middot;
+                  <span class="inline-block mx-1">Jobs</span> &middot;
+                  <span class="inline-block mx-1">Help</span> &middot;
+                  <span class="inline-block mx-1">API</span> &middot;
+                  <span class="inline-block mx-1">Privacy</span> &middot;
+                  <span class="inline-block mx-1">Terms</span> &middot;
+                  <span class="inline-block mx-1">Locations</span> &middot;
+                  <span class="inline-block mx-1">Instagram Lite</span> &middot;
+                  <span class="inline-block mx-1">Threads</span>
+              </p>
+              <p class="text-gray-600">
+                  <span class="inline-block mx-1">English (UK)</span> &middot;
+                  <span class="inline-block mx-1">© 2024 OneTap from MA</span> &middot;
+                  <span class="inline-block mx-1">Contact uploading and non-users</span> &middot;
+                  <span class="inline-block mx-1">MA Verified</span>
+              </p>
+      </div>
     </div>
 
   )
