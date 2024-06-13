@@ -45,6 +45,7 @@ function NotificationIcon() {
       variants={container}
       initial='hidden'
       animate='visible'
+      drag
     >
       <motion.div className='rounded-full w-9 h-9' variants={item}><TbBrandHipchat className='text-3xl' /></motion.div>
       <motion.div className='rounded-full w-9 h-9' variants={item}><PiFilmReelDuotone className='text-3xl' /></motion.div>

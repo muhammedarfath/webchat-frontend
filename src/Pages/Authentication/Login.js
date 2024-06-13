@@ -37,7 +37,7 @@ function Login() {
 
   
   return (
-    <div class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+    <div class="min-h-screen flex flex-col justify-center items-center">
       <div class="max-w-sm">
           <div class="border bg-white text-black flex flex-col justify-center items-center p-6 rounded-lg">
             <h1 className="text-2xl font-bold mb-4">One TAP</h1>

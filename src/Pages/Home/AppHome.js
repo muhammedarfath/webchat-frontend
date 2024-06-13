@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NotificationIcon from "../../Components/Logo/NotificationIcon";
 import FollowButton from "../../Components/follow_btn/FollowButton";
+import DrowLogo from "../../Components/Logo/DrowLogo";
 
 function AppHome() {
   const { authTokens } = useSelector((state) => state.auth);
@@ -36,8 +37,10 @@ function AppHome() {
         <div className="fixed top-6 right-6">
           <NotificationIcon/>
         </div>
-      </div>
 
+      </div>
+      
+        <DrowLogo/>
 
 
       <motion.div

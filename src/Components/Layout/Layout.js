@@ -32,12 +32,19 @@ function Layout() {
     };
 
     socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log('Notification received:', data);
-      setNotifications((prevNotifications) => [...prevNotifications, ...data.messages]); 
-      setUnreadCount(data.messages.length);
+      try {
+        const data = JSON.parse(event.data);    
+    
+        if (data && data.message && typeof data.message === 'object') {
+          setNotifications((prevNotifications) => [...prevNotifications, data.message]);
+          setUnreadCount((prevCount) => prevCount + 1);
+        } else {
+          console.error('Invalid data format received:', data);
+        }
+      } catch (error) {
+        console.error('Error parsing WebSocket message:', error);
+      }
     };
-
     socket.onerror = (error) => {
       console.log('WebSocket error:', error);
     };
@@ -147,7 +154,7 @@ function Layout() {
                 <MdOutlineNotifications className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]" />
                 <span className="md:hidden lg:block">Notification</span>
                 {unreadCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                  <span className="absolute top-0 left-0 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                     {unreadCount}
                   </span>
                 )}

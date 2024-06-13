@@ -28,7 +28,7 @@ function People() {
           search_query: query,
         }
       );
-      setUsers(response.data); // Assuming response data contains the follow state
+      setUsers(response.data);
     } catch (error) {
       alert(error);
     }
