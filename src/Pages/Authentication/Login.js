@@ -16,7 +16,7 @@ function Login() {
   const handlesubmit = async (e)=>{
     e.preventDefault()
     try{
-     const response = await axios.post('http://127.0.0.1:8000/chat/login/',{
+     const response = await axios.post('http://127.0.0.1:8000/users_auth/login/',{
       username,
       password
      })

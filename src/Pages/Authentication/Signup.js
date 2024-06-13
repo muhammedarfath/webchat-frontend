@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,6 @@ import { signUpUser } from "../../Redux/auth/authSlice";
 
 function Signup() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [usernameError, setUsernameError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,20 +29,6 @@ function Signup() {
     } catch (error) {
       console.log(error.response.data);
       alert("Signup failed");
-    }
-  };
-
-  const checkUsername = async (username) => {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/users_auth/check_username/?username=${username}`);
-      if (response.data.exists) {
-        setUsernameError("Username is already taken");
-      } else {
-        setUsernameError("");
-      }
-    } catch (error) {
-      console.log(error);
-      setUsernameError("Error checking username");
     }
   };
 
@@ -92,18 +77,10 @@ function Signup() {
           <input
             type="text"
             placeholder="Username"
-            {...register("username", {
-              required: true,
-              validate: async (value) => {
-                await checkUsername(value);
-                return usernameError === "";
-              }
-            })}
-            className={`border border-black p-2 rounded-md w-full mb-3 ${
-              usernameError ? "border-red-500" : ""
-            }`}
+            {...register("username", { required: true })}
+            className="border border-black p-2 rounded-md w-full mb-3"
           />
-          {usernameError && <span className="text-red-500">{usernameError}</span>}
+          {errors.username && <span className="text-red-500">Username is required</span>}
 
           <input
             type="password"

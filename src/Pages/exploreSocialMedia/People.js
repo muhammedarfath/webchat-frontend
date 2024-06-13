@@ -18,6 +18,7 @@ function People() {
     fetchAllUsers();
   }, [current_userId]);
 
+  
   const fetchAllUsers = async (query = "") => {
     setIsLoading(true);
     try {
@@ -34,6 +35,8 @@ function People() {
     }
     setIsLoading(false);
   };
+
+
 
   const handleInputChange = (e) => {
     const query = e.target.value;

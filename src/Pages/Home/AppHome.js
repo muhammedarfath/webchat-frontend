@@ -40,7 +40,10 @@ function AppHome() {
 
       </div>
       
+        <div className="fixed top-6 left-6">
+
         <DrowLogo/>
+        </div>
 
 
       <motion.div

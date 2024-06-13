@@ -1,15 +1,18 @@
 import React from 'react'
 import { motion } from "framer-motion"
+import { FaCameraRetro } from "react-icons/fa";
 
 function DrowLogo() {
   return (
     <div>
-<motion.img 
-    src="images/LOGO4.png" 
-    alt="image" 
-    className='max-w-40 max-h-40 rounded-full absolute top-8 left-10  cursor-pointer' 
-    drag 
-/>
+    <motion.div 
+        className='max-w-28 border-1 border-black rounded-xl  p-1' 
+        drag 
+    >
+     <FaCameraRetro className='text-8xl ' />
+
+
+    </motion.div>
     </div>
   )
 }
