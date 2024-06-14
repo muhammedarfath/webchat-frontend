@@ -64,7 +64,7 @@ console.log(isRequested);
             <span className="font-semibold text-sm " onClick={handleFollow} >Requested</span>
             </div>
         ) : (
-            <div className="shadow-sm p-1.5 px-4 text-white rounded-md bg-[#0095F6]">
+            <div className="shadow-sm px-5 py-3 rounded-3xl text-black hover:bg-[#d5d5d5] bg-[#E9E9E9]">
             <span className="font-semibold text-sm" onClick={handleFollow} >Follow</span>
             </div>
         )}

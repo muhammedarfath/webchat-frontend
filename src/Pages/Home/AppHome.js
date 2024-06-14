@@ -57,7 +57,7 @@ function AppHome() {
         className="relative flex flex-col gap-4 items-center justify-center px-4 lg:mt-[45rem] mt-[95rem] md:mt-[50rem] "
       >
         
-        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
+        <div className="text-3xl md:text-7xl font-bold dark:text-white  text-center">
           ONE TAP.
         </div>
         <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">

@@ -95,31 +95,15 @@ function Friends({ fetchUserIdDetails, username }) {
         </div>
       </div>
 
-      <div className="flex flex-col w-full p-5">
+      {users.length === 0 ? (<div className="flex flex-col w-full p-5">
         <h1 className="font-medium text-[#424242]">Online Now</h1>
-          {/* <img
-            src="images/profil-image.webp"
-            className="rounded-full"
-            alt="image"
-          />
-          <img
-            src="images/profil-image.webp"
-            className="rounded-full"
-            alt="image"
-          />
-          <img
-            src="images/profil-image.webp"
-            className="rounded-full"
-            alt="image"
-          />
-          <img
-            src="images/profil-image.webp"
-            className="rounded-full"
-            alt="image"
-          /> */}
+        <h2 className="text-lg font-medium text-gray-500 mb-4">....</h2>
+      </div>):(
+        <div className="flex flex-col w-full p-5">
+        <h1 className="font-medium text-[#424242]">Online Now</h1>
           <OnlineUser/>
-
       </div>
+      )}
 
       <div className="flex items-center ml-9 mt-5 gap-3">
         <RiMessage3Line className="text-2xl font-bold" />
@@ -130,7 +114,7 @@ function Friends({ fetchUserIdDetails, username }) {
         <div className="flex flex-col justify-center items-center h-full">
           <h2 className="text-lg font-medium text-gray-500 mb-4">You have no friends</h2>
           <Link to='/people'>
-            <button className="px-4 py-2 bg-[#420BA1] text-white rounded-md">
+            <button className="px-4 py-2 bg-[#E9E9E9] text-black hover:bg-[#d5d5d5] rounded-md">
               Add New Message
             </button>
           </Link>

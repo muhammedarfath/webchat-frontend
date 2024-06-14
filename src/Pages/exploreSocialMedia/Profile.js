@@ -35,16 +35,18 @@ function Profile() {
 
   return (
     <>
-      {user&&<div className="w-full flex flex-col overflow-auto gap-10">
+      {user && <div className="w-full flex flex-col overflow-auto gap-10">
         <div className="w-full h-1/2 flex flex-col justify-center items-center gap-1 p-3">
-          <img src="https://i.pinimg.com/564x/67/8c/fb/678cfbcea8dd03d0df9cd9050127b516.jpg" alt="img" className="rounded-full border-1 w-52 h-52 object-cover" />
+          {user.image ? (<img src={`http://127.0.0.1:8000${user.image}`} alt="img" className="rounded-full border-1 w-52 h-52 object-cover" />) :
+            (<img src="/images/profile-image.webp" alt="img" className="rounded-full border-1 w-52 h-52 object-cover" />)
+          }
           <h6>{user.user.username}</h6>
           <small>@{user.full_name}</small>
           <span>{user.follower && user.following && `${user.follower.length} followers . ${user.following.length} following`}</span>
           <div className="flex gap-4">
 
-            <button className="px-5 py-3 rounded-3xl bg-[#E9E9E9]">Messsage</button>
-            <button className="px-5 py-3 rounded-3xl bg-[#E9E9E9]">Follow</button>
+            <button className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]">Messsage</button>
+            <FollowButton user={user} currentUser={current_user} />
           </div>
         </div>
 
