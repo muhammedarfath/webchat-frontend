@@ -47,10 +47,10 @@ function NotificationIcon() {
       animate='visible'
       drag
     >
-      <motion.div className='rounded-full w-9 h-9' variants={item}><TbBrandHipchat className='text-3xl' /></motion.div>
-      <motion.div className='rounded-full w-9 h-9' variants={item}><PiFilmReelDuotone className='text-3xl' /></motion.div>
-      <motion.div className='rounded-full w-9 h-9' variants={item}><ImNewspaper className='text-3xl' /></motion.div>
-      <motion.div className='rounded-full w-9 h-9' variants={item}><FaChalkboardUser className='text-3xl' onClick={handleprofiletoggle}/></motion.div>
+      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><TbBrandHipchat className='lg:text-3xl text-2xl' /></motion.div>
+      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><PiFilmReelDuotone className='lg:text-3xl text-2xl' /></motion.div>
+      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><ImNewspaper className='lg:text-3xl text-2xl' /></motion.div>
+      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><FaChalkboardUser className='lg:text-3xl text-2xl' onClick={handleprofiletoggle}/></motion.div>
       {profiletoggle && (
         <div className="absolute top-20 right-6 w-36 bg-white shadow-md rounded-md z-10 profile-dropdown">
           <div className="arrow-up"></div>

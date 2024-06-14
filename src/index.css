@@ -6,7 +6,7 @@
 
 @layer base {
     body {
-      background-color: white; 
+      background-color: #FFF; 
       overflow: auto;
   }
   .blurred {

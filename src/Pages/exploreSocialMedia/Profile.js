@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, Image, useNavbar } from "@nextui-org/react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import FollowButton from "../../Components/follow_btn/FollowButton";
+import { SiCodefactor } from "react-icons/si";
+import { BsPostcardHeart } from "react-icons/bs";
 
 function Profile() {
   const navigate = useNavigate();
@@ -11,9 +12,7 @@ function Profile() {
   const [user, setUser] = useState();
   const current_user = useSelector((state) => state.auth.username);
 
-
-
-console.log(user,"once again");
+  console.log(user, "once again");
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -34,104 +33,40 @@ console.log(user,"once again");
     fetchUser();
   }, [username]);
 
-
   return (
     <>
-      {user && (
-        <div className="w-full h-[100vh] overflow-auto flex flex-col items-center">
-          <div className="flex lg:w-[80rem] lg:gap-11 gap-4 justify-center">
-            <div className="pt-16">
-              {user.image ? (
-                <img
-                  className="lg:w-40 w-20 lg:h-40 rounded-full"
-                  src={`http://127.0.0.1:8000${user.image}`}
-                  alt="Description"
-                />
-              ) : (
-                <img
-                  className="lg:w-40 w-20 lg:h-40 rounded-full"
-                  src="images/profil-image.webp"
-                  alt="Description"
-                />
-              )}
-            </div>
+      {user&&<div className="w-full flex flex-col overflow-auto gap-10">
+        <div className="w-full h-1/2 flex flex-col justify-center items-center gap-1 p-3">
+          <img src="https://i.pinimg.com/564x/67/8c/fb/678cfbcea8dd03d0df9cd9050127b516.jpg" alt="img" className="rounded-full border-1 w-52 h-52 object-cover" />
+          <h6>{user.user.username}</h6>
+          <small>@{user.full_name}</small>
+          <span>{user.follower && user.following && `${user.follower.length} followers . ${user.following.length} following`}</span>
+          <div className="flex gap-4">
 
-            <div>
-              {user.user.username === current_user ? (
-                <div className="flex pt-16 gap-5 justify-center items-center">
-                  <h1 className="font-light text-2xl">{user.user.username}</h1>
-                  <div className="shadow-sm p-1.5 px-4 rounded-md bg-gray-100">
-                    <span className="font-semibold text-sm">Edit Profile</span>
-                  </div>
-                  <div className="shadow-sm p-1.5 px-4 rounded-md bg-gray-100">
-                    <span className="font-semibold text-sm">Settings</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex pt-16 gap-5 justify-center items-center">
-                  <h1 className="font-light text-2xl">{user.user.username}</h1>
-                  
-
-
-                  <FollowButton user={user} currentUser={current_user} />
-
-
-
-                  <div className="shadow-sm p-1.5 px-4 cursor-pointer rounded-md bg-gray-100" onClick={()=>navigate('/chathome',{state:{username:user.user.username}})}>
-                    <span className="font-semibold text-sm">Message</span>
-                  </div>
-                </div>
-              )}
-
-              <div className="flex gap-5 mt-5">
-                <h1 className="flex gap-1">
-                  {" "}
-                  <span className="font-medium text-base">0</span>posts
-                </h1>
-                <h1 className="flex gap-1">
-                  <span className="font-medium text-base">
-                    {user.followers.length}
-                  </span>
-                  followers
-                </h1>
-                <h1 className="flex gap-1">
-                  <span className="font-medium text-base">
-                    {user.following.length}
-                  </span>
-                  following
-                </h1>
-              </div>
-
-              <div className="flex flex-col mt-5">
-                <span className="font-medium text-base">{user.full_name}</span>
-                <span>kerala🤣</span>
-                <span>{user.bio}</span>
-              </div>
-            </div>
-          </div>
-          <div className="lg:w-[60rem] mt-12 px-4">
-            <div className="grid grid-cols-3 gap-4 ">
-              {[...Array(6)].map((_, index) => (
-                <Card key={index} className="py-4">
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">Daily Mix</p>
-                    <small className="text-default-500">12 Tracks</small>
-                    <h4 className="font-bold text-large">Frontend Radio</h4>
-                  </CardHeader>
-                  <CardBody className="overflow-visible py-2">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl"
-                      src="https://nextui.org/images/hero-card-complete.jpeg"
-                      width={270}
-                    />
-                  </CardBody>
-                </Card>
-              ))}
-            </div>
+            <button className="px-5 py-3 rounded-3xl bg-[#E9E9E9]">Messsage</button>
+            <button className="px-5 py-3 rounded-3xl bg-[#E9E9E9]">Follow</button>
           </div>
         </div>
-      )}
+
+        <div className="flex justify-center items-center gap-5 w-full sticky top-0 bg-white shadow-sm p-4">
+          <BsPostcardHeart className="text-2xl cursor-pointer" />
+          <SiCodefactor className="text-2xl cursor-pointer" />
+
+        </div>
+
+        <div class="columns-2 xl:columns-4 p-4 text-white gap-4 space-y-4">
+          <img src="https://i.pinimg.com/564x/c0/e6/34/c0e634692ee286ace714b718373c4d9f.jpg" alt="Image 1" class="w-full h-auto rounded-3xl" />
+          <img src="https://i.pinimg.com/564x/81/3f/7a/813f7a5213a84224af60ae5a0ffafded.jpg" alt="Image 2" class="w-full h-auto rounded-3xl" />
+          <img src="https://i.pinimg.com/564x/fc/fd/fb/fcfdfbe3e1d541a150b275a8a10b0e95.jpg" alt="Image 4" class="w-full h-auto rounded-3xl" />
+          <img src="https://i.pinimg.com/564x/08/42/50/0842507422178226ea833e3509dce531.jpg" alt="Image 4" class="w-full h-auto rounded-3xl" />
+          <img src="	https://i.pinimg.com/564x/5c/c9/4b/5cc94b98ac39384081d76f52cf5ee40e.jpg" alt="Image 3" class="w-full h-auto rounded-3xl" />
+          <img src="https://i.pinimg.com/564x/c0/e6/34/c0e634692ee286ace714b718373c4d9f.jpg" alt="Image 1" class="w-full h-auto rounded-3xl" />
+          <img src="https://i.pinimg.com/564x/81/3f/7a/813f7a5213a84224af60ae5a0ffafded.jpg" alt="Image 2" class="w-full h-auto rounded-3xl" />
+          <img src="https://i.pinimg.com/564x/c0/e6/34/c0e634692ee286ace714b718373c4d9f.jpg" alt="Image 1" class="w-full h-auto rounded-3xl" />
+        </div>
+
+      </div>}
+
     </>
   );
 }

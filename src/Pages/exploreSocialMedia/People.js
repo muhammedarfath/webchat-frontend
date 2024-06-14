@@ -18,7 +18,7 @@ function People() {
     fetchAllUsers();
   }, [current_userId]);
 
-  
+
   const fetchAllUsers = async (query = "") => {
     setIsLoading(true);
     try {
@@ -128,9 +128,10 @@ function People() {
               </div>
               {users.map((user) => (
                 <div
-                  className="cursor-pointer bg-opacity-100 flex items-center justify-between ml-9 mt-1 mr-9 rounded-lg relative"
+                  className="cursor-pointer bg-opacity-100 flex items-center justify-between ml-9 mt-1 mr-10 rounded-lg relative"
                   key={user.id}
                 >
+                  <div className="flex justify-center items-center mt-1">
                   <div className="w-10 h-10 overflow-hidden">
                     {user.image ? (
                       <img
@@ -148,12 +149,13 @@ function People() {
                   </div>
                   <div className="flex flex-col items-start ml-3">
                     <Link to={`/profile/${user.user.username}`}>
-                      <h1 className="text-1xl mt-3 font-medium">
+                      <h1 className="text-1xl mt-2 font-medium">
                         {user.user.username}
                       </h1>
                     </Link>
-                    <small>arfathusr</small>
+                    <small>{user.bio}</small>
                     <small>Suggested for you</small>
+                  </div>
                   </div>
                   <FollowButton user={user} currentUser={current_user} />
                 </div>

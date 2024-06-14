@@ -58,7 +58,7 @@ console.log(isRequested);
   
 
   return (
-    <div className="flex gap-3 items-end ml-auto cursor-pointer">
+    <div className="flex gap-3 items-end cursor-pointer">
         {isFollowing(user.followers, currentUser) && isRequested ?(
             <div className="shadow-sm p-1.5 px-4 rounded-md bg-[#282828] text-white">
             <span className="font-semibold text-sm " onClick={handleFollow} >Requested</span>

@@ -9,9 +9,7 @@ function DrowLogo() {
         className='max-w-28 border-1 border-black rounded-xl  p-1' 
         drag 
     >
-     <FaCameraRetro className='text-8xl ' />
-
-
+     <FaCameraRetro className='lg:text-8xl text-7xl ' />
     </motion.div>
     </div>
   )

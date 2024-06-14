@@ -14,6 +14,7 @@ import { TbMessageCircle2Filled } from "react-icons/tb";
 import { RiMessage3Line } from "react-icons/ri";
 import { RiMessage3Fill } from "react-icons/ri";
 import Logo from "../Logo/Logo";
+import { FaQuestion } from "react-icons/fa6";
 
 function Layout() {
   const current_user = useSelector((state) => state.auth.user_id);
@@ -63,8 +64,8 @@ function Layout() {
 
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-full">
-      <div className="w-full lg:w-1/6 md:w-24 h-full">
+    <div className="flex flex-col md:flex-row w-full h-full fixed ">
+      <div className="w-full lg:w-1/6 md:w-24">
         <div className="hidden md:block border-2 lg:flex h-screen">
           <div className="text-[#000000] p-4 bg-white md:justify-center md:flex md:flex-col md:items-center">
             <div className="py-4 flex items-center justify-center">
@@ -72,8 +73,8 @@ function Layout() {
                 href="#"
                 className="text-[#000000] italic text-2xl text font-semibold uppercase"
               >
-                <span className="md:hidden lg:block">ONE TAP</span>
-                <span className="md:block lg:hidden">
+                {/* <span className="md:hidden lg:block">ONE TAP</span> */}
+                <span className="">
                   <Logo/>
                 </span>
               </a>
@@ -163,27 +164,16 @@ function Layout() {
                 <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
                 <span className="md:hidden lg:block">Create</span>
               </div>
-              {/* <Link to={`/profile/${username}`}>
-                <div className="flex gap-3 w-full hover:bg-gray-100 py-2 pr-7 rounded-lg items-center">
-                  {image ? <img
-                    src={`http://127.0.0.1:8000${image}`}
-                    class=" w-9 rounded-full"
-                    alt="image"
-                  />:<img
-                  src='images/profil-image.webp'
-                  class="w-9 rounded-full"
-                  alt="image/profil-image.webp"
-                />}
-                  <span className="md:hidden lg:block">Profile</span>
-                </div>
-              </Link> */}
             </nav>
-            <div class="absolute bottom-4 flex gap-3  hover:bg-gray-100 py-4 rounded-lg items-center">
+            <div class="absolute bottom-4 flex gap-3  hover:bg-gray-100 px-5 py-2 rounded-lg items-center">
               <AiOutlineMenu className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
               <span className="md:hidden lg:block">More</span>
             </div>
           </div>
         </div>
+      </div>
+      <div className="fixed bottom-0 right-0 border rounded-full p-4 m-6 bg-white shadow-2xl">
+        <FaQuestion className="text-2xl font-bold"/>
       </div>
       <Outlet />
     </div>
