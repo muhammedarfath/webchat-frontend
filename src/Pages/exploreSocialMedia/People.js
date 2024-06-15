@@ -141,7 +141,7 @@ function People() {
                       />
                     ) : (
                       <img
-                        src="images/profil-image.webp"
+                        src="/images/profile-image.webp"
                         className="w-full h-full rounded-full"
                         alt="image"
                       />

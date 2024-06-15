@@ -15,6 +15,8 @@ import { RiMessage3Line } from "react-icons/ri";
 import { RiMessage3Fill } from "react-icons/ri";
 import Logo from "../Logo/Logo";
 import { FaQuestion } from "react-icons/fa6";
+import { MdOutlineExplore } from "react-icons/md";
+import { MdExplore } from "react-icons/md";
 
 function Layout() {
   const current_user = useSelector((state) => state.auth.user_id);
@@ -108,13 +110,13 @@ function Layout() {
                   <>
                   {isActive ? (
                     <>
-                      <RiMovie2Fill className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
-                      <span className="md:hidden lg:block">Reels</span>
+                      <MdExplore className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                      <span className="md:hidden lg:block">Explore</span>
                     </>
                   ) : (
                     <>
-                      <RiMovie2Line className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
-                      <span className="md:hidden lg:block">Reels</span>
+                      <MdOutlineExplore className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+                      <span className="md:hidden lg:block">Explore</span>
                     </>
                   )}
                 </>
