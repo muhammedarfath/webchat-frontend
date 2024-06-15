@@ -1,28 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { signUpUser } from "../../Redux/auth/authSlice";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { CgSpinner } from "react-icons/cg";
+import { toast } from 'react-hot-toast';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 function Signup() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, control, formState: { errors } } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  function onCaptchaVerifier() {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+          onSubmit();
+        },
+        'expired-callback': () => {
+          console.log("Recaptcha expired. Please try again.");
+        }
+      }, auth);
+    }
+  }
 
   const onSubmit = async (data) => {
+    console.log(data, "this is data");
+    setLoading(true);
+    onCaptchaVerifier();
+
+    const appVerifier = window.recaptchaVerifier;
+    try {
+      const confirmationResult = await signInWithPhoneNumber(auth, `+${data.phone}`, appVerifier);
+      console.log(confirmationResult, "confirmation result");
+      window.confirmationResult = confirmationResult;
+      toast.success("OTP sent successfully");
+      setLoading(false);
+    } catch (error) {
+      console.error("Error during signInWithPhoneNumber:", error);
+      toast.error("Failed to send OTP. Please try again.");
+      setLoading(false);
+    }
+
     try {
       const response = await axios.post("http://127.0.0.1:8000/users_auth/signup/", {
         email: data.email,
-        phone: data.phone,
+        phone: `+${data.phone}`,
         profile: { full_name: data.fullname },
         username: data.username,
         password: data.password,
       });
       if (response.status === 201) {
         const userData = response.data;
-        dispatch(signUpUser({ user_id: userData }));
-        navigate("/login");
+        // dispatch(signUpUser({ user_id: userData }));
+        // navigate("/otp", { state: { userdata: userData }});
       } else {
         alert("Signup failed");
       }
@@ -34,12 +72,13 @@ function Signup() {
 
   return (
     <div className="w-full p-5 flex flex-col justify-center items-center">
+      <div id="recaptcha-container"></div>
       <div className="border bg-white max-w-sm text-black flex flex-col justify-center items-center p-6 rounded-lg">
         <h1 className="text-2xl font-bold mb-4">One TAP</h1>
         <h2 className="text-center mb-4">
           Signup with Facebook to find your Facebook friends
         </h2>
-        <button className="bg-blue-600 text-white p-2 rounded-md w-full mb-4">
+        <button className="bg-[#E9E9E9] hover:bg-[#d5d5d5] text-black p-2 rounded-md w-full mb-4">
           Login with Facebook
         </button>
 
@@ -58,11 +97,18 @@ function Signup() {
           />
           {errors.email && <span className="text-red-500">Email is required</span>}
 
-          <input
-            type="text"
-            placeholder="Phone"
-            {...register("phone", { required: true })}
-            className="border border-black p-2 rounded-md w-full mb-3"
+          <Controller
+            name="phone"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <PhoneInput
+                {...field}
+                country={'in'}
+                inputClass="border border-black p-2 rounded-md w-full mb-3"
+                onChange={(phone) => field.onChange(phone)}
+              />
+            )}
           />
           {errors.phone && <span className="text-red-500">Phone is required</span>}
 
@@ -95,12 +141,15 @@ function Signup() {
               Enter your username and password to create a new account.
             </span>
             <span>
-              Get the app from the Microsoft Store or download the Instagram APK
+              Get the app from the Microsoft Store or download the OneTap APK
               for Android from Google Play Store.
             </span>
           </div>
 
-          <button className="bg-blue-500 text-white p-2 rounded-md w-full">
+          <button className="bg-[#E9E9E9] text-black hover:bg-[#d5d5d5] p-2 flex justify-center items-center rounded-md w-full">
+            {loading && (
+              <CgSpinner className="text-black text-2xl animate-spin" />
+            )}
             Sign Up
           </button>
         </form>
@@ -109,14 +158,12 @@ function Signup() {
       <div className="border p-4 mt-6 bg-white rounded-lg w-full max-w-sm text-center">
         <span>
           Do you have an account?{" "}
-          <Link to="/login">
-            <a className="text-blue-500">Login</a>
-          </Link>
+          <Link to="/login" className="text-gray-400">Login</Link>
         </span>
       </div>
 
       <div className="text-center mt-6">
-        <p className="text-gray-600 gap-4 flex">
+        <p className="text-gray-600 gap-4 flex flex-wrap justify-center">
           <span className="inline-block mx-1">MA</span> &middot;
           <span className="inline-block mx-1">About</span> &middot;
           <span className="inline-block mx-1">Blog</span> &middot;
@@ -131,12 +178,8 @@ function Signup() {
         </p>
         <p className="text-gray-600">
           <span className="inline-block mx-1">English (UK)</span> &middot;
-          <span className="inline-block mx-1">© 2024 OneTap from MA</span>{" "}
-          &middot;
-          <span className="inline-block mx-1">
-            Contact uploading and non-users
-          </span>{" "}
-          &middot;
+          <span className="inline-block mx-1">© 2024 OneTap from MA</span> &middot;
+          <span className="inline-block mx-1">Contact uploading and non-users</span> &middot;
           <span className="inline-block mx-1">MA Verified</span>
         </p>
       </div>

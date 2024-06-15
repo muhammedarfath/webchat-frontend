@@ -83,3 +83,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #F5F7FA;
 }
+
+
+.react-tel-input .form-control{
+  @apply !w-full py-6 !text-base
+}

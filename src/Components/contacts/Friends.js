@@ -33,6 +33,8 @@ function Friends({ fetchUserIdDetails, username }) {
     fetchAllUsers();
   }, [current_userId]);
 
+
+
   useEffect(() => {
     if (username && !fetchedProfileUser) {
       const fetchProfileUser = async () => {
@@ -57,6 +59,9 @@ function Friends({ fetchUserIdDetails, username }) {
       fetchProfileUser();
     }
   }, [username, fetchedProfileUser]);
+
+
+
 
   const handleChat = async (id, username) => {
     try {
@@ -124,7 +129,7 @@ function Friends({ fetchUserIdDetails, username }) {
           <div
             key={user.id}
             onClick={() => handleChat(user.id, user.user.username)}
-            className="hover:bg-[#F8E8FF] cursor-pointer bg-opacity-100 flex items-center justify-between border border-gray mb-3 ml-9 mt-3 mr-9 p-3 rounded-lg relative"
+            className="hover:bg-[#d5d5d5] cursor-pointer bg-opacity-100 flex items-center justify-between border border-gray mb-3 ml-9 mt-3 mr-9 p-3 rounded-lg relative"
           >
             <div className="w-9 h-9 overflow-hidden">
               {user.image ? (
@@ -135,7 +140,7 @@ function Friends({ fetchUserIdDetails, username }) {
                 />
               ) : (
                 <img
-                  src="images/profil-image.webp"
+                  src="/images/profile-image.webp"
                   className="w-full h-full rounded-full"
                   alt="image"
                 />

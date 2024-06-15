@@ -11,7 +11,7 @@ function ChatHome() {
 
 
 
-
+   
 
 
   const fetchUserIdDetails = (id, email, username, image, full_name, bio) => {
@@ -24,6 +24,8 @@ function ChatHome() {
       bio,
     });
   };
+
+
 
   return (
     <>

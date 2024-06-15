@@ -14,6 +14,7 @@ import { Reels } from "./Pages/exploreSocialMedia/Reels";
 import People from "./Pages/exploreSocialMedia/People";
 import Profile from "./Pages/exploreSocialMedia/Profile";
 import Layout from "./Components/Layout/Layout";
+import Otp from "./Pages/Authentication/Otp";
 
 function App() {
   const { email } = useSelector((state) => state.auth);
@@ -29,6 +30,7 @@ function App() {
           <Route path="/chathome" element={<ChatHome />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/otp" element={<Otp/>} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>

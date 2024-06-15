@@ -45,7 +45,7 @@ function Profile() {
           <span>{user.follower && user.following && `${user.follower.length} followers . ${user.following.length} following`}</span>
           <div className="flex gap-4">
 
-            <button className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]">Messsage</button>
+            <button className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]" onClick={()=>navigate('/chathome',{state:{username:user.user.username}})}>Messsage</button>
             <FollowButton user={user} currentUser={current_user} />
           </div>
         </div>
