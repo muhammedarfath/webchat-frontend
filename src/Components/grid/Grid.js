@@ -100,10 +100,15 @@ const SkeletonOne = ({ users, isLoading }) => {
                   variants={variants}
                   className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
                 >
-                  <img
+                  {user.image ? (<img
                     src={`http://127.0.0.1:8000${user.image}`}
                     className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0"
+                  />):(
+                    <img
+                    src="images/profile-image.webp"
+                    className="h-6 w-6 rounded-full bg-gradient-to-r flex-shrink-0"
                   />
+                  )}
                   <h1 className="w-full bg-gray-100 h-4 rounded-full text-black dark:bg-neutral-900"></h1>
                 </motion.div>
               ) : (
@@ -364,57 +369,57 @@ const SkeletonFive = () => {
 
 const items = (users, isLoading) => [
   {
-    title: "Connect Globally🌐Chat Locally",
-    description: (
-      <span className="text-sm">
-           Explore diverse conversations with people near and far.
-      </span>
-    ),
+    title: "Chatify",
+    // description: (
+    //   <span className="text-sm">
+    //        Explore diverse conversations with people near and far.
+    //   </span>
+    // ),
     header: <SkeletonOne users={users} isLoading={isLoading} />,
     className: "md:col-span-1",
     // icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Automated Proofreading",
-    description: (
-      <span className="text-sm">
-        Let AI handle the proofreading of your documents.
-      </span>
-    ),
+    title: "Newsify",
+    // description: (
+    //   <span className="text-sm">
+    //     Let AI handle the proofreading of your documents.
+    //   </span>
+    // ),
     header: <SkeletonTwo />,
     className: "md:col-span-1",
     // icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Contextual Suggestions",
-    description: (
-      <span className="text-sm">
-        Get AI-powered suggestions based on your writing context.
-      </span>
-    ),
+    title: "Houseify",
+    // description: (
+    //   <span className="text-sm">
+    //     Get AI-powered suggestions based on your writing context.
+    //   </span>
+    // ),
     header: <SkeletonThree />,
     className: "md:col-span-1",
     // icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "Sentiment Analysis",
-    description: (
-      <span className="text-sm">
-        Understand the sentiment of your text with AI analysis.
-      </span>
-    ),
+    title: "Reelsify",
+    // description: (
+    //   <span className="text-sm">
+    //     Understand the sentiment of your text with AI analysis.
+    //   </span>
+    // ),
     header: <SkeletonFour />,
     className: "md:col-span-2",
     // icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
   },
 
   {
-    title: "Text Summarization",
-    description: (
-      <span className="text-sm">
-        Summarize your lengthy documents with AI technology.
-      </span>
-    ),
+    title: "Snapify",
+    // description: (
+    //   <span className="text-sm">
+    //     Summarize your lengthy documents with AI technology.
+    //   </span>
+    // ),
     header: <SkeletonFive />,
     className: "md:col-span-1",
     // icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutra  l-500" />,

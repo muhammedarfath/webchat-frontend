@@ -14,10 +14,13 @@ import {
 import { useSelector } from "react-redux";
 import Message from "./Message";
 import MessageInput from "./MessageInput";
+import { Link } from "react-router-dom";
+import { auth } from "../../firebase/firebase";
 
 function ChatArea({ userArr }) {
   const [messages, setMessages] = useState([]);
   const senderId = useSelector((state) => state.auth.user_id);
+  const username = useSelector((state) => state.auth.username)
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
@@ -55,13 +58,13 @@ function ChatArea({ userArr }) {
   }, [messages]);
 
   return (
-    <div className="hidden  lg:block rounded-lg bg-white h-screen">
+    <div className="hidden lg:block rounded-lg bg-white h-screen">
       <header className="w-full z-30 border-b-1 border-b-gray top-0 text-dark p-[13px] flex items-center justify-between bg-white">
         <div className="flex gap-4 items-center">
           <div>
             <Dropdown placement="bottom-start">
               <DropdownTrigger>
-                <User
+                {userArr.image ? (<User
                   as="button"
                   avatarProps={{
                     isBordered: true,
@@ -70,14 +73,29 @@ function ChatArea({ userArr }) {
                   className="transition-transform font-semibold gap-4"
                   description="Last Seen at 07:15 PM"
                   name={userArr.username.toUpperCase()}
+                />) : (
+                  <User
+                  as="button"
+                  avatarProps={{
+                    isBordered: true,
+                    src: "images/profile-image.webp",
+                  }}
+                  className="transition-transform font-semibold gap-4"
+                  description="Last Seen at 07:15 PM"
+                  name={userArr.username.toUpperCase()}
                 />
+                )}
               </DropdownTrigger>
               <DropdownMenu aria-label="User Actions" variant="flat">
                 <DropdownItem key="profile" className="h-14 gap-2">
                   <p className="font-bold">Signed in as</p>
                   <p className="font-bold">@tonyreichert</p>
                 </DropdownItem>
-                <DropdownItem key="settings">My Settings</DropdownItem>
+                <DropdownItem key="settings">
+                  <Link to={`/profile/${username}`}>
+                  My Profile
+                  </Link>
+                </DropdownItem>
                 <DropdownItem key="team_settings">Team Settings</DropdownItem>
                 <DropdownItem key="analytics">Analytics</DropdownItem>
                 <DropdownItem key="system">System</DropdownItem>
@@ -105,7 +123,7 @@ function ChatArea({ userArr }) {
         </div>
       </header>
       <div
-        className="messages-container w-full z-0 mt-[60px] pb-[70px]"
+        className="messages-container w-full h-full z-0"
         ref={messagesContainerRef}
       >
         {messages.map((message, index) => (
@@ -117,7 +135,7 @@ function ChatArea({ userArr }) {
         ))}
       </div>
 
-      <div className="relative bottom-20 w-full">
+      <div className="relative bottom-8 w-full">
         <MessageInput userArr={userArr} />
         {/* <MessageInput userArr={userArr} /> */}
       </div>

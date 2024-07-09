@@ -4,14 +4,15 @@ import { TbBrandHipchat } from "react-icons/tb";
 import { PiFilmReelDuotone } from "react-icons/pi";
 import { ImNewspaper } from "react-icons/im";
 import { FaChalkboardUser } from "react-icons/fa6";
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../Redux/auth/authSlice';
 
 function NotificationIcon() {
     const [profiletoggle, setProfiletoggle] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {username} = useSelector((state) => state.auth)
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -55,7 +56,9 @@ function NotificationIcon() {
         <div className="absolute top-20 right-6 w-36 bg-white shadow-md rounded-md z-10 profile-dropdown">
           <div className="arrow-up"></div>
           <ul>
+            <Link to={`/profile/${username}`}>
             <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
+            </Link>
             <li
               className="py-1 px-3 hover:bg-gray-200 cursor-pointer"
               onClick={handleLogout}
