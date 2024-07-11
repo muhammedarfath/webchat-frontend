@@ -61,7 +61,7 @@ function Otp({email}) {
 
 
   return (
-    <div className="flex justify-center">
+  <div className="flex justify-center">
     <div className="max-w-md mx-auto text-center bg-white px-4 sm:px-8 py-10 rounded-xl shadow">
     <header className="mb-8">
       <h1 className="text-2xl font-bold mb-1">Verification</h1>

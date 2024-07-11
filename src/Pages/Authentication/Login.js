@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {Card, CardHeader, CardBody, Input,Button} from "@nextui-org/react";
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../Redux/auth/authSlice';
 
 function Login() {
@@ -35,6 +35,9 @@ function Login() {
     }
   }
 
+
+
+
   
   return (
     <div class="min-h-screen flex flex-col justify-center items-center">
@@ -50,7 +53,7 @@ function Login() {
                     <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} class="border border-black p-2 rounded-md w-full"/>
                 </div>
               
-              <button type='submit' class="bg-blue-500 text-white p-2 rounded-md w-full mb-4">Login</button>
+              <button type='submit' class="bg-[#E9E9E9] text-black hover:bg-[#d5d5d5] p-2 rounded-md w-full mb-4">Login</button>
               </form>
               <div class="flex items-center w-full mb-4">
                   <hr class="flex-grow border-t border-black" />
@@ -58,15 +61,19 @@ function Login() {
                   <hr class="flex-grow border-t border-black" />
               </div>
 
-              <a href="#" class="mb-4 text-blue-500">Login with Facebook</a>
+              <a href="#" class="mb-4 text-gray-400">Login with Facebook</a>
               
               <Link to='/signup'>
-              <p class="text-gray-600 mb-4">Don't have an account? <a class="text-blue-500">Sign up</a></p>
+              <p class="text-gray-600 mb-4">Don't have an account? <a class="text-gray-400">Sign up</a></p>
               </Link>
           </div>
           
-          <div class="border p-4 bg-white rounded-lg text-center my-4">
-              <span>Forgot your password? <a href="" class="text-blue-500">Reset password</a></span>
+          <div class="border p-4 bg-white rounded-lg text-center my-4 cursor-pointer">
+              <span>Forgot your password?
+                <Link to='/registeremail'>
+                <a class="text-gray-400 cursor-pointer">Reset password</a>
+                </Link>
+               </span>
           </div>
         
       </div>
