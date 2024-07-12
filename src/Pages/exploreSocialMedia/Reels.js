@@ -22,6 +22,7 @@ export function Reels() {
         const response = await axios.get(
           `http://127.0.0.1:8000/posts/posts/${username}/`
         );
+
         if (response.data) {
           setPost(response.data)
         }
@@ -35,7 +36,7 @@ export function Reels() {
   }, [username]);
 
 
-
+ console.log(posts);
   if (loading) {
     return (
       <div className="h-screen overflow-auto relative bg-white w-full">

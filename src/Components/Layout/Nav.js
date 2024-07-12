@@ -33,7 +33,8 @@ import { IoIosImages } from "react-icons/io";
 import { Textarea } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useSelector } from 'react-redux';
-
+import axios from 'axios';
+import { Toaster, toast } from "react-hot-toast";
 
 
 
@@ -43,11 +44,16 @@ function Nav() {
 
     const current_user = useSelector((state) => state.auth.user_id);
     const [notifications, setNotifications] = useState([]);
+    const [caption, setCaption] = useState();
+    const [tags, setTags] = useState();
+    const [loading, setLoading] = useState(true);
     const [unreadCount, setUnreadCount] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { username } = useSelector((state) => state.auth);
     const [imageUrl, setImageUrl] = useState(null);
+    const [showImage, setShowImage] = useState(null);
     const fileInputRef = useRef(null);
+
 
 
 
@@ -102,11 +108,9 @@ function Nav() {
         const files = event.target.files;
         if (files.length > 0) {
           const file = files[0];
-    
-          console.log("Selected file:", file);
+          setImageUrl(file);
           const imageUrl = URL.createObjectURL(file);
-          setImageUrl(imageUrl);
-          console.log(imageUrl, "tjosoooooooooo");
+          setShowImage(imageUrl)
         } else {
           console.error("No file selected.");
         }
@@ -115,7 +119,31 @@ function Nav() {
         fileInputRef.current.click();
       };
     
-
+      const handlesubmit = async () =>{
+          setLoading(true)
+          try{
+            const formData = new FormData();
+            formData.append('picture', imageUrl); 
+            formData.append('caption', caption);
+            formData.append('tags', tags);
+            const response = await axios.post(`http://127.0.0.1:8000/posts/add-post/${username}/`, formData, {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              }
+          });
+            console.log(response,"this is rs");
+            if (response.status == 201){
+              toast.success('Your Post Addedd Successfully')
+              onClose()
+            }else{
+              toast.error("somthing went wrong")
+            }
+          }catch(err){
+            toast.error("somthing went wrong",err)
+          }finally{
+            setLoading(false)
+          }
+      }
 
 
 
@@ -351,6 +379,7 @@ function Nav() {
     </NavLink>
 
     <Modal isOpen={isOpen} onClose={onClose}>
+    <Toaster position="top-center" reverseOrder={false} />
       <ModalContent>
         {(onClose) => (
           <>
@@ -358,6 +387,7 @@ function Nav() {
               Create new post
             </ModalHeader>
             <ModalBody>
+              
               <input
                 type="file"
                 accept="image/*"
@@ -366,10 +396,10 @@ function Nav() {
                 style={{ display: "none" }}
               />
 
-              {imageUrl ? (
+              {showImage ? (
                 <>
                   <img
-                    src={imageUrl}
+                    src={showImage}
                     alt="Selected"
                     className="mt-4 w-full h-auto rounded-lg"
                   />
@@ -378,17 +408,21 @@ function Nav() {
                       label="Write a caption..."
                       className="max-w-xs"
                       variant="underlined"
+                      value={caption}
+                      onChange={(e)=>setCaption(e.target.value)}
                     />
                     <div className="flex max-w-xs flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                       <Input
                         type="text"
                         variant="underlined"
+                        value={tags}
+                        onChange={(e)=>setTags(e.target.value)}
                         label="Tags(add tags,separeted by commas)"
                       />
                     </div>
                     <Button
                       className="bg-gray-300 w-full hover:bg-gray-500"
-                      onPress={onclose}
+                      onPress={handlesubmit}
                     >
                       <FaArrowRight />
                     </Button>
