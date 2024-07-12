@@ -28,7 +28,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/people" element={<People />} />
-          <Route path="/reels" element={<Reels />} />
+          <Route path="/reels/:username" element={<Reels />} />
           <Route path="/chathome" element={<ChatHome />} />
         </Route>
         <Route path="/login" element={<Login />} />

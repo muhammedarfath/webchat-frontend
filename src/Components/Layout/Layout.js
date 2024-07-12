@@ -24,11 +24,19 @@ import { PiFilmReel } from "react-icons/pi";
 import { PiFilmReelFill } from "react-icons/pi";
 import { MdOutlineAddBox } from "react-icons/md";
 import { MdAddToPhotos } from "react-icons/md";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 
 function Layout() {
   const current_user = useSelector((state) => state.auth.user_id);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const {isOpen, onOpen, onClose} = useDisclosure();
+  const {username} = useSelector((state)=>state.auth)
+
+  const handleOpen = () => {
+    console.log("hiii");
+    onOpen();
+  }
 
   useEffect(() => {
     const socket = new WebSocket(
@@ -287,7 +295,7 @@ function Layout() {
               </NavLink>
 
               <NavLink
-                to="/reels"
+                to={`/reels/${username}`}
                 className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
                 activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
               >
@@ -314,31 +322,53 @@ function Layout() {
               </NavLink>
 
               <NavLink
-                to="/reels"
+                onClick={() => handleOpen()}
                 className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
                 activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
               >
-                {({ isActive }) => (
-                  <>
-                    {isActive ? (
-                      <>
-                        <MdAddToPhotos className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
-                        <span className="md:hidden lg:block">Post</span>
-                      </>
-                    ) : (
-                      <>
-                        <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]" />
-                        <span className="md:hidden lg:block">Post</span>
-                        {unreadCount > 0 && (
-                          <span className="absolute top-0 left-0 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-                            {unreadCount}
-                          </span>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
+              <MdOutlineAddBox className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]" />
+              <span className="md:hidden lg:block">Post</span>
+                      
               </NavLink>
+
+              <Modal 
+                isOpen={isOpen} 
+                onClose={onClose} 
+              >
+              <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalBody>
+                <p> 
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+                <p>
+                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
+                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
+                  Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+              </ModalContent>
+
+              </Modal>
             </nav>
           </div>
         </div>

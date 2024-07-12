@@ -11,9 +11,12 @@ function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState();
   const current_user = useSelector((state) => state.auth.username);
+  const [loading, setLoading] = useState(true);
 
-  console.log(user, "once again");
+
+
   useEffect(() => {
+    setLoading(true);
     const fetchUser = async () => {
       try {
         const response = await axios.post(
@@ -23,15 +26,23 @@ function Profile() {
           }
         );
         const data = response.data;
-        console.log(data, "this data");
         setUser(data);
       } catch (error) {
         console.error("Error fetching user:", error);
+      }finally {
+        setLoading(false);
       }
     };
 
     fetchUser();
   }, [username]);
+
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <>
@@ -46,7 +57,7 @@ function Profile() {
           <div className="flex gap-4">
 
             <button className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]" onClick={()=>navigate('/chathome',{state:{username:user.user.username}})}>Messsage</button>
-            <FollowButton user={user} currentUser={current_user} />
+            {/* <FollowButton user={user} currentUser={current_user} /> */}
           </div>
         </div>
 
