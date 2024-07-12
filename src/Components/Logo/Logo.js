@@ -22,13 +22,13 @@ function Logo() {
   };
 
   return (
-    <div className='border-1 p-3 rounded-xl bg-transparent'>
+    <div className='border-2 p-1 rounded-xl bg-transparent'>
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
         className="item"
-        width="50"
-        height="50"
+        width="30"
+        height="30"
       >
         {/* Path for letter 'O' */}
         <motion.circle

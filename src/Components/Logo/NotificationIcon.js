@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { TbBrandHipchat } from "react-icons/tb";
 import { PiFilmReelDuotone } from "react-icons/pi";
 import { ImNewspaper } from "react-icons/im";
-import { FaChalkboardUser } from "react-icons/fa6";
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { logoutUser } from '../../Redux/auth/authSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutUser } from "../../Redux/auth/authSlice";
+import { Avatar } from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  } from "@nextui-org/react";
+import Avatar_profile from "../avatar/Avatar_profile";
 
 function NotificationIcon() {
-    const [profiletoggle, setProfiletoggle] = useState(false);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const {username} = useSelector((state) => state.auth)
+  const [profiletoggle, setProfiletoggle] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { username, image } = useSelector((state) => state.auth);
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -21,14 +28,14 @@ function NotificationIcon() {
       scale: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const item = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { y: 0, opacity: 1 },
   };
   const handleprofiletoggle = () => {
     setProfiletoggle(!profiletoggle);
@@ -40,34 +47,39 @@ function NotificationIcon() {
     navigate("/login");
   };
 
+  const firstLetter = username.charAt(0).toUpperCase();
   return (
     <motion.div
-      className='max-w-40 border-1 border-black  rounded-xl grid grid-cols-2 p-3 gap-2'
+      className="max-w-40 border-1 border-black  rounded-xl grid grid-cols-2 p-3 gap-2"
       variants={container}
-      initial='hidden'
-      animate='visible'
+      initial="hidden"
+      animate="visible"
       drag
     >
-      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><TbBrandHipchat className='lg:text-3xl text-2xl' /></motion.div>
-      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><PiFilmReelDuotone className='lg:text-3xl text-2xl' /></motion.div>
-      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><ImNewspaper className='lg:text-3xl text-2xl' /></motion.div>
-      <motion.div className='rounded-full lg:w-9 lg:h-9' variants={item}><FaChalkboardUser className='lg:text-3xl text-2xl' onClick={handleprofiletoggle}/></motion.div>
-      {profiletoggle && (
-        <div className="absolute top-20 right-6 w-36 bg-white shadow-md rounded-md z-10 profile-dropdown">
-          <div className="arrow-up"></div>
-          <ul>
-            <Link to={`/profile/${username}`}>
-            <li className="py-1 px-3 hover:bg-gray-200">Profile</li>
-            </Link>
-            <li
-              className="py-1 px-3 hover:bg-gray-200 cursor-pointer"
-              onClick={handleLogout}
-            >
-              Logout
-            </li>
-          </ul>
-        </div>
-      )}
+      <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
+        <TbBrandHipchat className="lg:text-3xl text-2xl" />
+      </motion.div>
+      <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
+        <PiFilmReelDuotone className="lg:text-3xl text-2xl" />
+      </motion.div>
+      <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
+        <ImNewspaper className="lg:text-3xl text-2xl" />
+      </motion.div>
+      <Dropdown>
+        <DropdownTrigger>
+          <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
+            <Avatar_profile/>
+          </motion.div>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Static Actions">
+          <DropdownItem key="profile">
+            <Link to={`/profile/${username}`}>Profile</Link>
+          </DropdownItem>
+          <DropdownItem onClick={handleLogout} key="logout">
+            Logout
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     </motion.div>
   );
 }

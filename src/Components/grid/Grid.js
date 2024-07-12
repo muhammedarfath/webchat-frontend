@@ -2,19 +2,10 @@
 import { cn } from "../../utils/cn";
 import React, { useEffect, useState } from "react";
 import { BentoGrid, BentoGridItem } from "../../Components/ui/bento-grid";
-// import {
-//   IconBoxAlignRightFilled,
-//   IconClipboardCopy,
-//   IconFileBroken,
-//   IconSignature,
-//   IconTableColumn,
-// } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
-// import Image from "next/image";
 
 export function BentoGridThirdDemo() {
   const [users, setUsers] = useState([]);
