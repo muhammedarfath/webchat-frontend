@@ -48,7 +48,7 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
             </div>
           )}
           <hr className="w-full mt-28" />
-          <div className="absolute bottom-5 gap-x-64 flex justify-between">
+          <div className="absolute bottom-5 gap-x-56 flex justify-between">
             <div className="flex gap-4 pl-3">
               <FaRegHeart className="text-black font-bold text-2xl cursor-pointer" />
               <VscLiveShare className="text-black font-bold text-2xl cursor-pointer" />
