@@ -49,7 +49,7 @@ function Nav() {
     const [loading, setLoading] = useState(true);
     const [unreadCount, setUnreadCount] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { username } = useSelector((state) => state.auth);
+    const { username,image } = useSelector((state) => state.auth);
     const [imageUrl, setImageUrl] = useState(null);
     const [showImage, setShowImage] = useState(null);
     const fileInputRef = useRef(null);
@@ -214,7 +214,7 @@ function Nav() {
       className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
       activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
     >
-      <Avatar_profile />
+      <Avatar_profile image={image} username={username} />
       <span className="md:hidden lg:block">Profile</span>
     </NavLink>
 

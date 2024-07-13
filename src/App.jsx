@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import Login from "./Pages/Authentication/Login";
 import Signup from "./Pages/Authentication/Signup";
@@ -14,8 +13,7 @@ import { Reels } from "./Pages/exploreSocialMedia/Reels";
 import People from "./Pages/exploreSocialMedia/People";
 import Profile from "./Pages/exploreSocialMedia/Profile";
 import Layout from "./Components/Layout/Layout";
-import Otp from "./Pages/Authentication/Otp";
-import RegisterEmail from "./Pages/Authentication/RegisterEmail.js";
+import RegisterEmail from "./Pages/Authentication/RegisterEmail";
 import PasswordResetConfirmForm from "./Pages/Authentication/PasswordResetConfirm";
 import Tags from "./Pages/exploreSocialMedia/Tags";
 
@@ -34,8 +32,11 @@ function App() {
           <Route path="/chathome" element={<ChatHome />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/registeremail" element={<RegisterEmail/>} />
-        <Route path="/password-reset-confirm/:user_id" element={<PasswordResetConfirmForm/>} />
+        <Route path="/registeremail" element={<RegisterEmail />} />
+        <Route
+          path="/password-reset-confirm/:user_id"
+          element={<PasswordResetConfirmForm />}
+        />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>

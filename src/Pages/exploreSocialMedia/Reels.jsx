@@ -3,9 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Card, Skeleton } from "@nextui-org/react";
 
-import {
-  useDisclosure,
-} from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import Post from "../../Components/post/Post";
 import PostModal from "../../Components/post/PostModal";
 import { useSelector } from "react-redux";
@@ -13,23 +11,24 @@ import { useSelector } from "react-redux";
 export function Reels() {
   const [loading, setLoading] = useState(true);
   const { username } = useParams();
-  const [posts, setPost] = useState([])
+  const [posts, setPost] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedPost, setSelectedPost] = useState(null);
-  const {user_id} = useSelector((state)=>state.auth)
-
+  const { user_id } = useSelector((state) => state.auth);
 
   useEffect(() => {
     setLoading(true);
     const fetchPosts = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/posts/posts/${username}/`,{
-           user_id:user_id
-          });
+          `http://127.0.0.1:8000/posts/posts/${username}/`,
+          {
+            user_id: user_id,
+          }
+        );
 
         if (response.data) {
-          setPost(response.data)
+          setPost(response.data);
         }
       } catch (error) {
         console.error("errr", error);
@@ -40,8 +39,6 @@ export function Reels() {
     fetchPosts();
   }, [username]);
 
-  console.log(posts,"newwwww");
-
 
   if (loading) {
     return (
@@ -50,7 +47,8 @@ export function Reels() {
           {[...Array(8)].map((_, index) => (
             <Card key={index} className="w-full h-auto rounded-3xl">
               <Skeleton className="rounded-lg">
-                <div className="rounded-lg bg-default-300"
+                <div
+                  className="rounded-lg bg-default-300"
                   style={{ height: `${Math.random() * 300 + 300}px` }}
                 ></div>
               </Skeleton>
@@ -58,11 +56,11 @@ export function Reels() {
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   const handleOpen = (post) => {
-    setSelectedPost(post)
+    setSelectedPost(post);
     onOpen();
   };
 
@@ -74,9 +72,12 @@ export function Reels() {
         ))}
       </div>
       {selectedPost && (
-        <PostModal isOpen={isOpen} onClose={onClose} selectedPost={selectedPost} />
+        <PostModal
+          isOpen={isOpen}
+          onClose={onClose}
+          selectedPost={selectedPost}
+        />
       )}
     </div>
-
   );
 }

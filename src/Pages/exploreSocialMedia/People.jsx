@@ -18,7 +18,6 @@ function People() {
     fetchAllUsers();
   }, [current_userId]);
 
-
   const fetchAllUsers = async (query = "") => {
     setIsLoading(true);
     try {
@@ -35,8 +34,6 @@ function People() {
     }
     setIsLoading(false);
   };
-
-
 
   const handleInputChange = (e) => {
     const query = e.target.value;
@@ -132,30 +129,30 @@ function People() {
                   key={user.id}
                 >
                   <div className="flex justify-center items-center mt-1">
-                  <div className="w-10 h-10 overflow-hidden">
-                    {user.image ? (
-                      <img
-                        src={`http://127.0.0.1:8000${user.image}`}
-                        className="w-full h-full rounded-full"
-                        alt="image"
-                      />
-                    ) : (
-                      <img
-                        src="/images/profile-image.webp"
-                        className="w-full h-full rounded-full"
-                        alt="image"
-                      />
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start ml-3">
-                    <Link to={`/profile/${user.user.username}`}>
-                      <h1 className="text-1xl mt-2 font-medium">
-                        {user.user.username}
-                      </h1>
-                    </Link>
-                    <small>{user.bio}</small>
-                    <small>Suggested for you</small>
-                  </div>
+                    <div className="w-10 h-10 overflow-hidden">
+                      {user.image ? (
+                        <img
+                          src={`http://127.0.0.1:8000${user.image}`}
+                          className="w-full h-full rounded-full"
+                          alt="image"
+                        />
+                      ) : (
+                        <img
+                          src="/images/profile-image.webp"
+                          className="w-full h-full rounded-full"
+                          alt="image"
+                        />
+                      )}
+                    </div>
+                    <div className="flex flex-col items-start ml-3">
+                      <Link to={`/profile/${user.user.username}`}>
+                        <h1 className="text-1xl mt-2 font-medium">
+                          {user.user.username}
+                        </h1>
+                      </Link>
+                      <small>{user.bio}</small>
+                      <small>Suggested for you</small>
+                    </div>
                   </div>
                   <FollowButton user={user} currentUser={current_user} />
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -45,24 +45,21 @@ function Signup() {
         const userData = response.data;
         dispatch(signUpUser({ user_id: userData }));
         setShowOTP(true);
-        toast.success("OTP Sent Your Email")
+        toast.success("OTP Sent Your Email");
       } else {
-        toast.error("check your credentials")
+        toast.error("check your credentials");
         setLoading(false);
       }
     } catch (error) {
-      toast.error("Signup failed",error)
+      toast.error("Signup failed", error);
       setLoading(false);
     }
   };
 
   return (
     <div className="w-full p-5 flex flex-col justify-center items-center">
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />    
-        {showOTP ? (
+      <Toaster position="top-center" reverseOrder={false} />
+      {showOTP ? (
         <Otp email={email} />
       ) : (
         <>
