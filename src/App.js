@@ -17,6 +17,7 @@ import Layout from "./Components/Layout/Layout";
 import Otp from "./Pages/Authentication/Otp";
 import RegisterEmail from "./Pages/Authentication/RegisterEmail.js";
 import PasswordResetConfirmForm from "./Pages/Authentication/PasswordResetConfirm";
+import Tags from "./Pages/exploreSocialMedia/Tags";
 
 function App() {
   const { email } = useSelector((state) => state.auth);
@@ -29,6 +30,7 @@ function App() {
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/people" element={<People />} />
           <Route path="/reels/:username" element={<Reels />} />
+          <Route path="/tags/:title" element={<Tags />} />
           <Route path="/chathome" element={<ChatHome />} />
         </Route>
         <Route path="/login" element={<Login />} />
