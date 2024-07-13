@@ -15,8 +15,7 @@ import {
   } from "@nextui-org/react";
 import Avatar_profile from "../avatar/Avatar_profile";
 
-function NotificationIcon() {
-  const [profiletoggle, setProfiletoggle] = useState(false);
+function NotificationIcon({containerRef}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { username, image } = useSelector((state) => state.auth);
@@ -37,9 +36,7 @@ function NotificationIcon() {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 },
   };
-  const handleprofiletoggle = () => {
-    setProfiletoggle(!profiletoggle);
-  };
+
   const handleLogout = () => {
     dispatch(
       logoutUser({ authTokens: null, user_id: null, is_superuser: false })
@@ -47,14 +44,15 @@ function NotificationIcon() {
     navigate("/login");
   };
 
-  const firstLetter = username.charAt(0).toUpperCase();
   return (
+
     <motion.div
       className="max-w-40 border-1 border-black  rounded-xl grid grid-cols-2 p-3 gap-2"
       variants={container}
       initial="hidden"
       animate="visible"
       drag
+      dragConstraints={containerRef}
     >
       <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
         <TbBrandHipchat className="lg:text-3xl text-2xl" />
@@ -81,6 +79,7 @@ function NotificationIcon() {
         </DropdownMenu>
       </Dropdown>
     </motion.div>
+
   );
 }
 

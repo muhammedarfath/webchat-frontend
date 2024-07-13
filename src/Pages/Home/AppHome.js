@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { AuroraBackground } from "../../Components/ui/background-gradient-animation";
 import { BentoGridThirdDemo } from "../../Components/grid/Grid";
 import Footer from "../../Components/footer/Footer";
@@ -11,6 +11,9 @@ import DrowLogo from "../../Components/Logo/DrowLogo";
 function AppHome() {
   const { authTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const containerRef = useRef(null)
+  const containerCamRef = useRef(null)
+  
 
   useEffect(() => {
     if (!authTokens) {
@@ -19,15 +22,15 @@ function AppHome() {
   }, [authTokens, navigate]);
 
   return (
-    <AuroraBackground>
+    <AuroraBackground >
       <div className="justify-between flex w-full border border-slate-500 p-2 bg-black rounded-full cursor-pointer">
-        <div className="fixed top-6 right-6">
-          <NotificationIcon />
+        <div className="fixed top-6 right-6" ref={containerRef}>
+          <NotificationIcon containerRef={containerRef}/>
         </div>
       </div>
 
-      <div className="fixed top-6 left-6">
-        <DrowLogo />
+      <div className="fixed top-6 left-6" ref={containerCamRef}>
+        <DrowLogo containerCamRef={containerCamRef}/>
       </div>
 
       <motion.div

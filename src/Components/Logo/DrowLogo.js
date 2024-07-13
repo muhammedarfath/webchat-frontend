@@ -2,12 +2,13 @@ import React from 'react'
 import { motion } from "framer-motion"
 import { FaCameraRetro } from "react-icons/fa";
 
-function DrowLogo() {
+function DrowLogo({containerCamRef}) {
   return (
-    <div>
+    <div >
     <motion.div 
         className='max-w-28 border-1 border-black rounded-xl  p-1' 
-        drag 
+        drag
+        dragConstraints={containerCamRef}
     >
      <FaCameraRetro className='lg:text-8xl text-7xl ' />
     </motion.div>

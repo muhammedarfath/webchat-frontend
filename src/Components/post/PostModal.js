@@ -24,7 +24,7 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
         <div className="lg:block md:block sm:block hidden gap-5 pt-7 pl-2 mt-4">
           <div className="flex gap-x-64">
             <div className="flex gap-2">
-              <Avatar_profile />
+              <Avatar_profile image={selectedPost.user.image} username={selectedPost.user.username}/>
               <h1>{selectedPost.user.username}</h1>
             </div>
             <BsThreeDots className="mr-3" />
@@ -33,7 +33,7 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
           {selectedPost.caption ? (
             <div className="h-96">
               <div className="flex gap-3">
-                <Avatar_profile />
+              <Avatar_profile image={selectedPost.picture} username={selectedPost.user.username}/>
                 <h5>{selectedPost.caption}</h5>
               </div>
               <div className="mt-2">
