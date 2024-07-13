@@ -6,12 +6,13 @@ import { ImNewspaper } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../Redux/auth/authSlice";
+import { Avatar } from "@nextui-org/react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from "@nextui-org/react";
+  } from "@nextui-org/react";
 import Avatar_profile from "../avatar/Avatar_profile";
 
 function NotificationIcon() {
@@ -67,7 +68,7 @@ function NotificationIcon() {
       <Dropdown>
         <DropdownTrigger>
           <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
-            <Avatar_profile image={image} username={username} />
+            <Avatar_profile  image={image} username={username}/>
           </motion.div>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
