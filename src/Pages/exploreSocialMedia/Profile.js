@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import FollowButton from "../../Components/follow_btn/FollowButton";
 import { SiCodefactor } from "react-icons/si";
 import { BsPostcardHeart } from "react-icons/bs";
+import Post from "../../Components/post/Post";
+import { useDisclosure } from "@nextui-org/react";
 
 function Profile() {
   const navigate = useNavigate();
@@ -12,6 +14,9 @@ function Profile() {
   const [user, setUser] = useState();
   const current_user = useSelector((state) => state.auth.username);
   const [loading, setLoading] = useState(true);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
 
   useEffect(() => {
     setLoading(true);
@@ -20,9 +25,10 @@ function Profile() {
         const response = await axios.post(
           "http://127.0.0.1:8000/app_profile/userprofile/",
           {
-            username,
+            username:username,
           }
         );
+        console.log(response.data);
         const data = response.data;
         setUser(data);
       } catch (error) {
@@ -34,6 +40,14 @@ function Profile() {
 
     fetchUser();
   }, [username]);
+
+
+  console.log(user,"this is user");
+
+  const handleOpen = (post) => {
+    setSelectedPost(post);
+    onOpen();
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -57,8 +71,8 @@ function Profile() {
                 className="rounded-full border-1 w-52 h-52 object-cover"
               />
             )}
-            <h6>{user.user.username}</h6>
-            <small>@{user.full_name}</small>
+            <h6>{user.profile.full_name}</h6>
+            <small>@{user.profile.user.username}</small>
             <span>
               {user.follower &&
                 user.following &&
@@ -85,46 +99,9 @@ function Profile() {
           </div>
 
           <div class="columns-2 xl:columns-4 p-4 text-white gap-4 space-y-4">
-            <img
-              src="https://i.pinimg.com/564x/c0/e6/34/c0e634692ee286ace714b718373c4d9f.jpg"
-              alt="Image 1"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="https://i.pinimg.com/564x/81/3f/7a/813f7a5213a84224af60ae5a0ffafded.jpg"
-              alt="Image 2"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="https://i.pinimg.com/564x/fc/fd/fb/fcfdfbe3e1d541a150b275a8a10b0e95.jpg"
-              alt="Image 4"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="https://i.pinimg.com/564x/08/42/50/0842507422178226ea833e3509dce531.jpg"
-              alt="Image 4"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="	https://i.pinimg.com/564x/5c/c9/4b/5cc94b98ac39384081d76f52cf5ee40e.jpg"
-              alt="Image 3"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="https://i.pinimg.com/564x/c0/e6/34/c0e634692ee286ace714b718373c4d9f.jpg"
-              alt="Image 1"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="https://i.pinimg.com/564x/81/3f/7a/813f7a5213a84224af60ae5a0ffafded.jpg"
-              alt="Image 2"
-              class="w-full h-auto rounded-3xl"
-            />
-            <img
-              src="https://i.pinimg.com/564x/c0/e6/34/c0e634692ee286ace714b718373c4d9f.jpg"
-              alt="Image 1"
-              class="w-full h-auto rounded-3xl"
-            />
+          {user.posts.map((post, index) => (
+              <Post key={index} post={post} handleOpen={handleOpen} />
+            ))}
           </div>
         </div>
       )}

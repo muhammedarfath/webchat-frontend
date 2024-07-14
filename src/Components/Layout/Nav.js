@@ -61,48 +61,48 @@ function Nav() {
         onOpen();
       };
     
-      useEffect(() => {
-        const socket = new WebSocket(
-          `ws://localhost:8000/ws/notification/${current_user}/`
-        );
+      // useEffect(() => {
+      //   const socket = new WebSocket(
+      //     `ws://localhost:8000/ws/notification/${current_user}/`
+      //   );
     
-        const fetchNotification = () => {
-          socket.send(JSON.stringify({ command: "fetch_notificaion" }));
-        };
+      //   const fetchNotification = () => {
+      //     socket.send(JSON.stringify({ command: "fetch_notificaion" }));
+      //   };
     
-        socket.onopen = () => {
-          fetchNotification();
-        };
+      //   socket.onopen = () => {
+      //     fetchNotification();
+      //   };
     
-        socket.onmessage = (event) => {
-          try {
-            const data = JSON.parse(event.data);
+      //   socket.onmessage = (event) => {
+      //     try {
+      //       const data = JSON.parse(event.data);
     
-            if (data && data.message && typeof data.message === "object") {
-              setNotifications((prevNotifications) => [
-                ...prevNotifications,
-                data.message,
-              ]);
-              setUnreadCount((prevCount) => prevCount + 1);
-            } else {
-              console.error("Invalid data format received:", data);
-            }
-          } catch (error) {
-            console.error("Error parsing WebSocket message:", error);
-          }
-        };
-        socket.onerror = (error) => {
-          console.log("WebSocket error:", error);
-        };
+      //       if (data && data.message && typeof data.message === "object") {
+      //         setNotifications((prevNotifications) => [
+      //           ...prevNotifications,
+      //           data.message,
+      //         ]);
+      //         setUnreadCount((prevCount) => prevCount + 1);
+      //       } else {
+      //         console.error("Invalid data format received:", data);
+      //       }
+      //     } catch (error) {
+      //       console.error("Error parsing WebSocket message:", error);
+      //     }
+      //   };
+      //   socket.onerror = (error) => {
+      //     console.log("WebSocket error:", error);
+      //   };
     
-        socket.onclose = () => {
-          console.log("WebSocket connection closed");
-        };
+      //   socket.onclose = () => {
+      //     console.log("WebSocket connection closed");
+      //   };
     
-        return () => {
-          socket.close();
-        };
-      }, [current_user]);
+      //   return () => {
+      //     socket.close();
+      //   };
+      // }, [current_user]);
     
       const handleFileChange = (event) => {
         const files = event.target.files;
