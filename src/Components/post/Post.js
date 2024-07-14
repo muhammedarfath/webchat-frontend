@@ -10,6 +10,8 @@ import { FcLike } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import { BsBookmark } from "react-icons/bs";
 import { BsBookmarkFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import FollowButton from "../follow_btn/FollowButton";
 
 const Post = ({ post, handleOpen }) => {
   const [likes, setLikes] = useState(post.likes);
@@ -61,20 +63,26 @@ const Post = ({ post, handleOpen }) => {
     <div
       className="relative group cursor-pointer flex justify-center items-center"
       onClick={() => handleOpen(post)}
-    >
+    > 
       {liked && <LikeSVG />}
       <img
         src={`http://127.0.0.1:8000${post.picture}`}
         alt={`Image ${post.id}`}
         className="w-full h-auto rounded-3xl"
-      />
+        />
+
 
       <div className="absolute bottom-0 text-white left-0 rounded-3xl w-full h-full bg-black bg-opacity-30 flex items-end justify-between pr-6 pb-7 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute top-4 right-6">
+        <FollowButton/>
+        </div>
         <div className="ml-4">
+        <Link to={`/profile/${post.user.username}`}>
           <div className="flex gap-3">
             <Avatar_profile image={post.user.image} username={post.user.username} />
             <h1>{post.user.username}</h1>
           </div>
+        </Link>
           <span className="ml-6">{post.caption}</span>
           <div className="">
             {post.tags.map((tag) => (

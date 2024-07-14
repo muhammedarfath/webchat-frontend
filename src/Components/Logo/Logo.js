@@ -22,7 +22,7 @@ function Logo() {
   };
 
   return (
-    <div className='border-2 p-1 rounded-xl bg-transparent'>
+    <div className='border-none p-1 rounded-xl bg-[#E60022]'>
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
@@ -36,7 +36,7 @@ function Logo() {
           cy="50"
           r="20"
           fill="none"
-          stroke="black"
+          stroke="white"
           strokeWidth="5"
           variants={icon}
           initial="hidden"
@@ -54,7 +54,7 @@ function Logo() {
              M50 30
              H90"
           fill="none"
-          stroke="black"
+          stroke="white"
           strokeWidth="10"
           variants={icon}
           initial="hidden"

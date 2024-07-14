@@ -26,6 +26,7 @@ function Profile() {
           "http://127.0.0.1:8000/app_profile/userprofile/",
           {
             username:username,
+            current_user:current_user
           }
         );
         console.log(response.data);
@@ -53,11 +54,12 @@ function Profile() {
     return <div>Loading...</div>;
   }
 
+
   return (
     <>
       {user && (
         <div className="w-full flex flex-col overflow-auto gap-10">
-          <div className="w-full h-1/2 flex flex-col justify-center items-center gap-1 p-3">
+          <div className="w-full flex flex-col justify-center items-center gap-3 p-3">
             {user.image ? (
               <img
                 src={`http://127.0.0.1:8000${user.image}`}
@@ -73,12 +75,29 @@ function Profile() {
             )}
             <h6>{user.profile.full_name}</h6>
             <small>@{user.profile.user.username}</small>
+            <div className="w-96 flex items-center justify-center">
+            <span  className="text-center">{user.profile.bio}</span>
+            </div>
             <span>
               {user.follower &&
-                user.following &&
-                `${user.follower.length} followers . ${user.following.length} following`}
+                user.following ?
+                `${user.follower.length} followers . ${user.following.length} following`: `0 followers · 0 following`}
             </span>
-            <div className="flex gap-4">
+            { username == current_user ? <div className="flex gap-4">
+              <button
+                className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]"
+          
+              >
+                Edit Profile
+              </button>
+              <button
+                className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]"
+          
+              >
+                Settings
+              </button>
+            </div>  : (
+              <div className="flex gap-4">
               <button
                 className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]"
                 onClick={() =>
@@ -89,8 +108,9 @@ function Profile() {
               >
                 Messsage
               </button>
-              {/* <FollowButton user={user} currentUser={current_user} /> */}
+              <FollowButton follow_user={user.profile.user.username} follow_status={user.follow_status}/>
             </div>
+            )}
           </div>
 
           <div className="flex justify-center items-center gap-5 w-full sticky top-0 bg-white shadow-sm p-4">
