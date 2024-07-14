@@ -1,7 +1,7 @@
 import React,{ useEffect, useRef, useState } from 'react'
 import Avatar_profile from "../avatar/Avatar_profile";
 import { IoSaveOutline } from "react-icons/io5";
-import { IoSaveSharp } from "react-icons/io5";
+import { BsBookmarks } from "react-icons/bs";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { BsMusicNoteList } from "react-icons/bs";
@@ -35,7 +35,7 @@ import { Input } from "@nextui-org/react";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Toaster, toast } from "react-hot-toast";
-
+import { BsBookmarksFill } from "react-icons/bs";
 
 
 
@@ -227,12 +227,12 @@ function Nav() {
         <>
           {isActive ? (
             <>
-              <IoSaveSharp className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+              <BsBookmarksFill className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
               <span className="md:hidden lg:block">Save</span>
             </>
           ) : (
             <>
-              <IoSaveOutline className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
+              <BsBookmarks className="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1] " />
               <span className="md:hidden lg:block">Save</span>
             </>
           )}

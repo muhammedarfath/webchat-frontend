@@ -8,11 +8,14 @@ import axios from "axios";
 import LikeSVG from "./Likesvg";
 import { FcLike } from "react-icons/fc";
 import { useSelector } from "react-redux";
+import { BsBookmark } from "react-icons/bs";
+import { BsBookmarkFill } from "react-icons/bs";
 
 const Post = ({ post, handleOpen }) => {
   const [likes, setLikes] = useState(post.likes);
   const { username } = useSelector((state) => state.auth);
   const [liked, setLiked] = useState(post.is_liked);
+  const [fav,setFav] = useState(post.is_faved)
 
   const handleClick = async (e) => {
     e.stopPropagation();
@@ -23,7 +26,6 @@ const Post = ({ post, handleOpen }) => {
           username: username,
         }
       );
-      console.log(response.data, "check karo vai");
       if (response.data) {
         setLikes(response.data.post.likes);
         setLiked(!liked);
@@ -34,6 +36,26 @@ const Post = ({ post, handleOpen }) => {
       console.log(error);
     }
   };
+
+
+ const handlefavorites = async (e) =>{
+  e.stopPropagation();
+  try {
+    const response = await axios.post(
+      `http://127.0.0.1:8000/posts/fav-post/${post.id}/`,
+      {
+        username: username,
+      }
+    );
+    if (response.data) {
+      setFav(!fav);
+    } else {
+      console.log("Something went wrong");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+ }
 
   return (
     <div
@@ -85,7 +107,9 @@ const Post = ({ post, handleOpen }) => {
             <VscLiveShare className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />
             <small>0</small>
           </div>
-          <MdSaveAlt className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />
+          {fav ? (<BsBookmarkFill onClick={handlefavorites} className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />):(
+            <BsBookmark onClick={handlefavorites} className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />
+          )}
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ export function Reels() {
             user_id: user_id,
           }
         );
-
+         console.log(response.data);
         if (response.data) {
           setPost(response.data);
         }
