@@ -30,7 +30,12 @@ export const authSlice = createSlice({
       state.image = action.payload.image;
     },
     logoutUser: (state, action) => {
+      state.image = action.payload.image;
+      state.bio = action.payload.bio;
+      state.full_name = action.payload.full_name;
       state.authTokens = action.payload.authTokens;
+      state.email = action.payload.email;
+      state.username = action.payload.username;
       state.user_id = action.payload.user_id;
       state.is_superuser = action.payload.is_superuser;
     },

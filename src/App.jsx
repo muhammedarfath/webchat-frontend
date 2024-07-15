@@ -19,7 +19,6 @@ import Tags from "./Pages/exploreSocialMedia/Tags";
 import ProfileSettings from "./Components/profile/ProfileSettings";
 
 function App() {
-  const { email } = useSelector((state) => state.auth);
 
   return (
     <Router>

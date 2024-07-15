@@ -128,9 +128,7 @@ function Nav() {
               }
           });
             if (response.status == 201){
-              toast.success('Your Post Addedd Successfully')
               onClose()
-
             }else{
               toast.error("somthing went wrong")
             }
@@ -146,7 +144,16 @@ function Nav() {
           }
       }
 
-
+      const savePost = () => {
+        return toast.promise(
+          handlesubmit(),
+          {
+            loading: 'Posting...',
+            success: <b>Post added successfully!</b>,
+            error: <b>Failed to add post.</b>,
+          }
+        );
+      };
 
   return (
     <nav className="flex-1 w-full flex flex-col items-center gap-3">
@@ -429,7 +436,7 @@ function Nav() {
                 />
                 <Button
                   className="bg-gray-300 w-full hover:bg-gray-500"
-                  onClick={handlesubmit}
+                  onClick={savePost}
                 >
                   <FaArrowRight />
                 </Button>

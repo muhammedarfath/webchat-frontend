@@ -7,6 +7,10 @@ import { SiCodefactor } from "react-icons/si";
 import { BsPostcardHeart } from "react-icons/bs";
 import Post from "../../Components/post/Post";
 import { useDisclosure } from "@nextui-org/react";
+import { IoMdImages } from "react-icons/io";
+import AvatarProfile from "../../Components/avatar/Avatar_profile";
+import { Card, Skeleton } from "@nextui-org/react";
+import PostModal from "../../Components/post/PostModal";
 
 function Profile() {
   const navigate = useNavigate();
@@ -47,10 +51,6 @@ function Profile() {
     onOpen();
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  console.log(user,"image uno");
   return (
     <>
       {user && (
@@ -63,16 +63,14 @@ function Profile() {
                 className="rounded-full border-1 w-52 h-52 object-cover"
               />
             ) : (
-              <img
-                src="/images/profile-image.webp"
-                alt="img"
-                className="rounded-full border-1 w-52 h-52 object-cover"
-              />
+              <AvatarProfile username={user.profile.user.username} size="6xl" />
             )}
             <h6>{user.profile.full_name}</h6>
             <small>@{user.profile.user.username}</small>
-            <div className="w-96 flex items-center justify-center">
-              <span className="text-center">{user.profile.bio}</span>
+            <div className="w-96 flex items-center justify-center w-">
+              {!user.profile.bio === "undefined" ? (<span className="text-center">{user.profile.bio}</span>) : (
+                ''
+              )}
             </div>
             <span>
               {user.follower && user.following
@@ -114,12 +112,46 @@ function Profile() {
             <BsPostcardHeart className="text-2xl cursor-pointer" />
             <SiCodefactor className="text-2xl cursor-pointer" />
           </div>
+          <div className="h-screen bg-white w-full">
 
-          <div class="columns-2 xl:columns-4 p-4 text-white gap-4 space-y-4">
-            {user.posts.map((post, index) => (
-              <Post key={index} post={post} handleOpen={handleOpen} />
-            ))}
+
+            {
+              loading ? (
+                <div className="h-screen overflow-auto relative bg-white w-full">
+                  <div className="columns-2 xl:columns-4 p-4 gap-4 space-y-4">
+                    {[...Array(8)].map((_, index) => (
+                      <Card key={index} className="w-full h-auto rounded-3xl">
+                        <Skeleton className="rounded-lg">
+                          <div
+                            className="rounded-lg bg-default-300"
+                            style={{ height: `${Math.random() * 300 + 300}px` }}
+                          ></div>
+                        </Skeleton>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {user.posts.length > 0 ? (
+                    <div className="columns-2 xl:columns-4 p-4 gap-4 space-y-4">
+                      {user.posts.map((post, index) => (
+                        <Post key={index} post={post} handleOpen={handleOpen} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col justify-center w-full h-full items-center">
+                      <IoMdImages className="text-9xl" />
+                      <h1 className="font-bold text-2xl">No Post Yet</h1>
+                    </div>
+                  )}
+                </>
+              )
+            }
           </div>
+          {selectedPost && (
+            <PostModal isOpen={isOpen} onClose={onClose} selectedPost={selectedPost} />
+          )}
         </div>
       )}
     </>

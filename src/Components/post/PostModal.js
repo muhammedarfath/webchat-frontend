@@ -67,7 +67,6 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
     }
   };
 
-  // Format the posted date and time
   const formatDate = (dateTimeString) => {
     const options = { hour: "numeric", minute: "numeric", hour12: true };
     const date = new Date(dateTimeString);
@@ -79,6 +78,9 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
     });
     return `${timeFormatted} · ${dateFormatted}`;
   };
+
+console.log(selectedPost,"nokam");
+
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="flex h-screen" size="full">

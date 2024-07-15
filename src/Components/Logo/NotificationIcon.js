@@ -39,7 +39,7 @@ function NotificationIcon({containerRef}) {
 
   const handleLogout = () => {
     dispatch(
-      logoutUser({ authTokens: null, user_id: null, is_superuser: false })
+      logoutUser({ authTokens: null, user_id: null, is_superuser: false,image:null,username:null,email:null })
     );
     navigate("/login");
   };

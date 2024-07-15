@@ -15,6 +15,9 @@ function AvatarProfile({ image, username, size = "sm" }) {
     xl: "w-12 h-12 text-2xl",
     "2xl": "w-16 h-16 text-3xl",
     "3xl": "w-20 h-20 text-4xl",
+    "4xl": "w-24 h-24 text-5xl",
+    "5xl": "w-28 h-28 text-6xl",
+    "6xl": "w-32 h-32 text-7xl",
   };
 
   const selectedSizeClass = sizeClasses[size] || sizeClasses.sm;
@@ -25,11 +28,12 @@ function AvatarProfile({ image, username, size = "sm" }) {
         <Avatar
           src={`http://127.0.0.1:8000${image}`}
           className={selectedSizeClass}
+          
         />
       ) : (
         <Avatar
           name={firstLetter}
-          className={selectedSizeClass}
+          className={selectedSizeClass} 
         />
       )}
     </>

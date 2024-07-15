@@ -4,6 +4,7 @@ import AvatarProfile from '../avatar/Avatar_profile';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { updateUserProfile } from '../../Redux/auth/authSlice';
+import { Toaster, toast } from "react-hot-toast";
 
 function ProfileSettings() {
   const fileinputRef = useRef(null);
@@ -54,7 +55,7 @@ function ProfileSettings() {
       if (response.status === 200) {
         const updatedProfile = response.data;
         dispatch(updateUserProfile(updatedProfile));
-        alert('Profile updated successfully!');
+        toast.success("Profile Updated")
       } else {
         alert('Something went wrong. Please try again.');
       }
@@ -66,6 +67,7 @@ function ProfileSettings() {
 
   return (
     <div className='w-full'>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className='m-8 w-96'>
         <h1 className='font-bold text-3xl'>Edit profile</h1>
         <span>Keep your personal details private. Information you add here is visible to anyone who can view your profile.</span>
@@ -83,7 +85,7 @@ function ProfileSettings() {
           <div>
             <small>Photo</small>
             {profileImage ? (
-              <AvatarProfile username={username} image={profileImage} size="3xl" />
+              <AvatarProfile username={username} image={image} size="3xl" />
             ) : (
               <AvatarProfile username={username} image={image} size="3xl" />
             )}

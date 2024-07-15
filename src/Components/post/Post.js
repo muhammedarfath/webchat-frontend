@@ -8,6 +8,7 @@ const Post = ({ post, handleOpen }) => {
     const extension = mediaFile.split('.').pop().toLowerCase();
     return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(extension);
   };
+  console.log(post);
   return (
     <div
       className="relative group cursor-pointer w-full h-full flex justify-center items-center"
@@ -27,6 +28,7 @@ const Post = ({ post, handleOpen }) => {
             muted
             src={`http://127.0.0.1:8000${post.media_file}`}
             className="w-full h-auto rounded-3xl"
+            onEnded={(e)=>e.target.play()}
           />
         )
       ) : (
