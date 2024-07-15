@@ -17,6 +17,8 @@ import RegisterEmail from "./Pages/Authentication/RegisterEmail";
 import PasswordResetConfirmForm from "./Pages/Authentication/PasswordResetConfirm";
 import Tags from "./Pages/exploreSocialMedia/Tags";
 import ProfileSettings from "./Components/profile/ProfileSettings";
+import Music from "./Pages/exploreSocialMedia/Music";
+import News from "./Pages/exploreSocialMedia/ News";
 
 function App() {
 
@@ -29,8 +31,10 @@ function App() {
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/people" element={<People />} />
           <Route path="/reels/:username" element={<Reels />} />
+          <Route path="/music" element={<Music />} />
           <Route path="/tags/:title" element={<Tags />} />
           <Route path="/chathome" element={<ChatHome />} />
+          <Route path="/news" element={<News />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/registeremail" element={<RegisterEmail />} />

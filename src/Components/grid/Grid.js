@@ -94,11 +94,11 @@ const SkeletonOne = ({ users, isLoading }) => {
                   {user.image ? (<img
                     src={`http://127.0.0.1:8000${user.image}`}
                     className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0"
-                  />):(
+                  />) : (
                     <img
-                    src="images/profile-image.webp"
-                    className="h-6 w-6 rounded-full bg-gradient-to-r flex-shrink-0"
-                  />
+                      src="images/profile-image.webp"
+                      className="h-6 w-6 rounded-full bg-gradient-to-r flex-shrink-0"
+                    />
                   )}
                   <h1 className="w-full bg-gray-100 h-4 rounded-full text-black dark:bg-neutral-900"></h1>
                 </motion.div>
@@ -165,23 +165,27 @@ const SkeletonTwo = () => {
   };
   const arr = new Array(6).fill(0);
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
-    >
-      {arr.map((_, i) => (
+    <div>
+      <Link to="/news">
         <motion.div
-          key={"skelenton-two" + i}
-          variants={variants}
-          style={{
-            maxWidth: Math.random() * (100 - 40) + 40 + "%",
-          }}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
-        ></motion.div>
-      ))}
-    </motion.div>
+          initial="initial"
+          animate="animate"
+          whileHover="hover"
+          className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+        >
+          {arr.map((_, i) => (
+            <motion.div
+              key={"skelenton-two" + i}
+              variants={variants}
+              style={{
+                maxWidth: Math.random() * (100 - 40) + 40 + "%",
+              }}
+              className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
+            ></motion.div>
+          ))}
+        </motion.div>
+      </Link>
+    </div>
   );
 };
 const SkeletonThree = () => {
