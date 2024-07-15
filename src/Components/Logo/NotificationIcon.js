@@ -58,7 +58,9 @@ function NotificationIcon({containerRef}) {
         <TbBrandHipchat className="lg:text-3xl text-2xl" />
       </motion.div>
       <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
-        <PiFilmReelDuotone className="lg:text-3xl text-2xl" />
+        <Link to={`/reels/${username}`}>
+          <PiFilmReelDuotone className="lg:text-3xl text-2xl" />
+        </Link>
       </motion.div>
       <motion.div className="rounded-full lg:w-9 lg:h-9" variants={item}>
         <ImNewspaper className="lg:text-3xl text-2xl" />

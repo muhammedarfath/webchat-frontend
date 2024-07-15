@@ -43,7 +43,8 @@ function FollowButton({ follow_user,follow_status }) {
     fetchFollowStatus();
   }, [current_userId, follow_user]);
 
-  const handleFollowBack = async () => {
+  const handleFollowBack = async (e) => {
+    e.stopPropagation();
     try {
       const response = await axios.post(
         'http://127.0.0.1:8000/app_profile/follow_back_request/',
@@ -65,7 +66,8 @@ function FollowButton({ follow_user,follow_status }) {
   };
 
 
-  const handleFollow = async () => {
+  const handleFollow = async (e) => {
+    e.stopPropagation();
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/app_profile/send_follow_request/",
@@ -75,7 +77,7 @@ function FollowButton({ follow_user,follow_status }) {
         }
       );
       if (response.data) {
-        console.log('success');
+        setIsRequested(true)
       } else {
         alert("Something went wrong");
       }
@@ -95,7 +97,7 @@ function FollowButton({ follow_user,follow_status }) {
         <div className="shadow-sm px-5 py-3 rounded-3xl bg-[#282828] text-white">
           <span className="font-semibold text-sm">It's You</span>
         </div>
-      ) : followStatus === 'requested' ? (
+      ) : followStatus === 'requested' || isRequested ? (
         <div className="shadow-sm px-5 py-3 rounded-3xl bg-[#282828] text-white">
           <span className="font-semibold text-sm">Requested</span>
         </div>
@@ -103,12 +105,12 @@ function FollowButton({ follow_user,follow_status }) {
         <div className="shadow-sm px-5 py-3 rounded-3xl bg-[#282828] text-white">
           <span className="font-semibold text-sm">Following</span>
         </div>
-      ) : followStatus === 'following' ? (
+      ) : followStatus === 'following' || isRequested ? (
         <div className="shadow-sm px-5 py-3 rounded-3xl bg-[#282828] text-white" onClick={handleFollowBack}>
           <span className="font-semibold text-sm">Follow Back</span>
         </div>
       ) : (
-        <div className="shadow-sm px-5 py-3 rounded-3xl text-white hover:bg-[#d5d5d5] bg-[#E60022]" onClick={handleFollow}>
+        <div className="shadow-sm px-5 py-3 rounded-3xl text-white hover:bg-[#d5d5d5] bg-[#1D9BF0]" onClick={handleFollow}>
           <span className="font-semibold text-sm">Follow</span>
         </div>
       )}

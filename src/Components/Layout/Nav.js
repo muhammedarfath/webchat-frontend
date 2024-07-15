@@ -50,9 +50,9 @@ function Nav() {
     const [unreadCount, setUnreadCount] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { username,image } = useSelector((state) => state.auth);
-    const [imageUrl, setImageUrl] = useState(null);
-    const [showImage, setShowImage] = useState(null);
+    const [showMedia, setShowMedia] = useState(null);
     const fileInputRef = useRef(null);
+    const [mediaType, setMediaType] = useState(null); 
 
 
 
@@ -105,15 +105,11 @@ function Nav() {
       // }, [current_user]);
     
       const handleFileChange = (event) => {
-        const files = event.target.files;
-        if (files.length > 0) {
-          const file = files[0];
-          setImageUrl(file);
-          const imageUrl = URL.createObjectURL(file);
-          setShowImage(imageUrl)
-        } else {
-          console.error("No file selected.");
-        }
+        const file = event.target.files[0];
+        setShowMedia(file);
+        const extension = file.name.split('.').pop().toLowerCase();
+        const isImage = ["jpg", "jpeg", "png", "gif", "bmp"].includes(extension);
+        setMediaType(isImage ? 'image' : 'video');
       };
       const handleButtonClick = () => {
         fileInputRef.current.click();
@@ -123,7 +119,7 @@ function Nav() {
           setLoading(true)
           try{
             const formData = new FormData();
-            formData.append('picture', imageUrl); 
+            formData.append('media_file', showMedia);
             formData.append('caption', caption);
             formData.append('tags', tags);
             const response = await axios.post(`http://127.0.0.1:8000/posts/add-post/${username}/`, formData, {
@@ -131,10 +127,10 @@ function Nav() {
                   'Content-Type': 'multipart/form-data'
               }
           });
-            console.log(response,"this is rs");
             if (response.status == 201){
               toast.success('Your Post Addedd Successfully')
               onClose()
+
             }else{
               toast.error("somthing went wrong")
             }
@@ -142,6 +138,11 @@ function Nav() {
             toast.error("somthing went wrong",err)
           }finally{
             setLoading(false)
+            setShowMedia(null);
+            setMediaType(null);
+            setCaption('');
+            setTags('');
+            onClose(); 
           }
       }
 
@@ -210,7 +211,7 @@ function Nav() {
     <hr className="bg-gray-100 w-full" />
 
     <NavLink
-      to="/"
+      to={`/profile/${username}`}
       className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
       activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
     >
@@ -379,72 +380,74 @@ function Nav() {
     </NavLink>
 
     <Modal isOpen={isOpen} onClose={onClose}>
-    <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader className="flex flex-col gap-1 justify-center items-center">
-              Create new post
-            </ModalHeader>
-            <ModalBody>
-              
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                style={{ display: "none" }}
-              />
+        <ModalHeader className="flex flex-col gap-1 justify-center items-center">
+          Create new post
+        </ModalHeader>
+        <ModalBody>
+          <input
+            type="file"
+            accept="image/*,video/*"
+            onChange={handleFileChange}
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+          />
 
-              {showImage ? (
-                <>
-                  <img
-                    src={showImage}
-                    alt="Selected"
-                    className="mt-4 w-full h-auto rounded-lg"
-                  />
-                  <ModalFooter className="flex flex-col gap-5">
-                    <Textarea
-                      label="Write a caption..."
-                      className="max-w-xs"
-                      variant="underlined"
-                      value={caption}
-                      onChange={(e)=>setCaption(e.target.value)}
-                    />
-                    <div className="flex max-w-xs flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                      <Input
-                        type="text"
-                        variant="underlined"
-                        value={tags}
-                        onChange={(e)=>setTags(e.target.value)}
-                        label="Tags(add tags,separeted by commas)"
-                      />
-                    </div>
-                    <Button
-                      className="bg-gray-300 w-full hover:bg-gray-500"
-                      onPress={handlesubmit}
-                    >
-                      <FaArrowRight />
-                    </Button>
-                  </ModalFooter>
-                </>
+          {showMedia ? (
+            <>
+              {mediaType === 'image' ? (
+                <img
+                  src={URL.createObjectURL(showMedia)}
+                  alt="Selected Image"
+                  className="mt-4 w-full h-auto rounded-lg"
+                />
               ) : (
-                <>
-                  <div className="flex flex-col justify-center items-center pb-6">
-                    <IoIosImages className="text-9xl" />
-                    <h1>Drag photos and videos here</h1>
-                  </div>
-                  <Button
-                    onClick={handleButtonClick}
-                    className="bg-gray-300 mb-6 hover:bg-gray-500"
-                  >
-                    Select From Computer
-                  </Button>
-                </>
+                <video
+                  controls
+                  className="mt-4 w-full h-auto rounded-lg"
+                >
+                  <source src={URL.createObjectURL(showMedia)} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               )}
-            </ModalBody>
-          </>
-        )}
+
+              <ModalFooter className="flex flex-col gap-5">
+                <Textarea
+                  label="Write a caption..."
+                  className="max-w-xs"
+                  variant="underlined"
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                />
+                <Input
+                  type="text"
+                  variant="underlined"
+                  value={tags}
+                  onChange={(e) => setTags(e.target.value)}
+                  label="Tags (add tags, separated by commas)"
+                />
+                <Button
+                  className="bg-gray-300 w-full hover:bg-gray-500"
+                  onClick={handlesubmit}
+                >
+                  <FaArrowRight />
+                </Button>
+              </ModalFooter>
+            </>
+          ) : (
+            <div className="flex flex-col justify-center items-center pb-6">
+              <IoIosImages className="text-9xl" />
+              <h1>Drag photos and videos here</h1>
+              <Button
+                onClick={handleButtonClick}
+                className="bg-gray-300 mt-6 hover:bg-gray-500"
+              >
+                Select From Computer
+              </Button>
+            </div>
+          )}
+        </ModalBody>
       </ModalContent>
     </Modal>
     </nav>

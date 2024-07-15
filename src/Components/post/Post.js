@@ -1,123 +1,59 @@
 import React, { useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-import { TbMessageCircle } from "react-icons/tb";
-import { VscLiveShare } from "react-icons/vsc";
-import { MdSaveAlt } from "react-icons/md";
 import Avatar_profile from "../avatar/Avatar_profile";
-import axios from "axios";
-import LikeSVG from "./Likesvg";
-import { FcLike } from "react-icons/fc";
-import { useSelector } from "react-redux";
-import { BsBookmark } from "react-icons/bs";
-import { BsBookmarkFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import FollowButton from "../follow_btn/FollowButton";
 
 const Post = ({ post, handleOpen }) => {
-  const [likes, setLikes] = useState(post.likes);
-  const { username } = useSelector((state) => state.auth);
-  const [liked, setLiked] = useState(post.is_liked);
-  const [fav,setFav] = useState(post.is_faved)
-
-  const handleClick = async (e) => {
-    e.stopPropagation();
-    try {
-      const response = await axios.post(
-        `http://127.0.0.1:8000/posts/like-post/${post.id}/`,
-        {
-          username: username,
-        }
-      );
-      if (response.data) {
-        setLikes(response.data.post.likes);
-        setLiked(!liked);
-      } else {
-        console.log("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const isImage = (mediaFile) => {
+    const extension = mediaFile.split('.').pop().toLowerCase();
+    return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(extension);
   };
-
-
- const handlefavorites = async (e) =>{
-  e.stopPropagation();
-  try {
-    const response = await axios.post(
-      `http://127.0.0.1:8000/posts/fav-post/${post.id}/`,
-      {
-        username: username,
-      }
-    );
-    if (response.data) {
-      setFav(!fav);
-    } else {
-      console.log("Something went wrong");
-    }
-  } catch (error) {
-    console.log(error);
-  }
- }
-
   return (
     <div
-      className="relative group cursor-pointer flex justify-center items-center"
+      className="relative group cursor-pointer w-full h-full flex justify-center items-center"
       onClick={() => handleOpen(post)}
-    > 
-      {liked && <LikeSVG />}
-      <img
-        src={`http://127.0.0.1:8000${post.picture}`}
-        alt={`Image ${post.id}`}
-        className="w-full h-auto rounded-3xl"
+    >
+     {post.media_file ? (
+        isImage(post.media_file) ? (
+          <img
+            src={`http://127.0.0.1:8000${post.media_file}`}
+            alt={`Image ${post.id}`}
+            className="w-full h-auto rounded-3xl"
+          />
+        ) : (
+          <video
+            controls
+            autoPlay
+            muted
+            src={`http://127.0.0.1:8000${post.media_file}`}
+            className="w-full h-auto rounded-3xl"
+          />
+        )
+      ) : (
+        <img
+          src={`http://127.0.0.1:8000${post.picture}`}
+          alt={`Image ${post.id}`}
+          className="w-full h-auto rounded-3xl"
         />
-
+      )}
 
       <div className="absolute bottom-0 text-white left-0 rounded-3xl w-full h-full bg-black bg-opacity-30 flex items-end justify-between pr-6 pb-7 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <div className="absolute top-4 right-6">
-        <FollowButton/>
+        <div className="absolute top-4 right-6">
+          <FollowButton
+            follow_user={post.user.username}
+            follow_status={post.follow_status}
+          />
         </div>
-        <div className="ml-4">
-        <Link to={`/profile/${post.user.username}`}>
-          <div className="flex gap-3">
-            <Avatar_profile image={post.user.image} username={post.user.username} />
-            <h1>{post.user.username}</h1>
-          </div>
-        </Link>
-          <span className="ml-6">{post.caption}</span>
-          <div className="">
-            {post.tags.map((tag) => (
-              <a key={tag.id} className="ml-6 mr-2 text-blue-200">
-                #{tag.title}
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex flex-col items-center ">
-            {liked ? (
-              <FcLike
-                onClick={handleClick}
-                className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-2xl cursor-pointer"
+        <div className="pl-4">
+          <Link to={`/profile/${post.user.username}`}>
+            <div className="flex gap-3">
+              <Avatar_profile
+                image={post.user.image}
+                username={post.user.username}
               />
-            ) : (
-              <AiOutlineHeart
-                onClick={handleClick}
-                className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-2xl cursor-pointer"
-              />
-            )}
-            <small>{likes}</small>
-          </div>
-          <div className="flex flex-col items-center">
-            <TbMessageCircle className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />
-            <small>0</small>
-          </div>
-          <div className="flex flex-col items-center">
-            <VscLiveShare className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />
-            <small>0</small>
-          </div>
-          {fav ? (<BsBookmarkFill onClick={handlefavorites} className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />):(
-            <BsBookmark onClick={handlefavorites} className="text-black border-none p-2 bg-white bg-opacity-40 rounded-full w-9 h-9 font-bold text-4xl cursor-pointer" />
-          )}
+              <h1>{post.user.username}</h1>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
