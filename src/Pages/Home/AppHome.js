@@ -1,19 +1,15 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { AuroraBackground } from "../../Components/ui/background-gradient-animation";
 import { BentoGridThirdDemo } from "../../Components/grid/Grid";
 import Footer from "../../Components/footer/Footer";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import NotificationIcon from "../../Components/Logo/NotificationIcon";
-import DrowLogo from "../../Components/Logo/DrowLogo";
+import Header from "../../Components/header/Header";
 
 function AppHome() {
   const { authTokens } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const containerRef = useRef(null)
-  const containerCamRef = useRef(null)
-  
 
   useEffect(() => {
     if (!authTokens) {
@@ -22,17 +18,8 @@ function AppHome() {
   }, [authTokens, navigate]);
 
   return (
-    <AuroraBackground >
-      <div className="justify-between flex w-full border border-slate-500 p-2 bg-black rounded-full cursor-pointer">
-        <div className="fixed top-6 right-6" ref={containerRef}>
-          <NotificationIcon containerRef={containerRef}/>
-        </div>
-      </div>
-
-      <div className="fixed top-6 left-6" ref={containerCamRef}>
-        <DrowLogo containerCamRef={containerCamRef}/>
-      </div>
-
+    <AuroraBackground className="dark:bg-neutral-950">
+      <Header />
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -41,8 +28,8 @@ function AppHome() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4 lg:mt-[45rem] mt-[95rem] md:mt-[50rem] "
-      >
+        className="relative flex flex-col gap-4 items-center justify-center px-4 lg:mt-[45rem] mt-[95rem] md:mt-[50rem]"
+        >
         <div className="text-3xl md:text-7xl font-bold dark:text-white  text-center">
           ONE TAP.
         </div>

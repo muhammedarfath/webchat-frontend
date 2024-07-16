@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Authentication/Login";
 import Signup from "./Pages/Authentication/Signup";
 import AppHome from "./Pages/Home/AppHome";
@@ -21,30 +17,31 @@ import Music from "./Pages/exploreSocialMedia/Music";
 import News from "./Pages/exploreSocialMedia/ News";
 
 function App() {
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<AppHome />} />
-        <Route element={<Layout />}>
-          <Route path="/profile/:username" element={<Profile />} />
-          <Route path="/profile-settings" element={<ProfileSettings />} />
-          <Route path="/people" element={<People />} />
-          <Route path="/reels/:username" element={<Reels />} />
-          <Route path="/music" element={<Music />} />
-          <Route path="/tags/:title" element={<Tags />} />
-          <Route path="/chathome" element={<ChatHome />} />
-          <Route path="/news" element={<News />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/registeremail" element={<RegisterEmail />} />
-        <Route
-          path="/password-reset-confirm/:user_id"
-          element={<PasswordResetConfirmForm />}
-        />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </Router>
+    <div className="">
+      <Router>
+        <Routes>
+          <Route path="/" element={<AppHome />} />
+          <Route element={<Layout />}>
+            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/profile-settings" element={<ProfileSettings />} />
+            <Route path="/people" element={<People />} />
+            <Route path="/reels/:username" element={<Reels />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/tags/:title" element={<Tags />} />
+            <Route path="/chathome" element={<ChatHome />} />
+            <Route path="/news" element={<News />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/registeremail" element={<RegisterEmail />} />
+          <Route
+            path="/password-reset-confirm/:user_id"
+            element={<PasswordResetConfirmForm />}
+          />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

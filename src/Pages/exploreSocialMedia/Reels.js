@@ -7,6 +7,8 @@ import { useDisclosure } from "@nextui-org/react";
 import Post from "../../Components/post/Post";
 import PostModal from "../../Components/post/PostModal";
 import { useSelector } from "react-redux";
+import requests from "../../utils/urls";
+import { showErrorToast } from "../../utils/Toaser";
 
 export function Reels() {
   const [loading, setLoading] = useState(true);
@@ -21,7 +23,7 @@ export function Reels() {
     const fetchPosts = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/posts/posts/${username}/`,
+          `${requests.fetchPosts}${username}/`,
           {
             user_id: user_id,
           }
@@ -31,11 +33,10 @@ export function Reels() {
           setPost(response.data);
         }
       } catch (error) {
-        console.error("errr", error);
+        showErrorToast("errr", error)
       }
       setLoading(false);
     };
-
     fetchPosts();
   }, [username]);
 
