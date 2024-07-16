@@ -275,7 +275,7 @@ function Nav() {
     </NavLink>
 
     <NavLink
-      to="/search"
+      to="/news"
       className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
       activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
     >
