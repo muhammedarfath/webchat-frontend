@@ -1,37 +1,52 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { twMerge } from 'tailwind-merge';
+import React, { useEffect, useState, useRef } from 'react';
+import NewsCard from './NewsCard';
+import axios from 'axios';
 
-function NewsCard({url, top, rotate, left, containerRef, className }) {
-  const [zIndex, setZindex] = useState(0);
+function DragCards() {
+  const containerRef = useRef(null);
+  const [news, setNews] = useState([]);
+  const apiKey = '6ddc9e9c7fd748098d59311d1bd5481e';
+  const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+  const [latestFiveNews, setLatestFiveNews] = useState([]);
 
-  const updateZindex = () => {
-    const els = document.querySelectorAll('.drag-elements');
-    let maxZindex = -Infinity;
-    els.forEach((el) => {
-      let zIndex = parseInt(window.getComputedStyle(el).getPropertyValue('z-index'));
-      if (!isNaN(zIndex) && zIndex > maxZindex) {
-        maxZindex = zIndex;
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get(url);
+        const articles = response.data.articles.slice(0, 5); 
+        console.log(articles,"just nokaaam");
+        setNews(response.data.articles);
+        setLatestFiveNews(articles);
+      } catch (error) {
+        console.error('Error fetching top headlines:', error);
       }
-    });
-    setZindex(maxZindex + 1);
-  };
+    };
+
+    fetchNews();
+  }, []); 
+
+
+  const getRandomValue = (min, max) => Math.random() * (max - min) + min;
+  
+  const getRandomTop = () => `${getRandomValue(10, 90)}%`;
+  const getRandomRotate = () => `${getRandomValue(-15, 15)}deg`;
+  const getRandomLeft = () => `${getRandomValue(10, 90)}%`;
 
   return (
-    <motion.div
-      drag
-      dragConstraints={containerRef}
-      dragElastic={0.65}
-      style={{ top, rotate, left, zIndex }}
-      className={twMerge('drag-elements w-64 bg-black p-1 pb-4', className)}
-      onMouseDown={updateZindex} 
-    >
-      <motion.img
-        src={url}
-        className="w-full h-full object-cover"
-      />
-    </motion.div>
+    <div className='w-full h-full' ref={containerRef}>
+      {latestFiveNews.map((article, index) => (
+        <NewsCard
+          key={index}
+          news={article}
+          containerRef={containerRef}
+          top={getRandomTop()}
+          rotate={getRandomRotate()}
+          left={getRandomLeft()}
+          className="w-36 md:w-56"
+        />
+      ))}
+    </div>
   );
 }
 
-export default NewsCard;
+export default DragCards;
