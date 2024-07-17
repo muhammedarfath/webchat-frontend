@@ -10,13 +10,15 @@ const requests = {
     entertainment :`${baseUrl}&topic=entertainment&token=${API_KEY}`,
 
     //urls for backend
+    signupUser :`${backendUrl}/users_auth/signup/`,
+    verifyOtp :`${backendUrl}/users_auth/verify-otp/`,
+    resendOtp :`${backendUrl}/users_auth/resend-otp/`,
+    loginUser :`${backendUrl}/users_auth/login/`,
     fetchUserProfile :`${backendUrl}/app_profile/userprofile/`,
     fetchPosts :`${backendUrl}/posts/posts/`, 
     likePost :`${backendUrl}/posts/like-post/`,
-    savePost :`${backendUrl}/posts/fav-post/`
+    savePost :`${backendUrl}/posts/fav-post/`,
 
 
 }
-
-
 export default requests

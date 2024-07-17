@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import axios from "axios";
-import { Toaster, toast } from "react-hot-toast";
+import requests from "../../utils/urls";
+import { showErrorToast, showSuccessToast } from "../../utils/Toaser";
 
 function Otp({ email }) {
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,7 @@ function Otp({ email }) {
     const sanitisedOtp = Number(otp.join(""));
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/users_auth/verify-otp/",
+        `${requests.verifyOtp}`,
         {
           email: email,
           otp: sanitisedOtp,
@@ -33,12 +34,12 @@ function Otp({ email }) {
       );
       if (response.status === 200) {
         navigate("/login");
-        toast.success(response.data.message || "OTP verified successfully");
+        showSuccessToast(response.data.message || "OTP verified successfully")
       } else {
-        toast.error(response.data.message || "OTP verification failed");
+        showErrorToast(response.data.message || "OTP verification failed")
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "An error occurred");
+      showErrorToast(err.response?.data?.message || "An error occurred")
     } finally {
       setLoading(false);
     }
@@ -49,22 +50,22 @@ function Otp({ email }) {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/users_auth/resend-otp/",
+        `${requests.resendOtp}`,
         {
           email: email,
         }
       );
-      toast.success(response.data.message || "OTP resent successfully");
+      showSuccessToast(response.data.message || "OTP resent successfully")
     } catch (err) {
-      toast.error(err.response?.data?.message || "An error occurred");
+      showErrorToast(err.response?.data?.message || "An error occurred")
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="max-w-md mx-auto text-center bg-white px-4 sm:px-8 py-10 rounded-xl shadow">
+    <div className="flex flex-col w-full h-full items-center justify-center">
+      <div className="max-w-md mx-auto text-center bg-white border-2 px-4 sm:px-8 py-10 rounded-xl shadow">
         <header className="mb-8">
           <h1 className="text-2xl font-bold mb-1">Verification</h1>
           <p className="text-[15px] text-slate-500">
@@ -78,7 +79,7 @@ function Otp({ email }) {
               <input
                 key={index}
                 type="text"
-                className="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-[#E9E9E9] border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                className="w-14 h-14 text-center text-2xl font-extrabold border-2 bg-white text-[#1D9BF0] hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                 maxLength="1"
                 value={digit}
                 onChange={(e) => handleOTPChange(e.target, index)}
@@ -89,7 +90,7 @@ function Otp({ email }) {
           <div className="mx-auto mt-4">
             <button
               type="submit"
-              className="w-full inline-flex justify-center whitespace-nowrap rounded-lg bg-[#E9E9E9] text-black hover:bg-[#d5d5d5] px-3.5 py-2.5 text-sm font-medium shadow-sm shadow-indigo-950/10 focus:outline-none focus:ring focus:ring-indigo-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors duration-150"
+              className="w-full inline-flex justify-center whitespace-nowrap rounded-lg bg-white text-[#1D9BF0] hover:bg-[#eaf5fb] border-2 px-3.5 py-2.5 text-sm font-medium shadow-sm shadow-indigo-950/10 focus:outline-none focus:ring focus:ring-indigo-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors duration-150"
             >
               {loading && (
                 <CgSpinner className="text-black text-2xl animate-spin" />
@@ -103,10 +104,17 @@ function Otp({ email }) {
           <a
             onClick={resendOtp}
             href="#0"
-            className="font-medium text-[#d5d5d5] hover:text-gray-400"
+            className="font-medium text-[#1D9BF0] hover:text-gray-400"
           >
             Resend
           </a>
+        </div>
+      </div>
+      <div className="w-96">
+        <div className="text-center mt-6">
+          <p className="text-gray-600 text-start">
+            <span className="font-bold">Note:</span> Please verify your account in order to explore FYBOX. If your account is not verified, you won't be able to access FYBOX.
+          </p>
         </div>
       </div>
     </div>
