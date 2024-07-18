@@ -6,20 +6,27 @@ import Footer from "../../Components/footer/Footer";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/header/Header";
+import { useDisclosure } from "@nextui-org/react";
+import EmailVerifiedModal from "../../Components/auth/EmailVerifiedModal";
 
 function AppHome() {
-  const { authTokens } = useSelector((state) => state.auth);
+  const { authTokens,is_email_verified } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (!authTokens) {
       navigate("/login");
+    }
+    if (!is_email_verified){
+      onOpen();
     }
   }, [authTokens, navigate]);
 
   return (
     <AuroraBackground className="dark:bg-neutral-950">
       <Header />
+      <EmailVerifiedModal isOpen={isOpen} onClose={onClose}/>
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

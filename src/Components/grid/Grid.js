@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { showErrorToast } from "../../utils/Toaser";
+import requests from "../../utils/urls";
 
 export function BentoGridThirdDemo() {
   const [users, setUsers] = useState([]);
   const { email, user_id } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [latestNews, setLatestNews] = useState([])
   useEffect(() => {
     setIsLoading(true);
     const fetchUsersWithLastMessages = async () => {
@@ -31,9 +33,33 @@ export function BentoGridThirdDemo() {
     fetchUsersWithLastMessages();
   }, [user_id]);
 
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchLatestNews = async () => {
+      try {
+        const response = await axios.get(requests.world);
+        console.log(response, "wht");
+        const articles = response.data.articles.slice(0, 1);
+        if (response) {
+          setLatestNews(articles);
+        } else {
+          showErrorToast("Please verify your email to explore all Fybox features")
+        }
+      } catch (error) {
+        showErrorToast('Error fetching top headlines:', error)
+      }
+      setIsLoading(false);
+    };
+    fetchLatestNews();
+  }, [user_id]);
+
+
+
+
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
-      {items(users, isLoading).map((item, i) => (
+      {items(users, latestNews, isLoading).map((item, i) => (
         <BentoGridItem
           key={i}
           title={item.title}
@@ -145,7 +171,7 @@ const SkeletonOne = ({ users, isLoading }) => {
     </div>
   );
 };
-const SkeletonTwo = () => {
+const SkeletonTwo = ({ latestNews }) => {
   const variants = {
     initial: {
       width: 0,
@@ -173,7 +199,7 @@ const SkeletonTwo = () => {
           whileHover="hover"
           className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
         >
-          {arr.map((_, i) => (
+          {arr.map((news, i) => (
             <motion.div
               key={"skelenton-two" + i}
               variants={variants}
@@ -181,7 +207,8 @@ const SkeletonTwo = () => {
                 maxWidth: Math.random() * (100 - 40) + 40 + "%",
               }}
               className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
-            ></motion.div>
+            >
+            </motion.div>
           ))}
         </motion.div>
       </Link>
@@ -362,7 +389,7 @@ const SkeletonFive = () => {
   );
 };
 
-const items = (users, isLoading) => [
+const items = (users, latestNews, isLoading) => [
   {
     title: "Chatify",
     // description: (
@@ -381,7 +408,7 @@ const items = (users, isLoading) => [
     //     Let AI handle the proofreading of your documents.
     //   </span>
     // ),
-    header: <SkeletonTwo />,
+    header: <SkeletonTwo latestNews={latestNews} />,
     className: "md:col-span-1",
     // icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },

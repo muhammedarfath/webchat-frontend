@@ -5,18 +5,24 @@ import requests from '../../utils/urls'
 import NewsHeader from '../../Components/newscards/NewsHeader';
 import { showErrorToast } from '../../utils/Toaser';
 import Carousel from '../../Components/newscards/Carousel'
+import { useSelector } from 'react-redux';
 function News() {
 
   const [latesFiveNews, setLatestFiveNews] = useState([])
   const [news, setNews] = useState([])
+  const { is_email_verified } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(requests.world);
         const articles = response.data.articles.slice(0, 5);
-        setLatestFiveNews(articles);
-        setNews(response.data.articles)
+        if (response && is_email_verified) {
+          setLatestFiveNews(articles);
+          setNews(response.data.articles)
+        }else{
+          showErrorToast("Please verify your email to explore all Fybox features")
+        }
       } catch (error) {
         showErrorToast('Error fetching top headlines:', error)
       }
@@ -26,7 +32,7 @@ function News() {
 
   return (
     <div className='w-full font-serif overflow-auto'>
-      <NewsHeader/>
+      <NewsHeader />
       <hr className='w-full mt-1' />
       <div className='w-full border-b-2 overflow-auto'>
         <Carousel news={latesFiveNews} />

@@ -7,13 +7,16 @@ import { signUpUser } from "../../Redux/auth/authSlice";
 import axios from "axios";
 import requests from "../../utils/urls";
 import { showErrorToast, showSuccessToast } from "../../utils/Toaser";
+import { useNavigate } from "react-router-dom";
 
-function SignupForm({setEmail,setShowOTP}) {
+function  SignupForm() {
     const dispatch = useDispatch();
     const [phone, setPhone] = useState("");
     const [loading, setLoading] = useState(false);
     const {register,handleSubmit,formState: { errors },} = useForm();
-
+    const [email, setEmail] = useState("");
+    const navigate = useNavigate();
+    
     const onSubmit = async (data) => {
         setLoading(true);
         setEmail(data.email);
@@ -34,8 +37,8 @@ function SignupForm({setEmail,setShowOTP}) {
           if (response.status === 201) {
             const userData = response.data;
             dispatch(signUpUser({ user_id: userData }));
-            setShowOTP(true);
             showSuccessToast("OTP Sent Your Email")
+            navigate('/otp', { state: { email: response.data.email } });
           } else {
             showErrorToast("Username or email already exists")
             setLoading(false);

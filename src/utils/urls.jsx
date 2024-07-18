@@ -14,6 +14,8 @@ const requests = {
     verifyOtp :`${backendUrl}/users_auth/verify-otp/`,
     resendOtp :`${backendUrl}/users_auth/resend-otp/`,
     loginUser :`${backendUrl}/users_auth/login/`,
+    resetPassword :`${backendUrl}/users_auth/reset-password/`,
+    passwordResetConfirm :`${backendUrl}/users_auth/password-reset-confirm/`,
     fetchUserProfile :`${backendUrl}/app_profile/userprofile/`,
     fetchPosts :`${backendUrl}/posts/posts/`, 
     likePost :`${backendUrl}/posts/like-post/`,

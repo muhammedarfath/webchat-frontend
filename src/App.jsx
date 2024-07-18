@@ -15,6 +15,7 @@ import Tags from "./Pages/exploreSocialMedia/Tags";
 import ProfileSettings from "./Components/profile/ProfileSettings";
 import Music from "./Pages/exploreSocialMedia/Music";
 import News from "./Pages/exploreSocialMedia/ News";
+import Otp from "./Pages/Authentication/Otp";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/news" element={<News />} />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/otp" element={<Otp/>} />
           <Route path="/registeremail" element={<RegisterEmail />} />
           <Route
             path="/password-reset-confirm/:user_id"

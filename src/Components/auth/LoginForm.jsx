@@ -27,6 +27,7 @@ function LoginForm() {
             username: data.username,
             email: data.user_email,
             is_superuser: data.is_superuser,
+            is_email_verified:data.is_email_verified
           })
         );
         showSuccessToast(data.message);
@@ -46,7 +47,7 @@ function LoginForm() {
           type="text"
           placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
-          class="border placeholder-gray-700 border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+          className="border placeholder-gray-700 border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
         />
       </div>
@@ -55,13 +56,13 @@ function LoginForm() {
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          class="border placeholder-gray-700 border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+          className="border placeholder-gray-700 border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
         />
       </div>
       <button
         type="submit"
-        class="bg-white text-[#1D9BF0] hover:bg-[#eaf5fb] p-2 border-2 flex justify-center items-center rounded-md w-full"
+        className="bg-white text-[#1D9BF0] hover:bg-[#eaf5fb] p-2 border-2 flex justify-center items-center rounded-md w-full"
       >
         Login
       </button>

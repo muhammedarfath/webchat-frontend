@@ -12,6 +12,7 @@ export const authSlice = createSlice({
     authTokens: null,
     is_superuser: false,
     is_active: true,
+    is_email_verified:false,
   },
   reducers: {
     loginUser: (state, action) => {
@@ -20,6 +21,7 @@ export const authSlice = createSlice({
       state.email = action.payload.email;
       state.username = action.payload.username;
       state.is_superuser = action.payload.is_superuser;
+      state.is_email_verified = action.payload.is_email_verified;
     },
     signUpUser: (state, action) => {
       state.user_id = action.payload.user;

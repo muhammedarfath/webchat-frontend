@@ -51,7 +51,6 @@ function Profile() {
     <>
       {user && (
         <div className="w-full flex flex-col overflow-auto gap-10">
-
           <ProfileDetails user={user} username={username} current_user={current_user}/>
           <div className="flex justify-center items-center gap-5 w-full sticky top-0 bg-white shadow-sm p-4">
             <BsPostcardHeart className="text-2xl cursor-pointer" />
