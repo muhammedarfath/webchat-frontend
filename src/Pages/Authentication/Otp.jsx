@@ -34,7 +34,7 @@ function Otp() {
       });
       if (response.status === 200) {
         navigate("/login");
-        showSuccessToast(response.data.message || "OTP verified successfully");
+        showSuccessToast(response.data.message || "OTP verified successfully, Please Login");
       } else {
         showErrorToast(response.data.message || "OTP verification failed");
       }

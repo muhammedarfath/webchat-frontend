@@ -17,6 +17,7 @@ const requests = {
     resetPassword :`${backendUrl}/users_auth/reset-password/`,
     passwordResetConfirm :`${backendUrl}/users_auth/password-reset-confirm/`,
     fetchUserProfile :`${backendUrl}/app_profile/userprofile/`,
+    editUserProfile :`${backendUrl}/users_auth/edit/`,
     fetchPosts :`${backendUrl}/posts/posts/`, 
     likePost :`${backendUrl}/posts/like-post/`,
     savePost :`${backendUrl}/posts/fav-post/`,

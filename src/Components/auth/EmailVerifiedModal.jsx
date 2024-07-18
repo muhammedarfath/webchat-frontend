@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalContent } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import requests from "../../utils/urls";
-import { showErrorToast, showPromiseToast, showSuccessToast } from "../../utils/Toaser";
+import {
+  showErrorToast,
+  showPromiseToast,
+  showSuccessToast,
+} from "../../utils/Toaser";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function EmailVerifiedModal({ isOpen, onClose }) {
   const { email } = useSelector((state) => state.auth);
@@ -15,20 +19,20 @@ function EmailVerifiedModal({ isOpen, onClose }) {
       const response = await axios.post(`${requests.resendOtp}`, {
         email: email,
       });
-      navigate("/otp",{state:{email}});
+      navigate("/otp", { state: { email } });
     } catch (err) {
       showErrorToast(err.response?.data?.message || "An error occurred");
     }
   };
 
- const savePost = () => {
-  showPromiseToast(
-    resendOtp(),
-    'Loading...',
-    'OTP resent successfully!', 
-    'Failed to resend OTP' 
-  )
- }
+  const savePost = () => {
+    showPromiseToast(
+      resendOtp(),
+      "Loading...",
+      "OTP resent successfully!",
+      "Failed to resend OTP"
+    );
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="flex" size="5xl">
@@ -43,12 +47,17 @@ function EmailVerifiedModal({ isOpen, onClose }) {
             Please verify your email to explore all Fybox features.
           </span>
           <div className="flex m-4">
-            <button onClick={savePost} className="border-2 bg-black text-white rounded-2xl p-4">
+            <button
+              onClick={savePost}
+              className="border-2 bg-black text-white rounded-2xl p-4"
+            >
               OTP VALIDATION
             </button>
-            <button className="border-2 bg-black text-white rounded-2xl p-4">
-              CHANGE EMAIL
-            </button>
+            <Link to="/profile-settings">
+              <button className="border-2 bg-black text-white rounded-2xl p-4">
+                CHANGE EMAIL
+              </button>
+            </Link>
           </div>
         </div>
       </ModalContent>
