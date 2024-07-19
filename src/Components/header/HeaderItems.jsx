@@ -10,7 +10,6 @@ import {
   DropdownSection,
   DropdownItem,
   Button,
-  cn,
 } from "@nextui-org/react";
 import { logoutUser } from "../../Redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,11 +60,11 @@ function HeaderItems() {
             variant="faded"
             aria-label="Dropdown menu with description"
           >
-            <DropdownSection title="Actions" showDivider>
+            <DropdownSection title="Select" showDivider>
               <DropdownItem
                 onClick={handlenavigate}
                 key="new"
-                description="Create a new file"
+                description="Create a Profile"
               >
                 Profile
               </DropdownItem>

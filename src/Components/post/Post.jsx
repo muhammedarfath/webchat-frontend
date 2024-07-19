@@ -8,11 +8,11 @@ const Post = ({ post, handleOpen }) => {
     const extension = mediaFile.split('.').pop().toLowerCase();
     return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(extension);
   };
-  console.log(post);
+  
   return (
     <div
       className="relative group cursor-pointer w-full h-full flex justify-center items-center"
-      onClick={() => handleOpen(post)}
+      onClick={handleOpen}
     >
      {post.media_file ? (
         isImage(post.media_file) ? (

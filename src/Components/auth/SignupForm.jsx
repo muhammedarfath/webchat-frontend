@@ -14,12 +14,10 @@ function  SignupForm() {
     const [phone, setPhone] = useState("");
     const [loading, setLoading] = useState(false);
     const {register,handleSubmit,formState: { errors },} = useForm();
-    const [email, setEmail] = useState("");
     const navigate = useNavigate();
     
     const onSubmit = async (data) => {
         setLoading(true);
-        setEmail(data.email);
         try {
           const response = await axios.post(
             `${requests.signupUser}`,

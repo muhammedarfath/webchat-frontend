@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { backendUrl } from "../../Constants/Constants";
 import LikeSVG from "./Likesvg";
 import { FcLike } from "react-icons/fc";
@@ -6,14 +6,16 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { TbMessageCircle } from "react-icons/tb";
 import { RiShare2Line } from "react-icons/ri";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { PostContext } from "./PostProvider";
 
-function PostModalMedia({selectedPost,likes,liked,handleClick,handlefavorites,fav}) {
+function PostModalMedia({likes,liked,handleClick,handlefavorites,fav}) {
+const {selectedPost, setSelectedPost} = useContext(PostContext)
 const isImage = (mediaFile) => {
     const extension = mediaFile.split(".").pop().toLowerCase();
     return ["jpg", "jpeg", "png", "gif", "bmp"].includes(extension);
   };
   return (
-    <div className="flex w-full md:w-1/2 lg:w-1/2 flex-col bg-black">
+    <div className="flex w-full md:w-1/2 lg:w-2/3 flex-col bg-black">
       {selectedPost.media_file ? (
         isImage(selectedPost.media_file) ? (
           <img

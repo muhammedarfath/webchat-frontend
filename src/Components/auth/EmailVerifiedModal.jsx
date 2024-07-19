@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Modal, ModalContent } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import requests from "../../utils/urls";
 import {
   showErrorToast,
   showPromiseToast,
-  showSuccessToast,
 } from "../../utils/Toaser";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";

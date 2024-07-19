@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "react-phone-input-2/lib/style.css";
 import Logo from "../../Components/Logo/Logo";

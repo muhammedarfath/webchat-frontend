@@ -387,7 +387,6 @@ function Nav() {
     </NavLink>
 
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Toaster position="top-center" reverseOrder={false} />
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1 justify-center items-center">
           Create new post
@@ -407,7 +406,7 @@ function Nav() {
                 <img
                   src={URL.createObjectURL(showMedia)}
                   alt="Selected Image"
-                  className="mt-4 w-full h-auto rounded-lg"
+                  className="mt-6 w-full h-80 object-contain rounded-lg"
                 />
               ) : (
                 <video
@@ -422,14 +421,12 @@ function Nav() {
               <ModalFooter className="flex flex-col gap-5">
                 <Textarea
                   label="Write a caption..."
-                  className="max-w-xs"
-                  variant="underlined"
+                  className="max-w-sm"
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
                 />
                 <Input
                   type="text"
-                  variant="underlined"
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
                   label="Tags (add tags, separated by commas)"
@@ -438,6 +435,7 @@ function Nav() {
                   className="bg-gray-300 w-full hover:bg-gray-500"
                   onClick={savePost}
                 >
+                  Post
                   <FaArrowRight />
                 </Button>
               </ModalFooter>

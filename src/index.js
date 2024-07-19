@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import store, { persistor } from './Redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Toaster } from 'react-hot-toast';
+import { PostProvider } from './Components/post/PostProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,7 +16,9 @@ root.render(
       {/* <React.StrictMode> */}
       <NextUIProvider>
         <Toaster position="top-center" reverseOrder={false} />
-        <App />
+        <PostProvider>
+          <App />
+        </PostProvider>
       </NextUIProvider>
       {/* </React.StrictMode> */}
     </PersistGate>

@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AvatarProfile from "../avatar/Avatar_profile";
 import { BsThreeDots } from "react-icons/bs";
+import Comment from "./Comment";
+import CommentCards from "./CommentCards";
+import { TbMessageCircle } from "react-icons/tb";
+import { PostContext } from "./PostProvider";
 
-function PostModalContent({ selectedPost }) {
+
+function PostModalContent() {
+  const { selectedPost, setSelectedPost } = useContext(PostContext);
   const [showFullCaption, setShowFullCaption] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
+
+
   const formatDate = (dateTimeString) => {
     const options = { hour: "numeric", minute: "numeric", hour12: true };
     const date = new Date(dateTimeString);
@@ -28,7 +36,7 @@ function PostModalContent({ selectedPost }) {
   };
 
   return (
-    <div className="hidden lg:block md:block lg:w-1/2 sm:w-full flex-1 gap-5 pl-2 mt-4">
+    <div className="hidden lg:block md:block lg:w-1/3 sm:w-full flex-1 gap-5 pl-2 mt-4">
       <div className="flex w-full justify-between">
         <div className="flex flex-col w-full">
           <div className="flex gap-2 items-center">
@@ -53,14 +61,15 @@ function PostModalContent({ selectedPost }) {
             </div>
           )}
           <div className="ml-9 w-full">
-            {selectedPost.tags
-              .slice(0, showAllTags ? undefined : 3)
-              .map((tag) => (
-                <a key={tag.id} className="text-[#1D9BF0]">
-                  {tag.title}
-                </a>
-              ))}
-            {selectedPost.tags.length > 3 && (
+            {selectedPost.tags &&
+              selectedPost.tags
+                .slice(0, showAllTags ? undefined : 3)
+                .map((tag) => (
+                  <a key={tag.id} className="text-[#1D9BF0]">
+                    {tag.title}
+                  </a>
+                ))}
+            {selectedPost.tags && selectedPost.tags.length > 3 && (
               <button className="text-blue-500 ml-1" onClick={toggleTags}>
                 {showAllTags ? "Show less..." : `Show all`}
               </button>
@@ -73,11 +82,20 @@ function PostModalContent({ selectedPost }) {
         <BsThreeDots className="mr-9 text-4xl cursor-pointer" />
       </div>
       <hr className="w-full mt-2" />
-      <div className="flex justify-center items-center h-96">
-        <h5>No Comments Yet</h5>
+      <Comment />
+      <div className="overflow-auto">
+        {!selectedPost.comments ? (
+          <div className="w-full h-full flex justify-center items-center">
+            <h5>No Comments Yet</h5>
+          </div>
+        ) : (
+          <CommentCards />
+        )}
       </div>
     </div>
   );
 }
 
 export default PostModalContent;
+
+

@@ -21,6 +21,7 @@ const requests = {
     fetchPosts :`${backendUrl}/posts/posts/`, 
     likePost :`${backendUrl}/posts/like-post/`,
     savePost :`${backendUrl}/posts/fav-post/`,
+    commentPost :`${backendUrl}/posts/comment-post/` 
 
 
 }

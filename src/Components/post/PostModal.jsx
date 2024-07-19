@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, ModalContent } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -6,12 +6,16 @@ import { showErrorToast } from "../../utils/Toaser";
 import requests from "../../utils/urls";
 import PostModalMedia from "./PostModalMedia";
 import PostModalContent from "./PostModalContent";
+import { PostContext } from "./PostProvider";
 
-const PostModal = ({ isOpen, onClose, selectedPost }) => {
+const PostModal = ({ isOpen, onClose }) => {
+  const { selectedPost, setSelectedPost } = useContext(PostContext);
   const [likes, setLikes] = useState(selectedPost.likes);
   const { username } = useSelector((state) => state.auth);
   const [liked, setLiked] = useState(selectedPost.is_liked);
   const [fav, setFav] = useState(selectedPost.is_faved);
+
+  console.log(selectedPost);
 
   const handleClick = async () => {
     try {
@@ -23,10 +27,10 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
         setLikes(response.data.post.likes);
         setLiked(!liked);
       } else {
-        showErrorToast("Something went wrong")
+        showErrorToast("Something went wrong");
       }
     } catch (error) {
-      showErrorToast("Something went wrong",error)
+      showErrorToast("Something went wrong", error);
     }
   };
 
@@ -39,21 +43,32 @@ const PostModal = ({ isOpen, onClose, selectedPost }) => {
       if (response.data) {
         setFav(!fav);
       } else {
-        showErrorToast("Something went wrong")
+        showErrorToast("Something went wrong");
       }
     } catch (error) {
-      showErrorToast("Something went wrong",error)
+      showErrorToast("Something went wrong", error);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="flex h-screen" size="full">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      className="flex h-screen"
+      size="full"
+    >
       <ModalContent className="flex flex-row">
-         <PostModalMedia selectedPost={selectedPost} likes={likes} liked={liked} handleClick={handleClick} handlefavorites={handlefavorites} fav={fav}/>
-        <PostModalContent selectedPost={selectedPost} />
+        <PostModalMedia
+          likes={likes}
+          liked={liked}
+          handleClick={handleClick}
+          handlefavorites={handlefavorites}
+          fav={fav}
+        />
+        <PostModalContent />
       </ModalContent>
     </Modal>
-  );  
+  );
 };
 
 export default PostModal;
