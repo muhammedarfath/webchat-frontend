@@ -411,7 +411,7 @@ function Nav() {
               ) : (
                 <video
                   controls
-                  className="mt-4 w-full h-auto rounded-lg"
+                  className="mt-6 w-full h-80 object-contain rounded-lg"
                 >
                   <source src={URL.createObjectURL(showMedia)} type="video/mp4" />
                   Your browser does not support the video tag.

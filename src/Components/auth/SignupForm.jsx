@@ -34,7 +34,6 @@ function  SignupForm() {
           );
           if (response.status === 201) {
             const userData = response.data;
-            console.log(userData);
             dispatch(signUpUser({ user_id: userData}));
             showSuccessToast("OTP Sent Your Email")
             navigate('/otp', { state: { email: response.data.email } });
