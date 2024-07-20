@@ -41,7 +41,7 @@ function PostModalContent() {
         <div className="flex flex-col w-full">
           <div className="flex gap-2 items-center">
             <AvatarProfile
-              image={selectedPost.user.image}
+              image={selectedPost.profile.image}
               username={selectedPost.user.username}
             />
             <h1>{selectedPost.user.username}</h1>

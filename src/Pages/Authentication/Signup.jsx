@@ -7,11 +7,11 @@ import Support from "../../utils/Support";
 
 function Signup() {
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-screen flex flex-col justify-between">
       <div className="w-full h-full mt-2 flex justify-evenly items-center">
         <div className="w-3/5 h-4/6 flex flex-col justify-center items-center">
               <div className="border bg-white max-w-sm text-black flex flex-col justify-center items-center p-6 rounded-lg">
-                <h1 className="text-2xl font-semibold mb-4">𝖋𝖞𝖇𝖔𝖝</h1>
+                <h1 className="text-2xl font-bold mb-4">fybox</h1>
                 <h6 className="text-center mb-4">
                   Signup with Facebook to find your Facebook friends
                 </h6>
@@ -36,10 +36,10 @@ function Signup() {
         </div>
         <div className="hidden w-2/5 lg:flex items-center gap-6">
           <Logo width={200} height={200} />
-          <h1 className="text-8xl font-bold">𝖋𝖞𝖇𝖔𝖝</h1>
+          <h1 className="text-8xl font-bold">fybox</h1>
         </div>
       </div>
-      <div><Support/></div>
+      <div className="mb-2"><Support/></div>
     </div>
   );
 }

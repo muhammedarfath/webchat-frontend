@@ -11,7 +11,7 @@ function Login() {
         <div class="w-3/5 flex justify-center">
           <div className="max-w-sm">
             <div class="border bg-white text-black flex flex-col justify-center items-center p-6 rounded-lg">
-              <h1 className="text-2xl font-bold mb-4">𝖋𝖞𝖇𝖔𝖝</h1>
+              <h1 className="text-2xl font-bold mb-4">fybox</h1>
               <LoginForm />
               <div class="flex items-center w-full mb-4">
                 <hr class="flex-grow border-t border-gray-300" />
@@ -39,7 +39,7 @@ function Login() {
         </div>
         <div className="hidden w-2/5 lg:flex items-center gap-6">
           <Logo width={200} height={200} />
-          <h1 className="text-8xl">𝖋𝖞𝖇𝖔𝖝</h1>
+          <h1 className="text-8xl font-bold">fybox</h1>
         </div>
       </div>
       <div className="mb-2">

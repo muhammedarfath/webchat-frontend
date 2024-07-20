@@ -8,14 +8,12 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Avatar,
   User,
 } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import Message from "./Message";
 import MessageInput from "./MessageInput";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase/firebase";
 
 function ChatArea({ userArr }) {
   const [messages, setMessages] = useState([]);
@@ -137,10 +135,8 @@ function ChatArea({ userArr }) {
           />
         ))}
       </div>
-
       <div className="relative bottom-8 w-full">
         <MessageInput userArr={userArr} />
-        {/* <MessageInput userArr={userArr} /> */}
       </div>
     </div>
   );

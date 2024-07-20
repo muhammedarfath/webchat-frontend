@@ -39,7 +39,6 @@ function  SignupForm() {
             navigate('/otp', { state: { email: response.data.email } });
           } 
         } catch (error) {
-          console.log(error);
           showErrorToast("Username or email already exists", error)
           setLoading(false);
         }

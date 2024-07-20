@@ -38,18 +38,7 @@ export const SkeletonTwo = ({ latestNews }) => {
               src="https://media.architecturaldigest.com/photos/57c7003fdc03716f7c8289dd/16:9/w_1280,c_limit/IMG%20Worlds%20of%20Adventure%20-%201.jpg"
               alt="img"
             />
-            {sentences.map((sentence, i) => (
-              <motion.div
-                key={"skeleton-two" + i}
-                variants={variants}
-                style={{
-                  maxWidth: Math.random() * (100 - 40) + 40 + "%",
-                }}
-                className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
-              >
-                <span className="truncate">{sentence}</span>
-              </motion.div>
-            ))}
+            <span className="font-bold text-black">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
         </motion.div>
       </Link>
     </div>

@@ -33,6 +33,7 @@ function EditProfileForm() {
     const file = event.target.files[0];
     setProfileImage(file);
   };
+
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();

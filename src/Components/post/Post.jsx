@@ -8,7 +8,10 @@ const Post = ({ post, handleOpen }) => {
     const extension = mediaFile.split('.').pop().toLowerCase();
     return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(extension);
   };
-  
+
+  console.log(post,"user post");
+
+
   return (
     <div
       className="relative group cursor-pointer w-full h-full flex justify-center items-center"
@@ -50,7 +53,7 @@ const Post = ({ post, handleOpen }) => {
           <Link to={`/profile/${post.user.username}`}>
             <div className="flex gap-3">
               <Avatar_profile
-                image={post.user.image}
+                image={post.profile.image}
                 username={post.user.username}
               />
               <h1>{post.user.username}</h1>

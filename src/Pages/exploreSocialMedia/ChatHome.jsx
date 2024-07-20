@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatArea from "../../Components/chatarea/ChatArea";
 import Friends from "../../Components/contacts/Friends";
 import EmptyChat from "../../Components/contacts/EmptyChat";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import axios from "axios";
+import requests from "../../utils/urls";
+import { showErrorToast } from "../../utils/Toaser";
 
 function ChatHome() {
-  const [userId, setUserId] = useState({});
-  const location = useLocation();
-  const { username } = location.state || {};
-  
+  const [userDetails, setUserDetails] = useState({});
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const username = searchParams.get("user");
+  const id = searchParams.get("id");
+
   const fetchUserIdDetails = (id, email, username, image, full_name, bio) => {
-    setUserId({
+    setUserDetails({
       id,
       username,
       email,
@@ -20,18 +25,47 @@ function ChatHome() {
     });
   };
 
+  useEffect(() => {
+    const handleChat = async () => {
+      try {
+        const response = await axios.post(
+          `${requests.handleChat}${username}/`,
+          {
+            user_id: id,
+          }
+        );
+
+        if (response.status === 200) {
+          const data = response.data;
+          fetchUserIdDetails(
+            data.id,
+            data.user.email,
+            data.user.username,
+            data.image,
+            data.full_name,
+            data.bio
+          );
+        } else {
+          showErrorToast("something went wrong")
+        }
+      } catch (error) {
+        showErrorToast("something went wrong",error)
+      }
+    };
+    if (username) handleChat();
+  }, [username, id]);
+
   return (
     <>
       <div className="flex flex-col md:flex-row w-full lg:w-5/6 h-full">
         <div className="w-full md:w- lg:w-1/3 overflow-y-scroll h-full">
           <Friends
-            fetchUserIdDetails={fetchUserIdDetails}
-            username={username}
+            setSearchParams={setSearchParams}
           />
         </div>
         <div className="hidden md:hidden lg:block lg:w-2/3 h-full">
-          {Object.keys(userId).length !== 0 ? (
-            <ChatArea userArr={userId} />
+          {Object.keys(userDetails).length !== 0 ? (
+            <ChatArea userArr={userDetails} />
           ) : (
             <EmptyChat />
           )}

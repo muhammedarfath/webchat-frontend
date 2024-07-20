@@ -14,7 +14,6 @@ function PostProvider({children}) {
    const { user_id, is_email_verified,username } = useSelector((state) => state.auth);
    const [posts, setPost] = useState([]);
    
-   
    useEffect(() => {
       setLoading(true);
       const fetchPosts = async () => {
@@ -40,10 +39,6 @@ function PostProvider({children}) {
       fetchPosts();
     }, [username]);
   
-
-
-
-
   const [selectedPost, setSelectedPost] = useState(null);
 
   return (
