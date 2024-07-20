@@ -9,8 +9,7 @@ const Post = ({ post, handleOpen }) => {
     return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(extension);
   };
 
-  console.log(post,"user post");
-
+  console.log(post,"tryyyyyyyyyyyyyy");
 
   return (
     <div

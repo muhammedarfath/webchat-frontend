@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "@nextui-org/react";
 
 function AvatarProfile({ image, username, size = "sm" }) {
-  if (!username) {
-    return null;
-  }
+  const [firstLetter,setFirstLetter]=useState(null)
 
-  const firstLetter = username.charAt(0).toUpperCase();
+  useEffect(() => {
+    if (username) {
+      const letter = username.charAt(0).toUpperCase();
+      setFirstLetter(letter);
+    }
+  }, [username]);
+
 
   const sizeClasses = {
     sm: "w-6 h-6 text-md",

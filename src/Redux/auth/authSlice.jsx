@@ -22,6 +22,9 @@ export const authSlice = createSlice({
       state.username = action.payload.username;
       state.is_superuser = action.payload.is_superuser;
       state.is_email_verified = action.payload.is_email_verified;
+      state.full_name = action.payload.full_name;
+      state.image = action.payload.image;
+      state.bio = action.payload.bio
     },
     signUpUser: (state, action) => {
       state.user_id = action.payload.user;

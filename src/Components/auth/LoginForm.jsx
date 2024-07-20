@@ -20,6 +20,7 @@ function LoginForm() {
       });
       if (response.status === 200) {
         const data = response.data;
+        console.log(data);
         dispatch(
           loginUser({
             authTokens: data.access,
@@ -27,7 +28,10 @@ function LoginForm() {
             username: data.username,
             email: data.user_email,
             is_superuser: data.is_superuser,
-            is_email_verified:data.is_email_verified
+            is_email_verified:data.is_email_verified,
+            full_name:data.profile.full_name,
+            image:data.profile.image,
+            bio:data.profile.bio
           })
         );
         showSuccessToast(data.message);
@@ -39,6 +43,10 @@ function LoginForm() {
       showErrorToast("somthing went wrong", error);
     }
   };
+
+
+
+
 
   return (
     <form onSubmit={handlesubmit} className="w-full">

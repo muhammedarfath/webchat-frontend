@@ -13,7 +13,6 @@ import { PostContext } from "./PostProvider";
 function CommentCards() {
   const {selectedPost, setSelectedPost} = useContext(PostContext)
   const [isFollowed, setIsFollowed] = React.useState(false);
-console.log(selectedPost,"uuuuuuuuuuu");
   return (
     <>
       {selectedPost &&

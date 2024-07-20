@@ -15,7 +15,6 @@ const PostModal = ({ isOpen, onClose }) => {
   const [liked, setLiked] = useState(selectedPost.is_liked);
   const [fav, setFav] = useState(selectedPost.is_faved);
 
-  console.log(selectedPost);
 
   const handleClick = async () => {
     try {

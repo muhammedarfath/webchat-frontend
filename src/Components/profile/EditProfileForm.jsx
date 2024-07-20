@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Textarea, Button } from "@nextui-org/react";
 import AvatarProfile from "../avatar/Avatar_profile";
@@ -14,16 +14,25 @@ function EditProfileForm() {
   const { username, image, full_name, bio, email, user_id } = useSelector(
     (state) => state.auth
   );
-  const [profileImage, setProfileImage] = useState(image);
+  const [profileImage, setProfileImage] = useState(null);
+
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
+      full_name: "",
+      username: "",
+      bio: "",
+      website: "",
+      email: "",
+    },
+  });
+  useEffect(() => {
+    reset({
       full_name: full_name,
       username: username,
       bio: bio,
-      website: "",
       email: email,
-    },
-  });
+    });
+  }, [full_name, username, bio, email, reset]);
 
   const handleButtonClick = () => {
     fileinputRef.current.click();
@@ -31,49 +40,51 @@ function EditProfileForm() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setProfileImage(file);
+    setProfileImage(URL.createObjectURL(file));
   };
 
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
-      formData.append('email', data.email);
-      formData.append('username', data.username);
-      formData.append('profile.full_name', data.full_name);  
-      formData.append('profile.bio', data.bio);              
-      if (profileImage) {
-        formData.append('profile.image', profileImage);      
+      formData.append("email", data.email);
+      formData.append("username", data.username);
+      formData.append("profile.full_name", data.full_name);
+      formData.append("profile.bio", data.bio);
+      if (fileinputRef.current.files[0]) {
+        formData.append("profile.image", fileinputRef.current.files[0]);
       }
-  
+
       const response = await axios.post(
         `${requests.editUserProfile}${user_id}/`,
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-  
+
       if (response.status === 200) {
         const updatedProfile = response.data;
-        dispatch(updateUserProfile({
-          username: updatedProfile.username,
-          email: updatedProfile.email,
-          full_name:updatedProfile.profile.full_name,
-          bio:updatedProfile.profile.bio,
-          image:updatedProfile.profile.image
-        }));
-        showSuccessToast('Profile Updated');
+        dispatch(
+          updateUserProfile({
+            username: updatedProfile.username,
+            email: updatedProfile.email,
+            full_name: updatedProfile.profile.full_name,
+            bio: updatedProfile.profile.bio,
+            image: updatedProfile.profile.image,
+          })
+        );
+        showSuccessToast("Profile Updated");
       } else {
-        showErrorToast('Something went wrong. Please try again.');
+        showErrorToast("Something went wrong. Please try again.");
       }
     } catch (error) {
-      showErrorToast('An error occurred. Please try again.', error);
+      showErrorToast("An error occurred. Please try again.", error);
     }
   };
-  
-    return (
+
+  return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <div className="ml-8 flex gap-6 items-center">
         <input
@@ -85,8 +96,10 @@ function EditProfileForm() {
         />
         <div>
           <small>Photo</small>
-          {profileImage ? (<AvatarProfile username={username}  image={profileImage} size="3xl" />):(
-            <AvatarProfile image={profileImage} username={username}  size="3xl" />
+          {profileImage ? (
+            <img src={profileImage} className="w-24 h-24 rounded-full" alt="" />
+          ) : (
+            <AvatarProfile image={image} username={username} size="3xl" />
           )}
         </div>
         <Button onClick={handleButtonClick} className="bg-[#1D9BF0] text-white">

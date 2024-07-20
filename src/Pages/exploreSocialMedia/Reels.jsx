@@ -1,21 +1,51 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoMdImages } from "react-icons/io";
 import { useDisclosure } from "@nextui-org/react";
 import Post from "../../Components/post/Post";
 import PostModal from "../../Components/post/PostModal";
 import SkeletonLoader from "../../utils/SkeletonLoader";
-import { PostContext } from "../../Components/post/PostProvider";
-
+import { showErrorToast } from "../../utils/Toaser";
+import { useSelector } from "react-redux";
+import requests from "../../utils/urls";
+import axios from "axios";
+import { PostContext } from "../../Components/post/PostProvider"; 
 
 export function Reels() {
+  const { selectedPost, setSelectedPost } = useContext(PostContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { selectedPost, setSelectedPost,posts,loading,user_id } = useContext(PostContext);
-
+  const [loading, setLoading] = useState(true);
+  const { user_id, is_email_verified,username } = useSelector((state) => state.auth);
+  const [posts,setPost] = useState([])
 
   function handleOpen(post) {
     setSelectedPost(post);
     onOpen();
   }
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.post(
+          `${requests.fetchPosts}${username}/`,
+          {
+            user_id: user_id,
+          }
+        );
+        if (response.data && is_email_verified) {
+          setPost(response.data);
+        } else {
+          showErrorToast(
+            "Please verify your email to explore all Fybox features"
+          );
+        }
+      } catch (error) {
+        showErrorToast("errr", error);
+      }
+      setLoading(false);
+    };
+    fetchPosts();
+  }, [username]);
 
 
   return (
