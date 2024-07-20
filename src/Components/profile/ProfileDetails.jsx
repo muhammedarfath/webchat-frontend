@@ -6,7 +6,6 @@ import FollowButton from '../follow_btn/FollowButton'
 
 function ProfileDetails({user,current_user,username}) {
     const navigate = useNavigate();
-
     return (
         <div className="w-full flex flex-col justify-center items-center gap-3 p-3">
             {user.profile.image ? (
@@ -47,7 +46,7 @@ function ProfileDetails({user,current_user,username}) {
                         className="px-5 py-3 font-semibold rounded-3xl bg-[#E9E9E9]"
                         onClick={() =>
                             navigate("/chathome", {
-                                state: { username: user.user.username },
+                                state: { username: user.profile.user.username },
                             })
                         }
                     >

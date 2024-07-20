@@ -8,7 +8,7 @@ function ChatHome() {
   const [userId, setUserId] = useState({});
   const location = useLocation();
   const { username } = location.state || {};
-
+  
   const fetchUserIdDetails = (id, email, username, image, full_name, bio) => {
     setUserId({
       id,

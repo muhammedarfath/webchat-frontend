@@ -28,6 +28,7 @@ function People() {
           search_query: query,
         }
       );
+      console.log(response.data);
       setUsers(response.data);
     } catch (error) {
       alert(error);
@@ -154,7 +155,10 @@ function People() {
                       <small>Suggested for you</small>
                     </div>
                   </div>
-                  <FollowButton user={user} currentUser={current_user} />
+                  <FollowButton
+                    follow_user={user.user.username}
+                    follow_status={user.follow_status}
+                  />
                 </div>
               ))}
             </div>

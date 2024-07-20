@@ -61,9 +61,9 @@ function Otp() {
   };
 
   return (
-    <div className="w-full h-full mt-9 flex justify-evenly">
-      <div className="flex flex-col w-full h-full items-center justify-center">
-        <div className="max-w-md mx-auto text-center bg-white border-2 px-4 sm:px-8 py-10 rounded-xl shadow">
+    <div className="w-full h-screen flex flex-row justify-evenly">
+      <div className="flex flex-col w-full  items-center justify-center">
+        <div className="lg:max-w-md max-w-xs mx-auto text-center bg-white border-2 px-4 sm:px-8 py-10 rounded-xl shadow">
           <header className="mb-8">
             <h1 className="text-2xl font-bold mb-1">Verification</h1>
             <p className="text-[15px] text-slate-500">
@@ -77,7 +77,7 @@ function Otp() {
                 <input
                   key={index}
                   type="text"
-                  className="w-14 h-14 text-center text-2xl font-extrabold border-2 bg-white text-[#1D9BF0] hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                  className="lg:w-14 lg:h-14 w-8 h-8 text-center text-2xl font-extrabold border-2 bg-white text-[#1D9BF0] hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                   maxLength="1"
                   value={digit}
                   onChange={(e) => handleOTPChange(e.target, index)}
@@ -118,7 +118,7 @@ function Otp() {
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex items-center gap-6">
+      <div className="hidden lg:flex items-center gap-6 p-16">
         <Logo width={200} height={200} />
         <h1 className="text-8xl font-bold">𝖋𝖞𝖇𝖔𝖝</h1>
       </div>

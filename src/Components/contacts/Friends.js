@@ -42,7 +42,6 @@ function Friends({ fetchUserIdDetails, username }) {
           const response = await axios.post("http://127.0.0.1:8000/app_profile/userprofile/", {
             username,
           });
-
           if (response.status === 200) {
             const data = response.data;
             setUsers((prevUsers) => [data, ...prevUsers]);
@@ -60,7 +59,7 @@ function Friends({ fetchUserIdDetails, username }) {
     }
   }, [username, fetchedProfileUser]);
 
-
+  console.log(users,"whats wrong");
 
 
   const handleChat = async (id, username) => {
