@@ -13,7 +13,7 @@ import { PostContext } from "./PostProvider";
 function Comment() {
   const { selectedPost, setSelectedPost } = useContext(PostContext);
   const [comment, setComment] = useState("");
-  const { username } = useSelector((state) => state.auth);
+  const { username,image } = useSelector((state) => state.auth);
 
   const handlecomment = async () => {
     try {
@@ -39,8 +39,7 @@ function Comment() {
         <div className="flex gap-2 w-full">
           <AvatarProfile
             size="lg"
-            image={selectedPost.user.image}
-            username={selectedPost.user.username}
+            image={image}
           />
           <Textarea onChange={(e) => setComment(e.target.value)} placeholder="Write your comment here..." />
         </div>

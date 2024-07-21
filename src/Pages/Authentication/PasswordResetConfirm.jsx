@@ -1,5 +1,3 @@
-// PasswordResetConfirmForm.js
-
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,7 +8,7 @@ import { showErrorToast, showSuccessToast } from "../../utils/Toaser";
 
 function PasswordResetConfirmForm() {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,11 +22,11 @@ function PasswordResetConfirmForm() {
       const response = await axios.post(
         `${requests.passwordResetConfirm}${user_id}/`,
         {
-            password: data.password,
+          password: data.password,
         }
       );
       showSuccessToast(response.data.message);
-      navigate('/login')
+      navigate("/login");
     } catch (error) {
       showErrorToast("somthing went wrong", error);
     } finally {

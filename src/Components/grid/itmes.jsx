@@ -7,7 +7,7 @@ import { SkeletonTwo } from "./skeleton/SkeletonTwo";
 export const items = (users, latestNews, isLoading) => [
     {
       title: "Chatify",
-      header: <SkeletonOne users={users} isLoading={isLoading} />,
+      header: <SkeletonOne users={users} />,
       className: "md:col-span-1",
     },
     {

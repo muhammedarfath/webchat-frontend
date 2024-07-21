@@ -2,8 +2,9 @@ import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Logo from "../Logo/Logo";
 import { FaQuestion } from "react-icons/fa6";
-import Nav from "./Nav";
 import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+import MobileLayout from "./MobileLayout";
 
 function Layout() {
 
@@ -25,13 +26,12 @@ function Layout() {
                 </span>
               </a>
             </div>
-            
-            <Nav/>
-
+            <Navbar/>
           </div>
         </div>
+       <MobileLayout/>
       </div>
-      <div className="fixed bottom-0 right-0 border rounded-full p-4 m-6 bg-white shadow-2xl">
+      <div className="hidden lg:block fixed bottom-0 right-0 border rounded-full p-4 m-6 bg-white shadow-2xl">
         <FaQuestion className="text-2xl font-bold" />
       </div>
       <Outlet />

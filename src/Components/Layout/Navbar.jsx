@@ -1,6 +1,5 @@
-import React,{ useEffect, useRef, useState } from 'react'
+import React,{ useRef, useState } from 'react'
 import Avatar_profile from "../avatar/Avatar_profile";
-import { IoSaveOutline } from "react-icons/io5";
 import { BsBookmarks } from "react-icons/bs";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { IoNewspaperSharp } from "react-icons/io5";
@@ -37,13 +36,8 @@ import axios from 'axios';
 import { Toaster, toast } from "react-hot-toast";
 import { BsBookmarksFill } from "react-icons/bs";
 
+function Navbar() {
 
-
-
-function Nav() {
-
-    const current_user = useSelector((state) => state.auth.user_id);
-    const [notifications, setNotifications] = useState([]);
     const [caption, setCaption] = useState();
     const [tags, setTags] = useState();
     const [loading, setLoading] = useState(true);
@@ -351,7 +345,7 @@ function Nav() {
     </NavLink>
 
     <NavLink
-      to={`/reels/${username}`}
+      to='/reels'
       className="flex gap-3 w-full hover:bg-gray-100 py-2 px-2 rounded-lg items-center cursor-pointer"
       activeClassName="text-[#000000] text-2xl transition-transform transform hover:scale-x-[-1]"
     >
@@ -459,4 +453,4 @@ function Nav() {
   )
 }
 
-export default Nav
+export default Navbar

@@ -48,9 +48,6 @@ function ChatArea({ userArr }) {
     };
   }, [userArr]);
 
-
-  console.log(userArr,"maybeeeee");
-
   useEffect(() => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop =

@@ -23,7 +23,13 @@ const requests = {
     savePost :`${backendUrl}/posts/fav-post/`,
     commentPost :`${backendUrl}/posts/comment-post/`,
     handleChat: `${backendUrl}/chat/`, 
-    fetchAllUser:`${backendUrl}/chat/users/`
+    fetchAllUser:`${backendUrl}/chat/users/`,
+    lastThreeMessges:`${backendUrl}/home/last-three-messages/`,
+    suggestedFriends:`${backendUrl}/chat/suggested_friends/`,
+    checkRelationShip:`${backendUrl}/app_profile/check_relationship/`,
+    sendFollowRequest:`${backendUrl}/app_profile/send_follow_request/`,
+    sendFollowBackRequest:`${backendUrl}/app_profile/follow_back_request/`,
+    sendFollowUnfollowRequest:`${backendUrl}/app_profile/unfollow_request/`,
 
 }
 export default requests

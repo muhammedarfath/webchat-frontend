@@ -4,7 +4,7 @@ import { BiCheckDouble } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 
 function Message({ text, sent }) {
-  const { image } = useSelector((state) => state.auth);
+  const { image,username } = useSelector((state) => state.auth);
 
   return (
     <div className="flex flex-col">
@@ -13,7 +13,7 @@ function Message({ text, sent }) {
           <div className="flex justify-end gap-5">
             <div className="ml-2 mt-8 gap-2 flex items-center ">
               <BiCheckDouble class="text-sm text-[#2eff3c]" />
-              <h1 className="font-bold">Arfath</h1>
+              <h1 className="font-bold">{username}</h1>
               <small className="mt-1">8:16 PM</small>
               <BsThreeDots className="text-[#424242]" />
             </div>
@@ -42,7 +42,7 @@ function Message({ text, sent }) {
             )}
             <div className="flex flex-col justify-start gap-2">
               <div className="flex items-center mt-3 gap-2">
-                <h1 className="font-bold">Arfath</h1>
+                <h1 className="font-bold">{username}</h1>
                 <small className="mt-1 ml-2">8:16 PM</small>
                 <BsThreeDots className="text-[#424242]" />
               </div>

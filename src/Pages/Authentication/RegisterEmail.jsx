@@ -20,7 +20,7 @@ function RegisterEmail() {
         email: data.email,
       });
       if (response.data) {
-        showSuccessToast(response.data.message)
+        showSuccessToast(response.data.message);
       } else {
         showErrorToast("Request faild");
       }

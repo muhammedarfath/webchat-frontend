@@ -12,7 +12,6 @@ export const BentoGrid = ({ className, children }) => {
     </div>
   );
 };
-
 export const BentoGridItem = ({
   className,
   title,

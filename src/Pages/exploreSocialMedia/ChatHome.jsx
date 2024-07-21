@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import ChatArea from "../../Components/chatarea/ChatArea";
 import Friends from "../../Components/contacts/Friends";
 import EmptyChat from "../../Components/contacts/EmptyChat";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import requests from "../../utils/urls";
 import { showErrorToast } from "../../utils/Toaser";
 
 function ChatHome() {
   const [userDetails, setUserDetails] = useState({});
-
   const [searchParams, setSearchParams] = useSearchParams();
   const username = searchParams.get("user");
   const id = searchParams.get("id");
@@ -34,7 +33,6 @@ function ChatHome() {
             user_id: id,
           }
         );
-
         if (response.status === 200) {
           const data = response.data;
           fetchUserIdDetails(

@@ -5,40 +5,39 @@ import { BentoGrid, BentoGridItem } from "../../Components/ui/bento-grid";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { showErrorToast } from "../../utils/Toaser";
-import requests from "../../utils/urls";
 import { items } from "./itmes";
+import requests from "../../utils/urls";
 
 export function BentoGridThirdDemo() {
+
   const [users, setUsers] = useState([]);
-  const { email, user_id } = useSelector((state) => state.auth);
+  const { user_id } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(true);
   const [latestNews, setLatestNews] = useState([])
+
   useEffect(() => {
     setIsLoading(true);
     const fetchUsersWithLastMessages = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/home/last-three-messages/${user_id}/`
+          `${requests.lastThreeMessges}${user_id}/`
         );
         if (response.status === 200) {
           setUsers(response.data);
         }
       } catch (error) {
-        console.error("Error fetching users with last messages:", error);
+        showErrorToast("Error fetching users with last messages:", error)
       }
       setIsLoading(false);
     };
-
     fetchUsersWithLastMessages();
   }, [user_id]);
-
 
   useEffect(() => {
     setIsLoading(true);
     const fetchLatestNews = async () => {
       try {
         const response = await axios.get("");
-        console.log(response, "wht");
         const articles = response.data.articles.slice(0, 1);
         if (response) {
           setLatestNews(articles);
@@ -52,9 +51,6 @@ export function BentoGridThirdDemo() {
     };
     fetchLatestNews();
   }, [user_id]);
-
-
-
 
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">

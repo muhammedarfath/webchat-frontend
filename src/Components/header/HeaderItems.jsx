@@ -11,32 +11,8 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
-import { logoutUser } from "../../Redux/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 
-function HeaderItems() {
-  const { username } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    dispatch(
-      logoutUser({
-        authTokens: null,
-        user_id: null,
-        is_superuser: false,
-        image: null,
-        username: null,
-        email: null,
-      })
-    );
-    navigate("/login");
-  };
-
-  const handlenavigate = () => {
-    navigate(`/profile/${username}`);
-  };
-
+function HeaderItems({ handleLogout, handlenavigate }) {
   return (
     <div className="flex w-3/4 font-semibold justify-end lg:justify-evenly items-center">
       <li className="hidden lg:block cursor-pointer text-2xl">

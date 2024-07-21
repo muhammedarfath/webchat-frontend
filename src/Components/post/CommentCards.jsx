@@ -9,23 +9,31 @@ import {
 } from "@nextui-org/react";
 import { AiOutlineLike } from "react-icons/ai";
 import { PostContext } from "./PostProvider";
+import AvatarProfile from "../avatar/Avatar_profile";
 
 function CommentCards() {
-  const {selectedPost, setSelectedPost} = useContext(PostContext)
+  const { selectedPost, setSelectedPost } = useContext(PostContext);
   const [isFollowed, setIsFollowed] = React.useState(false);
   return (
     <>
       {selectedPost &&
         selectedPost.comments.map((comment, index) => (
-          <Card key={index} className="w-full rounded-none shadow-none border-1 border-gray-100">
+          <Card
+            key={index}
+            className="w-full rounded-none shadow-none border-1 border-gray-100"
+          >
             <CardHeader className="justify-between">
               <div className="flex gap-5">
-                <Avatar
-                  isBordered
-                  radius="full"
-                  size="md"
-                  src={`http://127.0.0.1:8000${comment.user.image}`}
-                />{" "}
+                {comment.user.image ? (
+                  <Avatar
+                    isBordered
+                    radius="full"
+                    size="md"
+                    src={`http://127.0.0.1:8000${comment.user.image}`}
+                  />
+                ) : (
+                  <AvatarProfile username={comment.user.user.username} />
+                )}
                 <div className="flex flex-col gap-1 items-start justify-center">
                   <h4 className="text-small font-semibold leading-none text-default-600">
                     {comment.user.full_name}

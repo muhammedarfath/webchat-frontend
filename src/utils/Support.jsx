@@ -4,7 +4,7 @@ function Support() {
   return (
     <div className="w-full">
       <div className="text-center mt-6">
-        <p className="text-gray-600 gap-4 flex flex-wrap justify-center">
+        <p className="text-gray-600 lg:gap-4 flex flex-wrap justify-center">
           <span className="inline-block mx-1">MA</span> &middot;
           <span className="inline-block mx-1">About</span> &middot;
           <span className="inline-block mx-1">Blog</span> &middot;

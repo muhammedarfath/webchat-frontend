@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { AuroraBackground } from "../../Components/ui/background-gradient-animation";
 import { BentoGridThirdDemo } from "../../Components/grid/Grid";
 import Footer from "../../Components/footer/Footer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/header/Header";
 import { useDisclosure } from "@nextui-org/react";

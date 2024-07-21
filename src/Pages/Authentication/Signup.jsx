@@ -7,9 +7,9 @@ import Support from "../../utils/Support";
 
 function Signup() {
   return (
-    <div className="w-full h-screen flex flex-col justify-between">
+    <div className="w-full h-full lg:h-screen flex flex-col justify-between">
       <div className="w-full h-full mt-2 flex justify-evenly items-center">
-        <div className="w-3/5 h-4/6 flex flex-col justify-center items-center">
+        <div className="lg:w-3/5 h-4/6 flex flex-col justify-center items-center">
               <div className="border bg-white max-w-sm text-black flex flex-col justify-center items-center p-6 rounded-lg">
                 <h1 className="text-2xl font-bold mb-4">fybox</h1>
                 <h6 className="text-center mb-4">

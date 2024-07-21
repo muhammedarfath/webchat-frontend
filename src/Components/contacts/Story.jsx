@@ -46,7 +46,7 @@ const people = [
   },
 ];
 
-export function OnlineUser() {
+export function Story() {
   return (
     <div className="flex flex-row w-full">
       <AnimatedTooltip items={people} />

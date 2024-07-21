@@ -7,10 +7,12 @@ import { loginUser } from "../../Redux/auth/authSlice";
 import axios from "axios";
 
 function LoginForm() {
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
@@ -44,10 +46,6 @@ function LoginForm() {
     }
   };
 
-
-
-
-
   return (
     <form onSubmit={handlesubmit} className="w-full">
       <div class="w-full mb-4">
@@ -55,8 +53,7 @@ function LoginForm() {
           type="text"
           placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
-          className="border placeholder-gray-700 border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+          className="input-style placeholder-gray-700"
         />
       </div>
       <div class="w-full mb-4">
@@ -64,8 +61,7 @@ function LoginForm() {
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          className="border placeholder-gray-700 border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+          className="input-style placeholder-gray-700"
         />
       </div>
       <button

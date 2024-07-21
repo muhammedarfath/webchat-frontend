@@ -1,8 +1,7 @@
+/* index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 
 @layer base {
     body {
@@ -122,3 +121,12 @@
   
 }
 
+/* Custom Input Style */
+.input-style {
+  @apply border border-gray-300 p-2 rounded-md w-full mb-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none;
+}
+
+/* Error Message Style */
+.error-message {
+  @apply text-red-500;
+}
