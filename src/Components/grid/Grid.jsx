@@ -37,7 +37,7 @@ export function BentoGridThirdDemo() {
     setIsLoading(true);
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get("");
+        const response = await axios.get(`${requests.sports}`);
         const articles = response.data.articles.slice(0, 1);
         if (response) {
           setLatestNews(articles);

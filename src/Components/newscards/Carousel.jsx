@@ -44,9 +44,9 @@ function Carousel({ news }) {
                         style={{ backfaceVisibility: 'hidden' }}>
                         <img
                             src={item.image}
-                            className="block object-contain"
-                            alt={item.title}/>
-                        <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
+                            className="block object-contain w-full"
+                            alt={item.title} />
+                        <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black font-bold md:block">
                             <h5 className="text-xl">{item.title}</h5>
                             <p>{item.description}</p>
                         </div>

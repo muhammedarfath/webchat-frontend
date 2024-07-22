@@ -3,11 +3,11 @@ import { API_KEY,baseUrl,backendUrl } from "../Constants/Constants";
 
 const requests = {
     // urls for newsify
-    world :`${baseUrl}&topic=world&token=${API_KEY}`,
-    busines :`${baseUrl}&topic=busines&token=${API_KEY}`,
-    technology :`${baseUrl}&topic=technology&token=${API_KEY}`,
-    sports :`${baseUrl}&topic=sports&token=${API_KEY}`,
-    entertainment :`${baseUrl}&topic=entertainment&token=${API_KEY}`,
+    world :`${backendUrl}/news/world/`,
+    busines :`${backendUrl}/news/busines/`,
+    technology :`${backendUrl}/news/technology/`,
+    sports :`${backendUrl}/news/sports/`,
+    entertainment :`${backendUrl}/news/entertainment/`,
 
     //urls for backend
     signupUser :`${backendUrl}/users_auth/signup/`,
