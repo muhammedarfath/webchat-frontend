@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import requests from "../../utils/urls";
 import { showErrorToast } from "../../utils/Toaser";
 import ContactAreaHeader from "./ContactAreaHeader";
-
+import Avatar_profile from "../avatar/Avatar_profile";
 function Friends({ setSearchParams }) {
   const current_userId = useSelector((state) => state.auth.user_id);
   const [users, setUsers] = useState([]);
@@ -60,21 +60,13 @@ function Friends({ setSearchParams }) {
                 onClick={() =>
                   setSearchParams({ user: user.user.username, id: user.id })
                 }
-                className="hover:bg-[#d5d5d5] cursor-pointer bg-opacity-100 flex items-center justify-between border border-gray mb-3 ml-9 mt-3 mr-9 p-3 rounded-lg relative"
+                className="hover:bg-[#eaf5fb] cursor-pointer bg-opacity-100 flex items-center justify-between border border-gray mb-3 ml-9 mt-3 mr-9 p-3 rounded-lg relative"
               >
                 <div className="w-9 h-9 overflow-hidden">
                   {user.image ? (
-                    <img
-                      src={`http://127.0.0.1:8000${user.image}`}
-                      className="w-full h-full rounded-full"
-                      alt="image"
-                    />
+                    <Avatar_profile image={user.image} size="md" />
                   ) : (
-                    <img
-                      src="/images/profile-image.webp"
-                      className="w-full h-full rounded-full"
-                      alt="image"
-                    />
+                    <Avatar_profile username={user.user.username} size="md" />
                   )}
                   <span className="absolute top-4 left-9 border-1 border-white bg-green-500 rounded-full w-3 h-3"></span>
                 </div>

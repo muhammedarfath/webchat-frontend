@@ -56,7 +56,7 @@ function ChatHome() {
   return (
     <>
       <div className="flex flex-col md:flex-row w-full lg:w-5/6 h-full">
-        <div className="w-full md:w- lg:w-1/3 overflow-y-scroll h-full">
+        <div className="w-full lg:w-1/3 overflow-y-scroll h-full">
           <Friends
             setSearchParams={setSearchParams}
           />

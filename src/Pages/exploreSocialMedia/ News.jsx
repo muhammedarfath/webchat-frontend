@@ -42,7 +42,7 @@ function News() {
     setCategory(newCategory);
   };
   return (
-    <div className="w-full h-full  overflow-auto">
+    <div className="w-full h-full overflow-auto mb-20">
       <NewsHeader onCategoryChange={handleCategoryChange}/>
       <hr className="w-full mt-1" />
       {!selectedArticle ? (

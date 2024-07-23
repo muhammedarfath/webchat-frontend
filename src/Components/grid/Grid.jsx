@@ -34,21 +34,23 @@ export function BentoGridThirdDemo() {
   }, [user_id]);
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchLatestNews = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(`${requests.sports}`);
-        const articles = response.data.articles.slice(0, 1);
-        if (response) {
-          setLatestNews(articles);
+        const articles = response.data.articles;
+        if (articles && articles.length > 0) {
+          const randomArticle = articles[Math.floor(Math.random() * articles.length)];
+          setLatestNews([randomArticle]);
         } else {
-          showErrorToast("Please verify your email to explore all Fybox features")
+          showErrorToast("Please verify your email to explore all Fybox features");
         }
       } catch (error) {
-        showErrorToast('Error fetching top headlines:', error)
+        showErrorToast("Error fetching top headlines:", error);
       }
       setIsLoading(false);
     };
+
     fetchLatestNews();
   }, [user_id]);
 
