@@ -30,6 +30,6 @@ const requests = {
     sendFollowRequest:`${backendUrl}/app_profile/send_follow_request/`,
     sendFollowBackRequest:`${backendUrl}/app_profile/follow_back_request/`,
     sendFollowUnfollowRequest:`${backendUrl}/app_profile/unfollow_request/`,
-
+    PublicMessages:`${backendUrl}/chat/public-chat`
 }
 export default requests

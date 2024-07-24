@@ -12,6 +12,7 @@ function ChatHome() {
   const [searchParams, setSearchParams] = useSearchParams();
   const username = searchParams.get("user");
   const id = searchParams.get("id");
+  
 
   const fetchUserIdDetails = (id, email, username, image, full_name, bio) => {
     setUserDetails({
@@ -44,22 +45,36 @@ function ChatHome() {
             data.bio
           );
         } else {
-          showErrorToast("something went wrong")
+          showErrorToast("Something went wrong");
         }
       } catch (error) {
-        showErrorToast("something went wrong",error)
+        showErrorToast("Something went wrong: " + error.message); 
       }
     };
     if (username) handleChat();
   }, [username, id]);
 
+
+  
+  useEffect(() => {
+    const fetchPublicMessages = async () => {
+      try {
+        const response = await axios.get(`${requests.PublicMessages}`);
+        console.log(response, "this is public message");
+      } catch (error) {
+        showErrorToast("Error fetching public messages: " + error.message);
+      }
+    };
+    fetchPublicMessages();
+  }, []);
+
+
+
   return (
     <>
       <div className="flex flex-col md:flex-row w-full lg:w-5/6 h-full">
         <div className="w-full lg:w-1/3 overflow-y-scroll h-full">
-          <Friends
-            setSearchParams={setSearchParams}
-          />
+          <Friends setSearchParams={setSearchParams} />
         </div>
         <div className="hidden md:hidden lg:block lg:w-2/3 h-full">
           {Object.keys(userDetails).length !== 0 ? (
