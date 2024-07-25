@@ -27,7 +27,9 @@ export const authSlice = createSlice({
       state.bio = action.payload.bio
     },
     signUpUser: (state, action) => {
-      state.user_id = action.payload.user;
+      state.authTokens = action.payload.authTokens;
+      state.full_name = action.payload.full_name;
+
     },
     updateUserProfile: (state, action) => {
       state.username = action.payload.username;

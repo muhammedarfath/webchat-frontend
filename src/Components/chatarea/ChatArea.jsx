@@ -10,46 +10,34 @@ import ChatProfileDropdown from "./ChatProfileDropdown";
 
 function ChatArea({ userArr }) {
   const [messages, setMessages] = useState([]);
-  const senderId = useSelector((state) => state.auth.user_id);
+  const {authTokens} = useSelector((state) => state.auth);
   const messagesContainerRef = useRef(null);
 
 
-  useEffect(() => {
-    const socket = new WebSocket(
-      `ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`
-    );
-
-    const fetchMessages = () => {
-      socket.send(JSON.stringify({ command: "fetch_messages" }));
-    };
-
-    socket.onopen = () => {
-      fetchMessages();
-    };
-
-    socket.onmessage = function (e) {
-      const data = JSON.parse(e.data);
-      if (data["command"] === "messages") {
-        setMessages(data["messages"]);
-      } else if (data["command"] === "new_message") {
-        setMessages((prevMessages) => [...prevMessages, data["message"]]);
-      }
-    };
-
-    socket.onclose = function (e) {
-      console.error("Chat socket closed unexpectedly");
-    };
-  }, [userArr]);
 
   useEffect(() => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop =
-        messagesContainerRef.current.scrollHeight;
+    const url = `ws://localhost:8000/chat/?token=${authTokens}/`;
+   
+    const socket = new WebSocket(url);
+    console.log(url);
+    socket.onopen = () =>{
+      console.log("socketo,open");
     }
-  }, [messages]);
+
+    socket.onmessage = () =>{
+      console.log("socketo,onmessage");
+    }
+
+    socket.onerror = (e) =>{
+      console.log("socketo,onerror",e);
+    }
+    socket.onclose = (e) =>{
+      console.log("socketo,onclose",e);
+    }
+
+  }, []);
 
 
-  console.log(messages,"this are the messages.........");
 
   return (
     <div className="hidden lg:block rounded-lg bg-white h-screen">

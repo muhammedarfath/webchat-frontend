@@ -9,18 +9,18 @@ function MessageInput({ userArr }) {
   const senderId = useSelector((state) => state.auth.user_id);
   
 
-  const socket = new WebSocket(
-    `ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`
-  );
+  // const socket = new WebSocket(
+  //   `ws://localhost:8000/ws/chat/${userArr.id}_${senderId}/`
+  // );
 
-  const handleInputMessage = () => {
-    socket.send(
-      JSON.stringify({
-        message: message,
-        command: "new_message",
-      })
-    );
-  };
+  // const handleInputMessage = () => {
+  //   socket.send(
+  //     JSON.stringify({
+  //       message: message,
+  //       command: "new_message",
+  //     })
+  //   );
+  // };
 
   const placeholders = [
     "What's the first rule of Fight Club?",
@@ -35,7 +35,7 @@ function MessageInput({ userArr }) {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    handleInputMessage();
+    // handleInputMessage();
   };
   return (
     <div className="absolute flex items-center bg-[#f5f5f5] p-4 w-full">

@@ -22,10 +22,9 @@ function LoginForm() {
       });
       if (response.status === 200) {
         const data = response.data;
-        console.log(data);
         dispatch(
           loginUser({
-            authTokens: data.access,
+            authTokens: data.user_data.tokens,
             user_id: data.user_id,
             username: data.username,
             email: data.user_email,
@@ -37,6 +36,7 @@ function LoginForm() {
           })
         );
         showSuccessToast(data.message);
+        console.log(data);
         navigate("/");
       } else {
         showErrorToast("somthing went wrong");

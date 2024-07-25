@@ -32,11 +32,12 @@ function SignupForm() {
           password: data.password,
         }
       );
+      console.log(response.data,"signup dataaa");
       if (response.status === 201) {
         const userData = response.data;
-        dispatch(signUpUser({ user_id: userData.id, full_name: userData.profile.full_name }));
+        dispatch(signUpUser({ authTokens: userData.user_data.tokens, full_name: userData.profile.full_name }));
         showSuccessToast("OTP Sent Your Email");
-        navigate('/otp', { state: { email: response.data.email } });
+        navigate('/otp', { state: { email: response.data.user_data.user.email } });
       }
     } catch (error) {
       showErrorToast("Username or email already exists", error);
